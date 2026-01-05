@@ -1,0 +1,633 @@
+
+[16-Jun-2023 04:41:05 UTC] PHP Warning:  require(/home2/arogyamitra/public_html/../vendor/autoload.php): Failed to open stream: No such file or directory in /home2/arogyamitra/public_html/index.php on line 34
+[16-Jun-2023 04:41:05 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/arogyamitra/public_html/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home2/arogyamitra/public_html/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home2/arogyamitra/public_html/index.php on line 34
+[16-Jun-2023 04:41:07 UTC] PHP Warning:  require(/home2/arogyamitra/public_html/../vendor/autoload.php): Failed to open stream: No such file or directory in /home2/arogyamitra/public_html/index.php on line 34
+[16-Jun-2023 04:41:07 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/arogyamitra/public_html/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home2/arogyamitra/public_html/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home2/arogyamitra/public_html/index.php on line 34
+[16-Jun-2023 04:49:04 UTC] PHP Warning:  require(/home2/arogyamitra/public_html/../vendor/autoload.php): Failed to open stream: No such file or directory in /home2/arogyamitra/public_html/index.php on line 34
+[16-Jun-2023 04:49:04 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/arogyamitra/public_html/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/arogyamitra/public_html/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home2/arogyamitra/public_html/index.php on line 34
+[16-Jun-2023 04:49:04 UTC] PHP Warning:  require(/home2/arogyamitra/public_html/../vendor/autoload.php): Failed to open stream: No such file or directory in /home2/arogyamitra/public_html/index.php on line 34
+[16-Jun-2023 04:49:04 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/arogyamitra/public_html/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/arogyamitra/public_html/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home2/arogyamitra/public_html/index.php on line 34
+[16-Jun-2023 04:49:13 UTC] PHP Warning:  require(/home2/arogyamitra/public_html/../vendor/autoload.php): Failed to open stream: No such file or directory in /home2/arogyamitra/public_html/index.php on line 34
+[16-Jun-2023 04:49:13 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/arogyamitra/public_html/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/arogyamitra/public_html/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home2/arogyamitra/public_html/index.php on line 34
+[16-Jun-2023 04:49:13 UTC] PHP Warning:  require(/home2/arogyamitra/public_html/../vendor/autoload.php): Failed to open stream: No such file or directory in /home2/arogyamitra/public_html/index.php on line 34
+[16-Jun-2023 04:49:13 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/arogyamitra/public_html/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/arogyamitra/public_html/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home2/arogyamitra/public_html/index.php on line 34
+[16-Jun-2023 04:51:29 UTC] PHP Warning:  require(/home2/arogyamitra/public_html/../vendor/autoload.php): Failed to open stream: No such file or directory in /home2/arogyamitra/public_html/index.php on line 34
+[16-Jun-2023 04:51:29 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/arogyamitra/public_html/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/arogyamitra/public_html/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home2/arogyamitra/public_html/index.php on line 34
+[16-Jun-2023 06:05:59 UTC] PHP Warning:  require_once(/home2/arogyamitra/public_html/public/index.php): Failed to open stream: No such file or directory in /home2/arogyamitra/public_html/index.php on line 16
+[16-Jun-2023 06:05:59 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home2/arogyamitra/public_html/public/index.php' (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home2/arogyamitra/public_html/index.php:16
+Stack trace:
+#0 {main}
+  thrown in /home2/arogyamitra/public_html/index.php on line 16
+[16-Jun-2023 06:09:58 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.0.29. in /home2/arogyamitra/public_html/vendor/composer/platform_check.php on line 24
+[16-Jun-2023 06:14:02 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.20. in /home2/arogyamitra/public_html/vendor/composer/platform_check.php on line 24
+[16-Jun-2023 06:14:05 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.20. in /home2/arogyamitra/public_html/vendor/composer/platform_check.php on line 24
+[16-Jun-2023 06:16:44 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.20. in /home2/arogyamitra/public_html/vendor/composer/platform_check.php on line 24
+[16-Jun-2023 06:16:46 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.20. in /home2/arogyamitra/public_html/vendor/composer/platform_check.php on line 24
+[16-Jun-2023 06:16:47 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.20. in /home2/arogyamitra/public_html/vendor/composer/platform_check.php on line 24
+[16-Jun-2023 06:23:40 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.20. in /home2/arogyamitra/public_html/vendor/composer/platform_check.php on line 24
+[10-Jan-2024 08:34:56 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "view" does not exist in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(914): ReflectionClass->__construct('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#19 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [view] does not exist. in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:916
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 {main}
+  thrown in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 916
+[10-Jan-2024 08:34:58 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "view" does not exist in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(914): ReflectionClass->__construct('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#19 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [view] does not exist. in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:916
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 {main}
+  thrown in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 916
+[10-Jan-2024 08:34:59 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "view" does not exist in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(914): ReflectionClass->__construct('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#19 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [view] does not exist. in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:916
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 {main}
+  thrown in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 916
+[10-Jan-2024 08:35:00 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "view" does not exist in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(914): ReflectionClass->__construct('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#19 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [view] does not exist. in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:916
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 {main}
+  thrown in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 916
+[10-Jan-2024 08:35:00 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "view" does not exist in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(914): ReflectionClass->__construct('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#19 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [view] does not exist. in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:916
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 {main}
+  thrown in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 916
+[10-Jan-2024 08:35:00 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "view" does not exist in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(914): ReflectionClass->__construct('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#19 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [view] does not exist. in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:916
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 {main}
+  thrown in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 916
+[10-Jan-2024 08:35:01 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "view" does not exist in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(914): ReflectionClass->__construct('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#19 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [view] does not exist. in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:916
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 {main}
+  thrown in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 916
+[10-Jan-2024 08:35:02 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "view" does not exist in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(914): ReflectionClass->__construct('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#19 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [view] does not exist. in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:916
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 {main}
+  thrown in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 916
+[10-Jan-2024 08:35:02 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "view" does not exist in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(914): ReflectionClass->__construct('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#19 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [view] does not exist. in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:916
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 {main}
+  thrown in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 916
+[10-Jan-2024 08:35:02 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "view" does not exist in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(914): ReflectionClass->__construct('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#19 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [view] does not exist. in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:916
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 {main}
+  thrown in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 916
+[10-Jan-2024 08:35:03 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "view" does not exist in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(914): ReflectionClass->__construct('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#19 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [view] does not exist. in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:916
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 {main}
+  thrown in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 916
+[10-Jan-2024 08:35:03 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "view" does not exist in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(914): ReflectionClass->__construct('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#19 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [view] does not exist. in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:916
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 {main}
+  thrown in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 916
+[10-Jan-2024 08:35:08 UTC] PHP Fatal error:  Uncaught ReflectionException: Class "view" does not exist in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:914
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(914): ReflectionClass->__construct('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#19 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [view] does not exist. in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:916
+Stack trace:
+#0 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(795): Illuminate\Container\Container->build('view')
+#1 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(933): Illuminate\Container\Container->resolve('view', Array, true)
+#2 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(731): Illuminate\Foundation\Application->resolve('view', Array)
+#3 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(918): Illuminate\Container\Container->make('view', Array)
+#4 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(1456): Illuminate\Foundation\Application->make('view')
+#5 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(236): Illuminate\Container\Container->offsetGet('view')
+#6 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(207): Illuminate\Support\Facades\Facade::resolveFacadeInstance('view')
+#7 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php(347): Illuminate\Support\Facades\Facade::getFacadeRoot()
+#8 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#9 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(661): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#10 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#11 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(573): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#12 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(479): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#13 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(396): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#14 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(217): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\Contracts\Container\BindingResolutionException))
+#15 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(194): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#16 /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#17 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\Contracts\Container\BindingResolutionException))
+#18 {main}
+  thrown in /home2/arogyamitra/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 916

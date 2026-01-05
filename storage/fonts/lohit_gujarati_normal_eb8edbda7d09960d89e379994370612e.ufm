@@ -1,0 +1,179 @@
+StartFontMetrics 4.1
+Notice Converted by PHP-font-lib
+Comment https://github.com/PhenX/php-font-lib
+EncodingScheme FontSpecific
+FontName Lohit Gujarati
+FontSubfamily Regular
+UniqueID FontForge 2.0 : Lohit Gujarati : 12-11-2013
+FullName Lohit Gujarati
+Version 2.92.2
+PostScriptName Lohit-Gujarati
+LicenseDescription OFL 1.1
+LicenseURL http://scripts.sil.org/OFL
+Weight Medium
+ItalicAngle 0
+IsFixedPitch false
+UnderlineThickness 24
+UnderlinePosition -372
+FontHeightOffset 240
+Ascender 924
+Descender -367
+FontBBox -612 -367 1689 924
+StartCharMetrics 352
+U 0 ; WX 0 ; N .null ; G 1
+U 12 ; WX 0 ; N CR ; G 2
+U 32 ; WX 287 ; N space ; G 3
+U 33 ; WX 348 ; N exclam ; G 4
+U 34 ; WX 451 ; N quotedbl ; G 5
+U 35 ; WX 879 ; N numbersign ; G 6
+U 36 ; WX 678 ; N dollar ; G 7
+U 37 ; WX 864 ; N percent ; G 8
+U 38 ; WX 723 ; N ampersand ; G 9
+U 39 ; WX 295 ; N quotesingle ; G 10
+U 40 ; WX 558 ; N parenleft ; G 11
+U 41 ; WX 540 ; N parenright ; G 12
+U 42 ; WX 612 ; N asterisk ; G 13
+U 43 ; WX 684 ; N plus ; G 14
+U 44 ; WX 426 ; N comma ; G 15
+U 45 ; WX 744 ; N hyphen ; G 16
+U 46 ; WX 348 ; N period ; G 17
+U 47 ; WX 756 ; N slash ; G 18
+U 48 ; WX 575 ; N zero ; G 19
+U 49 ; WX 574 ; N one ; G 20
+U 50 ; WX 575 ; N two ; G 21
+U 51 ; WX 575 ; N three ; G 22
+U 52 ; WX 574 ; N four ; G 23
+U 53 ; WX 575 ; N five ; G 24
+U 54 ; WX 575 ; N six ; G 25
+U 55 ; WX 575 ; N seven ; G 26
+U 56 ; WX 575 ; N eight ; G 27
+U 57 ; WX 574 ; N nine ; G 28
+U 58 ; WX 372 ; N colon ; G 29
+U 59 ; WX 408 ; N semicolon ; G 30
+U 60 ; WX 633 ; N less ; G 31
+U 61 ; WX 576 ; N equal ; G 32
+U 62 ; WX 633 ; N greater ; G 33
+U 63 ; WX 607 ; N question ; G 34
+U 91 ; WX 576 ; N bracketleft ; G 35
+U 92 ; WX 582 ; N backslash ; G 36
+U 93 ; WX 576 ; N bracketright ; G 37
+U 94 ; WX 641 ; N asciicircum ; G 38
+U 95 ; WX 858 ; N underscore ; G 39
+U 96 ; WX 343 ; N grave ; G 40
+U 123 ; WX 473 ; N braceleft ; G 41
+U 124 ; WX 276 ; N bar ; G 42
+U 125 ; WX 474 ; N braceright ; G 43
+U 126 ; WX 687 ; N asciitilde ; G 44
+U 215 ; WX 573 ; N multiply ; G 45
+U 247 ; WX 636 ; N divide ; G 46
+U 2404 ; WX 288 ; N danda ; G 47
+U 2405 ; WX 504 ; N doubledanda ; G 48
+U 2689 ; WX 0 ; N candrabinduguj ; G 49
+U 2690 ; WX 0 ; N anusvaraguj ; G 50
+U 2691 ; WX 366 ; N visargaguj ; G 51
+U 2693 ; WX 878 ; N aguj ; G 52
+U 2694 ; WX 1166 ; N aaguj ; G 53
+U 2695 ; WX 635 ; N iguj ; G 54
+U 2696 ; WX 639 ; N iiguj ; G 55
+U 2697 ; WX 660 ; N uguj ; G 56
+U 2698 ; WX 882 ; N uuguj ; G 57
+U 2699 ; WX 1055 ; N rvocalicguj ; G 58
+U 2700 ; WX 732 ; N lvocalicguj ; G 59
+U 2701 ; WX 878 ; N ecandraguj ; G 60
+U 2703 ; WX 878 ; N eguj ; G 61
+U 2704 ; WX 878 ; N aiguj ; G 62
+U 2705 ; WX 1162 ; N ocandraguj ; G 63
+U 2707 ; WX 1166 ; N oguj ; G 64
+U 2708 ; WX 1163 ; N auguj ; G 65
+U 2709 ; WX 569 ; N kaguj ; G 66
+U 2710 ; WX 764 ; N khaguj ; G 67
+U 2711 ; WX 694 ; N gaguj ; G 68
+U 2712 ; WX 672 ; N ghaguj ; G 69
+U 2713 ; WX 647 ; N ngaguj ; G 70
+U 2714 ; WX 766 ; N caguj ; G 71
+U 2715 ; WX 747 ; N chaguj ; G 72
+U 2716 ; WX 713 ; N jaguj ; G 73
+U 2717 ; WX 744 ; N jhaguj ; G 74
+U 2718 ; WX 808 ; N nyaguj ; G 75
+U 2719 ; WX 531 ; N ttaguj ; G 76
+U 2720 ; WX 594 ; N tthaguj ; G 77
+U 2721 ; WX 598 ; N ddaguj ; G 78
+U 2722 ; WX 574 ; N ddhaguj ; G 79
+U 2723 ; WX 910 ; N nnaguj ; G 80
+U 2724 ; WX 673 ; N taguj ; G 81
+U 2725 ; WX 713 ; N thaguj ; G 82
+U 2726 ; WX 558 ; N daguj ; G 83
+U 2727 ; WX 715 ; N dhaguj ; G 84
+U 2728 ; WX 705 ; N naguj ; G 85
+U 2730 ; WX 675 ; N paguj ; G 86
+U 2731 ; WX 533 ; N phaguj ; G 87
+U 2732 ; WX 797 ; N baguj ; G 88
+U 2733 ; WX 834 ; N bhaguj ; G 89
+U 2734 ; WX 679 ; N maguj ; G 90
+U 2735 ; WX 665 ; N yaguj ; G 91
+U 2736 ; WX 448 ; N raguj ; G 92
+U 2738 ; WX 730 ; N laguj ; G 93
+U 2739 ; WX 800 ; N llaguj ; G 94
+U 2741 ; WX 660 ; N vaguj ; G 95
+U 2742 ; WX 733 ; N shaguj ; G 96
+U 2743 ; WX 663 ; N ssaguj ; G 97
+U 2744 ; WX 756 ; N saguj ; G 98
+U 2745 ; WX 562 ; N haguj ; G 99
+U 2748 ; WX 0 ; N nuktaguj ; G 100
+U 2749 ; WX 630 ; N avagrahaguj ; G 101
+U 2750 ; WX 288 ; N aasignguj ; G 102
+U 2751 ; WX 288 ; N isignguj ; G 103
+U 2752 ; WX 288 ; N iisignguj ; G 104
+U 2753 ; WX 0 ; N usignguj ; G 105
+U 2754 ; WX 0 ; N uusignguj ; G 106
+U 2755 ; WX 0 ; N rvocalicsignguj ; G 107
+U 2756 ; WX 0 ; N rrvocalicsignguj ; G 108
+U 2757 ; WX 0 ; N ecandrasignguj ; G 109
+U 2759 ; WX 0 ; N esignguj ; G 110
+U 2760 ; WX 0 ; N aisignguj ; G 111
+U 2761 ; WX 288 ; N ocandrasignguj ; G 112
+U 2763 ; WX 288 ; N osignguj ; G 113
+U 2764 ; WX 288 ; N ausignguj ; G 114
+U 2765 ; WX 0 ; N viramaguj ; G 115
+U 2768 ; WX 1211 ; N omguj ; G 116
+U 2784 ; WX 1101 ; N rrvocalicguj ; G 117
+U 2785 ; WX 711 ; N llvocalicguj ; G 118
+U 2786 ; WX 0 ; N lvocalicsignguj ; G 119
+U 2787 ; WX 0 ; N llvocalicsignguj ; G 120
+U 2790 ; WX 660 ; N zeroguj ; G 121
+U 2791 ; WX 659 ; N oneguj ; G 122
+U 2792 ; WX 659 ; N twoguj ; G 123
+U 2793 ; WX 659 ; N threeguj ; G 124
+U 2794 ; WX 663 ; N fourguj ; G 125
+U 2795 ; WX 660 ; N fiveguj ; G 126
+U 2796 ; WX 660 ; N sixguj ; G 127
+U 2797 ; WX 659 ; N sevenguj ; G 128
+U 2798 ; WX 660 ; N eightguj ; G 129
+U 2799 ; WX 660 ; N nineguj ; G 130
+U 2801 ; WX 861 ; N rupeeguj ; G 131
+U 8204 ; WX 264 ; N zerowidthnonjoiner ; G 132
+U 8205 ; WX 576 ; N zerojoin ; G 133
+U 8211 ; WX 660 ; N endash ; G 134
+U 8212 ; WX 1229 ; N emdash ; G 135
+U 8216 ; WX 426 ; N quoteleft ; G 136
+U 8217 ; WX 426 ; N quoteright ; G 137
+U 8220 ; WX 522 ; N quotedblleft ; G 138
+U 8221 ; WX 552 ; N quotedblright ; G 139
+U 8230 ; WX 972 ; N ellipsis ; G 140
+U 8377 ; WX 730 ; N inr_currency ; G 141
+U 8722 ; WX 744 ; N minus ; G 142
+U 9676 ; WX 864 ; N dottedcircle ; G 143
+U 65522 ; WX 288 ; N isign_ra_virama_anusvara.alt11 ; G 144
+U 65523 ; WX 288 ; N isignguj_raguj_viramaguj.alt11 ; G 145
+U 65524 ; WX 288 ; N isignguj_anusvaraguj.alt11 ; G 146
+U 65525 ; WX 288 ; N isignguj.alt11 ; G 147
+U 65526 ; WX 288 ; N isign_ra_virama_anusvara.alt10 ; G 148
+U 65527 ; WX 288 ; N isignguj_raguj_viramaguj.alt10 ; G 149
+U 65528 ; WX 288 ; N isignguj_anusvaraguj.alt10 ; G 150
+U 65529 ; WX 288 ; N isignguj.alt10 ; G 151
+U 65530 ; WX 288 ; N isign_ra_virama_anusvara.alt9 ; G 152
+U 65531 ; WX 288 ; N isignguj_raguj_viramaguj.alt9 ; G 153
+U 65532 ; WX 288 ; N isignguj_anusvaraguj.alt9 ; G 154
+U 65533 ; WX 288 ; N isignguj.alt9 ; G 155
+EndCharMetrics
+EndFontMetrics
