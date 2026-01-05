@@ -24,7 +24,13 @@ class GramjuthController extends Controller
      */
     public function index()
     {
-        $gramjuth = Gramjuth::select(DB::raw("CONCAT_WS(' > ', prant.name, vibhag.name, jilla.name, taluka.name) as  concat_values"), 'gramjuth.*')
+        $gramjuth = Gramjuth::select(
+            DB::raw("CONCAT_WS(' > ', prant.name, vibhag.name, jilla.name, taluka.name) as  concat_values"),
+            'gramjuth.*',
+            'prant.name as prant_name',
+            'vibhag.name as vibhag_name',
+            'jilla.name as jilla_name',
+        )
             ->join('taluka', 'taluka.id', '=', 'gramjuth.taluka_id')
             ->join('jilla', 'jilla.id', '=', 'taluka.jilla_id')
             ->join('vibhag', 'vibhag.id', '=',  'jilla.vibhag_id')

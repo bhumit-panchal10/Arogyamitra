@@ -22,7 +22,7 @@ class JillaController extends Controller
     public function index()
     {
         $title = 'Jilla';
-        $district = Jilla::select(DB::raw("CONCAT_WS(' > ', prant.name, vibhag.name) as concat_values"), 'jilla.*')
+        $district = Jilla::select(DB::raw("CONCAT_WS(' > ', prant.name, vibhag.name) as concat_values"), 'jilla.*', 'prant.name as prant_name')
             ->join('vibhag', 'vibhag.id', '=', 'jilla.vibhag_id')
             ->join('prant', 'prant.id', '=', 'vibhag.prant_id')
             ->orderBy('jilla.id', 'desc')
