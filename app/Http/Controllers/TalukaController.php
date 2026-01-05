@@ -23,13 +23,12 @@ class TalukaController extends Controller
     {
         $title = 'Taluka';
         $subDistrict = Taluka::with('jilla')->orderBy('id', 'desc')->get();
-        $subDistrict = Taluka::select(DB::raw("CONCAT_WS(' > ', prant.name, vibhag.name, jilla.NAME) as concat_values"), 'taluka.*')
+        $subDistrict = Taluka::select(DB::raw("CONCAT_WS(' > ', prant.name, vibhag.name, jilla.NAME) as concat_values"), 'taluka.*', 'prant.name as prant_name', 'vibhag.name as vibhag_name',)
             ->join('jilla', 'jilla.id', '=', 'taluka.jilla_id')
             ->join('vibhag', 'vibhag.id', '=',  'jilla.vibhag_id')
             ->join('prant', 'prant.id', '=', 'vibhag.prant_id')
             ->orderBy('taluka.id', 'desc')
             ->get();
-
 
         return view('taluka.index', compact('subDistrict', 'title'));
     }

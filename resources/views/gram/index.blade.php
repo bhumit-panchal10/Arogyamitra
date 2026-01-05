@@ -1,321 +1,383 @@
 @extends('layouts.app')
 @section('head')
-<link href="{{ url('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
-<div class="card">
-    <div class="card-header border-0 pt-6">
-        <div class="card-title">
-            <div class="d-flex align-items-center position-relative my-1">
-                <span class="svg-icon svg-icon-1 position-absolute ms-6">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black" />
-                        <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black" />
-                    </svg>
-                </span>
-                <input type="text" id="searchInput" class="form-control form-control-solid w-250px ps-14 datatable-input" placeholder="Search" />
+    <style>
+        /* SR NO column - header + body */
+        #kt_customers_table th:nth-child(2),
+        #kt_customers_table td:nth-child(2) {
+            padding: 4px 6px !important;
+            width: 50px;
+            min-width: 50px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* NAME column - reduce padding */
+        #kt_customers_table th:nth-child(3),
+        #kt_customers_table td:nth-child(3) {
+            padding: 6px 8px !important;
+            white-space: nowrap;
+        }
+
+        /* Prevent action column from forcing row height */
+        #kt_customers_table td:last-child {
+            white-space: nowrap;
+        }
+
+        /* Reduce overall row height */
+        #kt_customers_table td {
+            vertical-align: middle !important;
+        }
+    </style>
+
+    <div class="card">
+        <div class="card-header border-0 pt-6">
+            <div class="card-title">
+                <div class="d-flex align-items-center position-relative my-1">
+                    <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none">
+                            <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
+                                transform="rotate(45 17.0365 15.1223)" fill="black" />
+                            <path
+                                d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+                                fill="black" />
+                        </svg>
+                    </span>
+                    <input type="text" id="searchInput"
+                        class="form-control form-control-solid w-250px ps-14 datatable-input" placeholder="Search" />
+                </div>
+            </div>
+            <div class="card-toolbar">
+                <span class="me-2 d-none showCount fw-bolder me-3"></span>
+                <button type="button" class="btn btn-info me-2 d-none" onclick="updateStatusChange()">Change
+                    status</button>
+                <button type="button" class="btn btn-danger me-2 d-none" onclick="multiDelete()">Delete Selected</button>
             </div>
         </div>
-        <div class="card-toolbar">
-            <span class="me-2 d-none showCount fw-bolder me-3"></span>
-            <button type="button" class="btn btn-info me-2 d-none" onclick="updateStatusChange()">Change status</button>
-            <button type="button" class="btn btn-danger me-2 d-none" onclick="multiDelete()">Delete Selected</button>
+
+        <div class="card-body pt-0 table-responsive">
+            <div class="datatable datatable-bordered datatable-head-custom">
+                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
+                    <thead>
+                        <tr class="text-start fw-bolder fs-7 text-uppercase gs-0">
+                            <th class="text-center">
+                                <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                                    <input class="form-check-input" type="checkbox" data-kt-check="true"
+                                        id="selectAllCheckbox" data-kt-check-target="#kt_customers_table .form-check-input"
+                                        value="" />
+                                </div>
+                            </th>
+                            <th class="text-center">{{ trans('messages.gram.fields.serial_no') }}</th>
+                            <th class="text-center">{{ trans('messages.gram.fields.name') }}</th>
+                            <th class="text-center">{{ trans('messages.gram.fields.gramjuth') }}</th>
+                            <th class="text-center">{{ trans('messages.gram.fields.taluka') }}</th>
+                            <th class="text-center">{{ trans('messages.gram.fields.jilla') }}</th>
+                            <th class="text-center">{{ trans('messages.gram.fields.vibhag') }}</th>
+                            <th class="text-center">{{ trans('messages.gram.fields.prant') }}</th>
+                            <th class="text-center">{{ trans('messages.gram.fields.action') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600 fw-bold">
+                        @forelse($grams as $gram)
+                            <tr>
+                                <td class="text-center">
+                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                        <input name="id[]" class="form-check-input checkbox selectAllCheckbox"
+                                            type="checkbox" value="{{ $gram->id }}" />
+                                    </div>
+                                </td>
+                                <td class="text-center">{{ $loop->iteration }}</td>
+                                <td class="text-center">{{ $gram->name }}</td>
+                                <td class="text-center">{{ $gram->gramjuth->name }}</td>
+                                <td class="text-center">{{ $gram->taluka_name }}</td>
+                                <td class="text-center">{{ $gram->jilla_name }}</td>
+                                <td class="text-center">{{ $gram->vibhag_name }}</td>
+                                <td class="text-center">{{ $gram->prant_name }}</td>
+
+                                <td class="text-center">
+                                    <span class="btn btn-info" style="width: 60px;" data-bs-toggle="tooltip"
+                                        data-bs-custom-class="tooltip-dark" data-bs-placement="top"
+                                        title="{{ $gram->concat_values }}"><i class="fa fa-info"></i></span>
+                                    <a href="javascript:void(0);" data-bs-custom-class="tooltip-dark" data-toggle="tooltip"
+                                        {{ $gram->status == '1' ? 'title= Active' : 'title=Inactive' }}
+                                        onclick="changeGramStatus('{{ $gram->status }}','{{ $gram->id }}')"
+                                        class="btn btn-xs btn-success">
+                                        @if ($gram->status == '1')
+                                            <i class="fas fa-regular fa-lock-open fa-5x" aria-hidden="true"></i>
+                                        @else
+                                            <i class="fas fa-regular fa-lock fa-5x" aria-hidden="true"></i>
+                                        @endif
+                                    </a>
+                                    <a class="btn btn-primary" data-toggle="tooltip" data-bs-custom-class="tooltip-dark"
+                                        title="Show" href="{{ route('grams.show', $gram->id) }}"><i
+                                            class="fa fa-eye"></i></a>
+                                    <a class="btn btn-info" data-toggle="tooltip" data-bs-custom-class="tooltip-dark"
+                                        title="Edit" href="{{ route('grams.edit', $gram->id) }}"><i
+                                            class="fa fa-edit"></i></a>
+
+                                    {!! Form::open([
+                                        'route' => ['grams.destroy', $gram->id],
+                                        'method' => 'DELETE',
+                                        'style' => 'display:inline-block;',
+                                        'onsubmit' => "return confirm('Are you sure you want to delete this gram?');",
+                                    ]) !!}
+
+                                    {!! Form::button('<i class="fa fa-trash"></i>', [
+                                        'data-toggle' => 'tooltip',
+                                        'data-bs-custom-class' => 'tooltip-dark',
+                                        'title' => 'Delete',
+                                        'type' => 'submit',
+                                        'class' => 'btn btn-xs btn-danger',
+                                    ]) !!}
+                                    {!! Form::close() !!}
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="12" style="text-align: center;">
+                                    No record found
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-
-    <div class="card-body pt-0 table-responsive">
-        <div class="datatable datatable-bordered datatable-head-custom">
-            <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
-                <thead>
-                    <tr class="text-start fw-bolder fs-7 text-uppercase gs-0">
-                        <th class="text-center">
-                            <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                <input class="form-check-input" type="checkbox" data-kt-check="true" id="selectAllCheckbox" data-kt-check-target="#kt_customers_table .form-check-input" value="" />
-                            </div>
-                        </th>
-                        <th class="text-center">{{ trans('messages.gram.fields.serial_no') }}</th>
-                        <th class="text-center">{{ trans('messages.gram.fields.name') }}</th>
-                        <th class="text-center">{{ trans('messages.gram.fields.gramjuth') }}</th>
-                        <th class="text-center">{{ trans('messages.gram.fields.action') }}</th>
-                    </tr>
-                </thead>
-                <tbody class="text-gray-600 fw-bold">
-                    @forelse($grams as $gram)
-                    <tr>
-                        <td class="text-center">
-                            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                <input name="id[]" class="form-check-input checkbox selectAllCheckbox" type="checkbox" value="{{ $gram->id }}" />
-                            </div>
-                        </td>
-                        <td class="text-center">{{$loop->iteration}}</td>
-                        <td class="text-center">{{ $gram->name }}</td>
-                        <td class="text-center">{{ $gram->gramjuth->name }}</td>
-                        <td class="text-center">
-                            <span class="btn btn-info" style="width: 60px;" data-bs-toggle="tooltip" data-bs-custom-class="tooltip-dark"        data-bs-placement="top" title="{{ $gram->concat_values }}"><i class="fa fa-info"></i></span>
-                            <a href="javascript:void(0);" data-bs-custom-class="tooltip-dark" data-toggle="tooltip" {{ $gram->status == '1' ? 'title= Active' : 'title=Inactive' }} onclick="changeGramStatus('{{$gram->status}}','{{$gram->id}}')" class="btn btn-xs btn-success">
-                                @if($gram->status == '1')
-                                <i class="fas fa-regular fa-lock-open fa-5x" aria-hidden="true"></i>
-                                @else
-                                <i class="fas fa-regular fa-lock fa-5x" aria-hidden="true"></i>
-                                @endif
-                            </a>
-                            <a class="btn btn-primary" data-toggle="tooltip" data-bs-custom-class="tooltip-dark" title="Show" href="{{ route('grams.show', $gram->id) }}"><i class="fa fa-eye"></i></a>
-                            <a class="btn btn-info" data-toggle="tooltip" data-bs-custom-class="tooltip-dark" title="Edit" href="{{ route('grams.edit', $gram->id) }}"><i class="fa fa-edit"></i></a>
-
-                            {!! Form::open([
-                            'route' => ['grams.destroy', $gram->id],
-                            'method' => 'DELETE',
-                            'style' => 'display:inline-block;',
-                            'onsubmit' => "return confirm('Are you sure you want to delete this gram?');"
-                            ]) !!}
-
-                            {!! Form::button('<i class="fa fa-trash"></i>', ['data-toggle'=>"tooltip", 'data-bs-custom-class'=>"tooltip-dark", 'title'=>"Delete",'type' => 'submit', 'class' => 'btn btn-xs btn-danger']) !!}
-                            {!! Form::close() !!}
-                        </td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="12" style="text-align: center;">
-                            No record found
-                        </td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
 @endsection
 
 @section('javascript')
-<script src="{{ url('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-<script>
-    $(document).ready(function() {
+    <script src="{{ url('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+    <script>
+        $(document).ready(function() {
 
-        $(document).on('click', '.checkbox', function() {
-            var selectedCount = $('.checkbox').filter(':checked').length;
-            if (selectedCount > 0) {
+            $(document).on('click', '.checkbox', function() {
+                var selectedCount = $('.checkbox').filter(':checked').length;
+                if (selectedCount > 0) {
+                    $('.showCount').text(selectedCount + " Selected");
+                    $('.showCount').removeClass('d-none');
+                    $('#selectAllCheckbox').prop("checked", false);
+                } else {
+                    $('.showCount').addClass('d-none');
+                    // $('#selectAllCheckbox').prop("checked", true);
+                }
+                if ($('.checkbox:checked').length > 0) {
+                    $('button[type=button]').removeClass('d-none');
+                } else {
+                    $('button[type=button]').addClass('d-none');
+                }
+            });
+
+            $('#selectAllCheckbox').click(function() {
+                var checkboxes = $('.checkbox');
+                if ($(this).is(':checked') == true) {
+                    $('button[type=button]').removeClass('d-none');
+                    $('.showCount').removeClass('d-none');
+                    checkboxes.prop('checked', $(this).is(':checked'));
+                } else {
+                    $('.showCount').addClass('d-none');
+                    $('button[type=button]').addClass('d-none');
+                }
+                var selectedCount = checkboxes.filter(':checked').length;
                 $('.showCount').text(selectedCount + " Selected");
-                $('.showCount').removeClass('d-none');
-                $('#selectAllCheckbox').prop("checked", false);
-            } else {
-                $('.showCount').addClass('d-none');
-                // $('#selectAllCheckbox').prop("checked", true);
+            });
+
+            // Initialize DataTables with search input functionality
+            $('#kt_customers_table').DataTable({
+                paginate: true,
+                searching: true,
+                pageLength: 25,
+                order: [],
+                columnDefs: [{
+                    targets: [0],
+                    orderable: false,
+                    //targets: 'no-search',
+                    searchable: false,
+                }],
+            });
+
+            $('#searchInput').on('keyup', function() {
+                $('#kt_customers_table').DataTable().search($(this).val()).draw();
+            });
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+        function changeGramStatus(status, id) {
+            if (confirm('Are you sure you want to change your status')) {
+                $.ajax({
+                    url: "{{ url('change-gram-status') }}",
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        gram_id: id,
+                        gram_status: status,
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1000);
+                    }
+                });
             }
-            if ($('.checkbox:checked').length > 0) {
-                $('button[type=button]').removeClass('d-none');
-            } else {
-                $('button[type=button]').addClass('d-none');
-            }
-        });
+        }
 
-        $('#selectAllCheckbox').click(function() {
-            var checkboxes = $('.checkbox');
-            if ($(this).is(':checked') == true) {
-                $('button[type=button]').removeClass('d-none');
-                $('.showCount').removeClass('d-none');
-                checkboxes.prop('checked', $(this).is(':checked'));
-            } else {
-                $('.showCount').addClass('d-none');
-                $('button[type=button]').addClass('d-none');
-            }
-            var selectedCount = checkboxes.filter(':checked').length;
-            $('.showCount').text(selectedCount + " Selected");
-        });
+        function updateStatusChange() {
+            var selectedIds = [];
+            $(':checkbox:checked').each(function(i) {
+                selectedIds.push($(this).val());
+            });
 
-        // Initialize DataTables with search input functionality
-        $('#kt_customers_table').DataTable({
-            paginate: true,
-            searching: true,
-            pageLength: 25,
-            order: [],
-            columnDefs: [{
-                targets: [0],
-                orderable: false,
-                //targets: 'no-search',
-                searchable: false,
-            }],
-        });
+            Swal.fire({
+                title: 'Confirmation',
+                text: "Are you sure you want to change the status of gram request?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Active',
+                cancelButtonText: 'Cancel',
+                confirmButtonColor: 'green',
+                denyButtonText: 'Deactive',
+                showCloseButton: true,
+                showDenyButton: true,
+                reverseButtons: false,
+            }).then((result) => {
+                console.log(result);
 
-        $('#searchInput').on('keyup', function() {
-            $('#kt_customers_table').DataTable().search($(this).val()).draw();
-        });
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-
-    function changeGramStatus(status, id) {
-        if (confirm('Are you sure you want to change your status')) {
-            $.ajax({
-                url: "{{ url('change-gram-status') }}",
-                type: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: {
-                    gram_id: id,
-                    gram_status: status,
-                },
-                dataType: "JSON",
-                success: function(response) {
-                    setTimeout(function() {
-                        location.reload();
-                    }, 1000);
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ url('change-gram-status') }}",
+                        type: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: {
+                            ids: selectedIds,
+                            status: 1,
+                            type: "Multiple"
+                        },
+                        dataType: "JSON",
+                        success: function(response) {
+                            if (response.status == 1) {
+                                Swal.fire({
+                                    title: 'Success',
+                                    text: response.messages,
+                                    icon: 'success'
+                                });
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 2000);
+                            } else {
+                                Swal.fire({
+                                    title: 'Error',
+                                    text: 'Something went wrong!',
+                                    icon: 'error'
+                                });
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 2000);
+                            }
+                        }
+                    });
+                } else if (result.isDenied) {
+                    $.ajax({
+                        url: "{{ url('change-gram-status') }}",
+                        type: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: {
+                            ids: selectedIds,
+                            status: 0,
+                            type: "Multiple"
+                        },
+                        dataType: "JSON",
+                        success: function(response) {
+                            console.log(response.status)
+                            if (response.status == 0) {
+                                Swal.fire({
+                                    title: 'Success',
+                                    text: response.messages,
+                                    icon: 'success'
+                                });
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 2000);
+                            } else {
+                                Swal.fire({
+                                    title: 'Error',
+                                    text: 'Something went wrong!',
+                                    icon: 'error'
+                                });
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 2000);
+                            }
+                        }
+                    });
                 }
             });
         }
-    }
 
-    function updateStatusChange() {
-        var selectedIds = [];
-        $(':checkbox:checked').each(function(i) {
-            selectedIds.push($(this).val());
-        });
+        function multiDelete() {
+            var selectedIds = [];
+            $(':checkbox:checked').each(function(i) {
+                selectedIds.push($(this).val());
+            });
 
-        Swal.fire({
-            title: 'Confirmation',
-            text: "Are you sure you want to change the status of gram request?",
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonText: 'Active',
-            cancelButtonText: 'Cancel',
-            confirmButtonColor: 'green',
-            denyButtonText: 'Deactive',
-            showCloseButton: true,
-            showDenyButton: true,
-            reverseButtons: false,
-        }).then((result) => {
-            console.log(result);
+            Swal.fire({
+                text: "Are you sure you want to delete selected gram?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete!',
+                cancelButtonText: 'No, cancel',
+                confirmButtonColor: 'red',
+                showCloseButton: true,
+                reverseButtons: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ url('delete-gram') }}",
+                        type: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: {
+                            ids: selectedIds,
+                            status: 1,
+                            type: "Multiple"
+                        },
+                        dataType: "JSON",
+                        success: function(response) {
+                            if (response.status == 1) {
+                                Swal.fire({
+                                    title: 'Success',
+                                    text: response.messages,
+                                    icon: 'success',
+                                    reverseButtons: false,
 
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: "{{ url('change-gram-status') }}",
-                    type: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    data: {
-                        ids: selectedIds,
-                        status: 1,
-                        type: "Multiple"
-                    },
-                    dataType: "JSON",
-                    success: function(response) {
-                        if (response.status == 1) {
-                            Swal.fire({
-                                title: 'Success',
-                                text: response.messages,
-                                icon: 'success'
-                            });
-                            setTimeout(function() {
-                                location.reload();
-                            }, 2000);
-                        } else {
-                            Swal.fire({
-                                title: 'Error',
-                                text: 'Something went wrong!',
-                                icon: 'error'
-                            });
-                            setTimeout(function() {
-                                location.reload();
-                            }, 2000);
+                                });
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 2000);
+                            } else {
+                                Swal.fire({
+                                    title: 'Error',
+                                    text: response.messages,
+                                    icon: 'error'
+                                });
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 2000);
+                            }
                         }
-                    }
-                });
-            } else if (result.isDenied) {
-                $.ajax({
-                    url: "{{ url('change-gram-status') }}",
-                    type: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    data: {
-                        ids: selectedIds,
-                        status: 0,
-                        type: "Multiple"
-                    },
-                    dataType: "JSON",
-                    success: function(response) {
-                        console.log(response.status)
-                        if (response.status == 0) {
-                            Swal.fire({
-                                title: 'Success',
-                                text: response.messages,
-                                icon: 'success'
-                            });
-                            setTimeout(function() {
-                                location.reload();
-                            }, 2000);
-                        } else {
-                            Swal.fire({
-                                title: 'Error',
-                                text: 'Something went wrong!',
-                                icon: 'error'
-                            });
-                            setTimeout(function() {
-                                location.reload();
-                            }, 2000);
-                        }
-                    }
-                });
-            }
-        });
-    }
-
-    function multiDelete() {
-        var selectedIds = [];
-        $(':checkbox:checked').each(function(i) {
-            selectedIds.push($(this).val());
-        });
-
-        Swal.fire({
-            text: "Are you sure you want to delete selected gram?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, delete!',
-            cancelButtonText: 'No, cancel',
-            confirmButtonColor: 'red',
-            showCloseButton: true,
-            reverseButtons: false,
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: "{{ url('delete-gram') }}",
-                    type: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    data: {
-                        ids: selectedIds,
-                        status: 1,
-                        type: "Multiple"
-                    },
-                    dataType: "JSON",
-                    success: function(response) {
-                        if (response.status == 1) {
-                            Swal.fire({
-                                title: 'Success',
-                                text: response.messages,
-                                icon: 'success',
-                                reverseButtons: false,
-
-                            });
-                            setTimeout(function() {
-                                location.reload();
-                            }, 2000);
-                        } else {
-                            Swal.fire({
-                                title: 'Error',
-                                text: response.messages,
-                                icon: 'error'
-                            });
-                            setTimeout(function() {
-                                location.reload();
-                            }, 2000);
-                        }
-                    }
-                });
-            }
-        });
-    }
-</script>
+                    });
+                }
+            });
+        }
+    </script>
 @endsection

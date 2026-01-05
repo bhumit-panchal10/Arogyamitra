@@ -22,7 +22,14 @@ class GramController extends Controller
 
     public function index()
     {
-        $grams = Gram::select(DB::raw("CONCAT_WS(' > ', prant.name, vibhag.name, jilla.name, taluka.name , gramjuth.name) as  concat_values"), 'gram.*')
+        $grams = Gram::select(
+            DB::raw("CONCAT_WS(' > ', prant.name, vibhag.name, jilla.name, taluka.name , gramjuth.name) as  concat_values"),
+            'gram.*',
+            'prant.name as prant_name',
+            'vibhag.name as vibhag_name',
+            'jilla.name as jilla_name',
+            'taluka.name as taluka_name',
+        )
             ->join('gramjuth', 'gramjuth.id', '=', 'gram.gramjuth_id')
             ->join('taluka', 'taluka.id', '=', 'gramjuth.taluka_id')
             ->join('jilla', 'jilla.id', '=', 'taluka.jilla_id')
