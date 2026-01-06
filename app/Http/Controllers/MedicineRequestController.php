@@ -140,4 +140,20 @@ class MedicineRequestController extends Controller
             return response()->json(['status' => 0, 'success' => false, 'message' => 'Action Failed!']);
         }
     }
+
+    public function bulkAccept(Request $request)
+    {
+        foreach ($request->requests as $req) {
+
+            MedicineRequest::where([
+                'medicine_id' => $req['medicine_id'],
+                'arogyamitra_id' => $req['arogyamitra_id'],
+                'status' => 2
+            ])->update(['status' => 3]);
+        }
+
+        return response()->json([
+            'message' => 'Selected requests accepted successfully'
+        ]);
+    }
 }
