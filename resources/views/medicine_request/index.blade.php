@@ -27,14 +27,26 @@
 
         /* Keep active tab strong */
         /* .nav-tabs .nav-link.active {
-                                        background-color: #0d6efd;
-                                        color: #fff;
-                                        font-weight: 600;
-                                    } */
+                                                                                                                                                                                                                                                                                    background-color: #0d6efd;
+                                                                                                                                                                                                                                                                                    color: #fff;
+                                                                                                                                                                                                                                                                                    font-weight: 600;
+                                                                                                                                                                                                                                                                                } */
     </style>
     <div class="card">
 
         @include('medicine_request.orderTab')
+
+        <div class="row">
+            @if (request()->status == 2)
+                <div class="col-md-12  text-end">
+                    <a href="{{ route('medicineRequest.export', request('status', 1)) }}" class="btn btn-success btn-sm mr-3">
+                        Export Excel
+                    </a>
+
+                </div>
+            @endif
+        </div>
+
 
         <div class="card-header border-0 pt-6">
             @if (request()->status == 2 || request()->status == 3)
@@ -60,14 +72,14 @@
                         class="form-control form-control-solid w-250px ps-14" placeholder="Search" />
 
 
-                    <div class="col-12">
-                        <select id="Prant" name="Prant" class="form-control w-150px" data-kt-select2="true">
-                            <option value="">Select Prant</option>
-                            @foreach ($Prant as $pran)
-                                <option value="{{ $pran->id }}">{{ $pran->name ?? '' }}</option>
+                    {{-- <div class="col-12">
+                        <select id="Stockiest" name="Stockiest" class="form-control w-150px" data-kt-select2="true">
+                            <option value="">Select Stockiest</option>
+                            @foreach ($stockiestuser as $stockiest)
+                                <option value="{{ $stockiest->id }}">{{ $stockiest->name ?? '' }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
 
                     {{-- <div class="col-12">
                         {!! Form::submit('Submit', ['class' => 'btn btn-primary me-2']) !!}
@@ -77,6 +89,7 @@
                             status</button>
                         {!! Form::close() !!}
                     </div> --}}
+                    {!! Form::close() !!}
                 </div>
             @endif
 
@@ -106,10 +119,10 @@
                         @endif
                         <!-- @if ($totalMedicinePending > 0 || Auth::user()->role != '5')
     <th class="text-center">
-                                                                                                        <div class="form-check form-check-sm form-check-custom form-check-solid me-3 {{ $dNone }}">
-                                                                                                            <input class="form-check-input" type="checkbox" data-kt-check="true" id="selectAllCheckbox" data-kt-check-target="#kt_customers_table .form-check-input" value="" />
-                                                                                                        </div>
-                                                                                                    </th>
+                                                                                                                                                                                                                                                                                                                                                    <div class="form-check form-check-sm form-check-custom form-check-solid me-3 {{ $dNone }}">
+                                                                                                                                                                                                                                                                                                                                                        <input class="form-check-input" type="checkbox" data-kt-check="true" id="selectAllCheckbox" data-kt-check-target="#kt_customers_table .form-check-input" value="" />
+                                                                                                                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                                                                                                                </th>
 @elseif (Auth::user()->role == '5')
     <th class="text-center">{{ trans('messages.dashboard.fields.serial_no') }}</th>
     @endif -->
@@ -127,6 +140,9 @@
                         <th class="text-center">{{ trans('messages.medicine_request.request_quantity') }}</th>
                         <th class="text-center">{{ trans('messages.medicine_request.request') }}</th>
                         <th class="text-center">{{ trans('messages.medicine_request.status') }}</th>
+                        @if (request()->status == 2)
+                            <th class="text-center">{{ trans('messages.medicine_request.delivered_quantity') }}</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody class="text-gray-600 fw-bold">
@@ -148,13 +164,13 @@
                                     ->groupBy('medicine_id', 'app_user_id')
                                     ->first();
                             @endphp
-                                                                                                                                                                                                @if ($medicine['status'] == '1' && (Auth::user()->role == '1' || Auth::user()->role == '4' || Auth::user()->role != '5'))
+                                                                                                                                                                                                                                                                                                                                                                                                                                            @if ($medicine['status'] == '1' && (Auth::user()->role == '1' || Auth::user()->role == '4' || Auth::user()->role != '5'))
     <td class="text-center">
-                                                                                                                                                                                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                                                                                                                                                            <input class="form-check-input checkbox" type="checkbox" value="{{ $mids['mrId'] ? $mids['mrId'] : '' }}" />
-                                                                                                                                                                                                            <input type="hidden" name="app_user_id[]" class="app_user_id" value="{{ $medicine['arogyamitra_id'] }}">
-                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                    </td>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        <input class="form-check-input checkbox" type="checkbox" value="{{ $mids['mrId'] ? $mids['mrId'] : '' }}" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        <input type="hidden" name="app_user_id[]" class="app_user_id" value="{{ $medicine['arogyamitra_id'] }}">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                </td>
 @elseif (Auth::user()->role == '5')
     <td class="text-center">{{ $loop->iteration }}</td>
     @endif -->
@@ -224,6 +240,8 @@
                                         <div class="badge badge-light-success fw-bolder">Accepted</div>
                                     @elseif($medicine['status'] == 0)
                                         <div class="badge badge-light-danger fw-bolder">Rejected</div>
+                                    @elseif($medicine['status'] == 3)
+                                        <div class="badge badge-light-success fw-bolder">Deliverd</div>
                                     @endif
                                 </td>
                             @else
@@ -235,12 +253,40 @@
                                     <td>
                                         <div class="badge badge-light-success fw-bolder">Accepted</div>
                                     </td>
+                                @elseif($medicine['status'] == 3)
+                                    <div class="badge badge-light-success fw-bolder">Deliverd</div>
                                 @else
                                     <td>
                                         <div class="badge badge-light-danger fw-bolder">Rejected</div>
                                     </td>
                                 @endif
                             @endif
+
+                            <td class="text-center">
+
+                                @if ((int) $medicine['status'] === 2 && (int) Auth::user()->role === 1)
+                                    {!! Form::open([
+                                        'route' => 'medicineRequest.deliver',
+                                        'method' => 'POST',
+                                    ]) !!}
+                                    @csrf
+
+                                    <input type="hidden" name="medicine_id" value="{{ $medicine['mrId'] }}">
+                                    <input type="hidden" name="arogyamitra_id"
+                                        value="{{ $medicine['arogyamitra_id'] }}">
+
+                                    <input type="number" name="delivered_quantity" class="form-control form-control-sm"
+                                        placeholder="Delivered Qty" required>
+
+                                    <button type="submit" class="btn btn-primary btn-sm mt-2">
+                                        Submit
+                                    </button>
+
+                                    {!! Form::close() !!}
+                                @else
+                                @endif
+                            </td>
+
                         </tr>
                     @empty
                         <tr>

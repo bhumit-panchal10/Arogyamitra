@@ -11,6 +11,20 @@ class MedicineRequest extends Model
 
     protected $table = 'medicine_request';
 
+    protected $fillable = [
+        'id',
+        'medicine_id',
+        'arogyamitra_id',
+        'qty',
+        'status',
+        'created_at',
+        'updated_at',
+        'gram_id',
+        'app_user_id',
+        'app_user_name',
+        'delivered_quantity',
+    ];
+
     public function medicine()
     {
         return $this->hasOne(Medicine::class, 'id');

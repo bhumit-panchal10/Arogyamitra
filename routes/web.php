@@ -105,6 +105,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::any('medicine-stock', [MedicineStockController::class, 'index'])->name('medicineStock.index');
     Route::post('medicine-stock/store', [MedicineStockController::class, 'store'])->name('medicine-stock.store');
+    Route::get('medicineRequest/export/{status}', [MedicineRequestController::class, 'export'])
+        ->name('medicineRequest.export');
+    Route::post('medicineRequest/deliver', [MedicineRequestController::class, 'deliver'])
+        ->name('medicineRequest.deliver');
+
 
     /* App User Medicine Request */
     /* Route::get('change-status', [MedicineRequestController::class, 'updateStatus']);
@@ -117,6 +122,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('medicineRequest', [StockiestMedicineRequestController::class, 'index'])->name('medicineRequest.index');
     Route::post('medicineRequest', [StockiestMedicineRequestController::class, 'index'])->name('medicineRequest.status');
     Route::post('/medicineRequest/{id}/updateStatus', [StockiestMedicineRequestController::class, 'updateRequestStatus'])->name('medicineRequest.updateRequestStatus');
+    Route::get('medicineReqReport', [StockiestMedicineRequestController::class, 'medicineReqReport'])->name('medicineReqReport');
 
     Route::get('accept-stock', [StockiestMedicineRequestController::class, 'acceptStock']);
     Route::get('export', [UserExportController::class, 'export'])->name('user-export');
