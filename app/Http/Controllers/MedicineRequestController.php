@@ -9,13 +9,17 @@ use App\Models\{
     Jilla,
     Taluka,
     Gramjuth,
-    Gram
+    Gram,
+    MedicineTrack
 };
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{
     Auth,
     DB
 };
+use App\Exports\MedicineRequestExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class MedicineRequestController extends Controller
 {
@@ -155,5 +159,70 @@ class MedicineRequestController extends Controller
         return response()->json([
             'message' => 'Selected requests accepted successfully'
         ]);
+    }
+
+    public function export($status)
+    {
+        return Excel::download(
+            new MedicineRequestExport($status),
+            'medicine_requests.xlsx'
+        );
+    }
+
+    public function deliver(Request $request)
+    {
+
+
+        $request->validate([
+            'medicine_id' => 'required',
+            'delivered_quantity'  => 'required|numeric|min:1',
+        ]);
+
+
+        DB::transaction(function () use ($request) {
+
+            // 1️⃣ Get Medicine Request
+            $medicineRequest = MedicineRequest::findOrFail($request->medicine_id);
+
+            $medicineId  = $medicineRequest->medicine_id;
+            $qtyDelivered = $request->delivered_quantity;
+
+            $arogyamitra_id = $request->arogyamitra_id;
+            // 2️⃣ Get last stock entry for this medicine
+            $lastTrack = MedicineTrack::where('medicine_id', $medicineId)
+                ->orderBy('id', 'desc')
+                ->first();
+
+            $openingStock = $lastTrack ? $lastTrack->closing_stock : 0;
+            $closingStock = $openingStock - $qtyDelivered;
+
+            // if ($closingStock < 0) {
+            //     throw new \Exception('Insufficient stock');
+            // }
+
+
+            // 3️⃣ Insert medicine_track entry (REDUCE)
+            MedicineTrack::create([
+                'arogyamitra_id' => $arogyamitra_id ?? '',
+                'medicine_id'    => $medicineId,
+                'opening_stock'  => $openingStock,
+                'qty'            => $qtyDelivered,
+                'closing_stock'  => $closingStock,
+                'mode'           => 'R', // Reduce
+                'gram_id'        => $medicineRequest->gram_id,
+            ]);
+
+
+            // Update medicine_request
+            DB::table('medicine_request')
+                ->where('id', $request->medicine_id)
+                ->update([
+                    'delivered_quantity' => $qtyDelivered,
+                    'status'             => '3', // must be string for ENUM
+                ]);
+        });
+
+        toastr()->success('Medicine delivered & stock updated successfully');
+        return back();
     }
 }

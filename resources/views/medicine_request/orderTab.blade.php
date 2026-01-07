@@ -1,7 +1,7 @@
 <ul class="nav nav-tabs nav-fill mb-4">
 
     <li class="nav-item">
-        <a class="nav-link {{ request()->status == '1' || !request()->has('status') ? 'active' : '' }}"
+        <a class="nav-link {{ request()->status == '1' ? 'active' : '' }}"
             href="{{ route('medicineRequest.index', ['status' => 1]) }}">
             Pending Request
         </a>
@@ -29,8 +29,8 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('medicineRequest.index') ? 'active' : '' }}"
-            href="{{ route('medicineRequest.index') }}">
+        <a class="nav-link {{ request()->routeIs('medicineReqReport') ? 'active' : '' }}"
+            href="{{ route('medicineReqReport') }}">
             Reports
         </a>
     </li>

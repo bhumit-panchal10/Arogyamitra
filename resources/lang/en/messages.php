@@ -126,6 +126,8 @@ return [
         'request'                    =>  'Request date',
         'status'                    =>    'STATUS',
         'current_quantity'            =>    'Current Quantity',
+        'delivered_quantity'            =>    'Delivered Quantity',
+
     ],
 
     'prant'    =>    [

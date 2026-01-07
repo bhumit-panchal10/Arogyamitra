@@ -43,6 +43,8 @@ class StockiestMedicineRequestController extends Controller
         $gramjuth = Gramjuth::where('status', '1')->pluck('name', 'id');
         $gram = Gram::where('status', '1')->pluck('name', 'id');
         $user = User::select('users.role', 'users.*');
+        $stockiestuser = User::where('role', '6')->get();
+
         $dNone = '';
         if (Auth::user()->role == 4) {
 
@@ -91,7 +93,6 @@ class StockiestMedicineRequestController extends Controller
                 ->get()
                 ->toArray();
 
-
             $totalMedicinePending = MedicineRequest::join('users as u', 'u.id', 'medicine_request.app_user_id')
                 ->where(['medicine_request.status' => '1', 'u.id' => Auth::user()->prant_id])->where('medicine_request.status', '1')
                 ->count();
@@ -116,7 +117,8 @@ class StockiestMedicineRequestController extends Controller
 
             $totalMedicinePending = MedicineRequest::where('status', '1')->count();
         }
-        return view('medicine_request.index', compact('Prant', 'title', 'medicineRequest', 'totalMedicinePending', 'dNone'));
+
+        return view('medicine_request.index', compact('stockiestuser', 'Prant', 'title', 'medicineRequest', 'totalMedicinePending', 'dNone'));
     }
 
     public function updateRequestStatus(Request $request)
@@ -221,5 +223,27 @@ class StockiestMedicineRequestController extends Controller
         } else {
             return response()->json(['status' => 0, 'success' => false, 'message' => 'Stock is not available!']);
         }
+    }
+
+    public function medicineReqReport(Request $request)
+    {
+        $status = $request->get('status', 2);
+        $title = 'Medicine Request Report';
+
+        $medicineRequest = MedicineRequest::select(
+            'm.id as medicine_id',
+            'm.name as medicine_name',
+            DB::raw('SUM(medicine_request.qty) as total_request')
+        )
+            ->join('medicine as m', 'm.id', '=', 'medicine_request.medicine_id')
+            ->where('medicine_request.status', $status)
+            ->groupBy('m.id', 'm.name')
+            ->orderBy('m.name')
+            ->get();
+
+        return view(
+            'medicine_request.medicineReport',
+            compact('medicineRequest', 'title')
+        );
     }
 }
