@@ -227,7 +227,7 @@ class StockiestMedicineRequestController extends Controller
 
     public function medicineReqReport(Request $request)
     {
-        $status = $request->get('status', 2);
+        $status = $request->get('status', 3);
         $title = 'Medicine Request Report';
 
         $medicineRequest = MedicineRequest::select(
@@ -240,7 +240,7 @@ class StockiestMedicineRequestController extends Controller
             ->groupBy('m.id', 'm.name')
             ->orderBy('m.name')
             ->get();
-
+        //dd($medicineRequest);
         return view(
             'medicine_request.medicineReport',
             compact('medicineRequest', 'title')

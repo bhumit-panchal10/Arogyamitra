@@ -194,7 +194,7 @@ class MedicineRequestController extends Controller
                 ->first();
 
             $openingStock = $lastTrack ? $lastTrack->closing_stock : 0;
-            $closingStock = $openingStock - $qtyDelivered;
+            $closingStock = $openingStock + $qtyDelivered;
 
             // if ($closingStock < 0) {
             //     throw new \Exception('Insufficient stock');
