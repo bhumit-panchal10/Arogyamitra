@@ -10,6 +10,7 @@ use App\Models\{
     Taluka,
     Gramjuth,
     Gram,
+    MedicineDispatch,
     MedicineStock,
     MedicineTrack,
     Prant
@@ -98,24 +99,78 @@ class StockiestMedicineRequestController extends Controller
                 ->count();
         } else {
 
-            $select = ['medicine_request.id as mrId', 'm.id', 'medicine_request.status', 'medicine_request.created_at',  'medicine_request.arogyamitra_id', 'j.name as jilla_name', 'u.name as name', 'medicine_request.qty as request_qty', 'm.name as medicine_name', DB::raw('SUM(medicine_request.qty) as total_request')];
-            $query = MedicineRequest::select($select)
-                ->join('medicine as m', 'm.id', 'medicine_request.medicine_id')
-                ->join('users as u', 'u.id', 'medicine_request.arogyamitra_id')
-                ->join('jilla as j', 'j.id', 'u.jilla_id');
-            if (!is_null($status)) {
-                if ($status == 2 || $status == 0) {
-                    $dNone = "d-none";
-                }
-                $query->where('medicine_request.status', $status);
-            }
-            $medicineRequest = $query->where('u.role', 6)
-                ->groupBy('medicine_request.medicine_id', 'medicine_request.status', 'u.id', DB::raw('Date(medicine_request.updated_at)'))
-                ->orderBy('medicine_request.updated_at', 'DESC')
-                ->get()
-                ->toArray();
-
+            // $select = [
+            //     'medicine_request.id as mrId',
+            //     'm.id',
+            //     'medicine_request.status',
+            //     'medicine_request.created_at',
+            //     'medicine_request.arogyamitra_id',
+            //     'j.name as jilla_name',
+            //     'u.name as name',
+            //     'medicine_request.qty as request_qty',
+            //     'm.name as medicine_name',
+            //     DB::raw('SUM(medicine_request.qty) as total_request')
+            // ];
+            // $query = MedicineRequest::select($select)
+            //     ->join('medicine as m', 'm.id', 'medicine_request.medicine_id')
+            //     ->join('users as u', 'u.id', 'medicine_request.arogyamitra_id')
+            //     ->join('jilla as j', 'j.id', 'u.jilla_id');
+            // if (!is_null($status)) {
+            //     if ($status == 2 || $status == 0) {
+            //         $dNone = "d-none";
+            //     }
+            //     $query->where('medicine_request.status', $status);
+            // }
+            // $medicineRequest = $query
+            //     ->groupBy(
+            //         'medicine_request.medicine_id',
+            //         'medicine_request.arogyamitra_id',
+            //         'medicine_request.status',
+            //         'm.name',
+            //         'u.name',
+            //         'j.name'
+            //     )
+            //     ->orderBy('medicine_request.updated_at', 'DESC')
+            //     ->get()
+            //     ->toArray();
             $totalMedicinePending = MedicineRequest::where('status', '1')->count();
+            $medicineRequest = DB::table('medicine_request as mr')
+                ->join('users as u', 'u.id', '=', 'mr.arogyamitra_id')
+                ->join('medicine as m', 'm.id', 'mr.medicine_id')
+                ->leftJoin('medicine_dispatch as md', 'md.medicine_id', '=', 'mr.medicine_id')
+                ->join('jilla as j', 'j.id', 'u.jilla_id')
+                ->select(
+                    DB::raw('SUM(mr.qty) as total_request'),
+                    'mr.id',
+                    'u.name As vibhag_name',
+                    'mr.id As mrId',
+                    'mr.status',
+                    'md.qty As deliverd_qty',
+                    'md.created_at As deliverd_date',
+                    'mr.created_at',
+                    'm.name As medicine_name',
+                    'm.name As name',
+                    'j.name As jilla_name',
+                    'mr.medicine_id',
+                    'mr.arogyamitra_id',
+                    DB::raw('MAX(mr.updated_at) as last_updated_at')
+                )
+                //->where('mr.status', 3)
+                ->where('u.role', 6)
+                ->when(!is_null($status), function ($q) use ($status) {
+                    if ($status == 2 || $status == 0) {
+                        // UI related flag (optional)
+                        // $dNone = "d-none";
+                    }
+                    $q->where('mr.status', $status);
+                }, function ($q) {
+                    // default behavior when status is NULL
+                    $q->where('mr.status', 3);
+                })
+                ->groupBy('mr.medicine_id', 'mr.arogyamitra_id')
+                ->get()
+                ->map(fn($row) => (array) $row)
+                ->toArray();
         }
 
         return view('medicine_request.index', compact('stockiestuser', 'Prant', 'title', 'medicineRequest', 'totalMedicinePending', 'dNone'));
