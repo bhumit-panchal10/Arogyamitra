@@ -10,7 +10,8 @@ use App\Models\{
     Taluka,
     Gramjuth,
     Gram,
-    MedicineTrack
+    MedicineTrack,
+    MedicineDispatch
 };
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{
@@ -171,24 +172,30 @@ class MedicineRequestController extends Controller
 
     public function deliver(Request $request)
     {
-
-
         $request->validate([
-            'medicine_id' => 'required',
+            'medicine_request_id' => 'required',
             'delivered_quantity'  => 'required|numeric|min:1',
         ]);
-
 
         DB::transaction(function () use ($request) {
 
             // 1️⃣ Get Medicine Request
-            $medicineRequest = MedicineRequest::findOrFail($request->medicine_id);
+            $medicineRequest = MedicineRequest::findOrFail($request->medicine_request_id);
 
             $medicineId  = $medicineRequest->medicine_id;
             $qtyDelivered = $request->delivered_quantity;
 
             $arogyamitra_id = $request->arogyamitra_id;
             // 2️⃣ Get last stock entry for this medicine
+
+            MedicineDispatch::create([
+                'Stockiest_id' => $arogyamitra_id ?? '',
+                'medicine_id'    => $medicineId,
+                'qty'            => $qtyDelivered,
+                'Entery_By'  => Auth::user()->role,
+
+            ]);
+
             $lastTrack = MedicineTrack::where('medicine_id', $medicineId)
                 ->orderBy('id', 'desc')
                 ->first();
@@ -208,14 +215,13 @@ class MedicineRequestController extends Controller
                 'opening_stock'  => $openingStock,
                 'qty'            => $qtyDelivered,
                 'closing_stock'  => $closingStock,
-                'mode'           => 'R', // Reduce
+                'mode'           => 'R', // Reduce that means credit
                 'gram_id'        => $medicineRequest->gram_id,
             ]);
-
-
             // Update medicine_request
             DB::table('medicine_request')
-                ->where('id', $request->medicine_id)
+                ->where('medicine_id', $medicineId)
+                ->where('arogyamitra_id', $arogyamitra_id)
                 ->update([
                     'delivered_quantity' => $qtyDelivered,
                     'status'             => '3', // must be string for ENUM
