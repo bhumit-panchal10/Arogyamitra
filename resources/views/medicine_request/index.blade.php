@@ -27,10 +27,10 @@
 
         /* Keep active tab strong */
         /* .nav-tabs .nav-link.active {
-                                                                                                                                                                                                                                                                                                                                                                                            background-color: #0d6efd;
-                                                                                                                                                                                                                                                                                                                                                                                            color: #fff;
-                                                                                                                                                                                                                                                                                                                                                                                            font-weight: 600;
-                                                                                                                                                                                                                                                                                                                                                                                        } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                background-color: #0d6efd;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                color: #fff;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                font-weight: 600;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            } */
     </style>
     <div class="card">
 
@@ -68,9 +68,26 @@
                                 fill="black" />
                         </svg>
                     </span>
+                    <input type="hidden" name="status" value="{{ request()->status }}">
                     <input type="text" id="searchInput" data-kt-user-table-filter="search"
                         class="form-control form-control-solid w-250px ps-14" placeholder="Search" />
-
+                    @if (request()->status == 3)
+                        <div class="col-12">
+                            <input type="date" name="fromdate" id="fromdate"
+                                class="form-control form-control-solid w-250px ps-14" placeholder="date"
+                                value="{{ $fromdate ?? '' }}" />
+                        </div>
+                        To
+                        <div class="col-12">
+                            <input type="date" id="Todate" name="Todate"
+                                class="form-control form-control-solid w-250px ps-14" placeholder="date"
+                                value="{{ $todate ?? '' }}" />
+                        </div>
+                        <input type="submit" name="search" class="btn btn-secondary" style="margin-right: 7px">
+                        <a href="{{ url('medicineRequest?status=3') }}" class="btn btn-secondary">
+                            Reset
+                        </a>
+                    @endif
 
                     {{-- <div class="col-12">
                         <select id="Stockiest" name="Stockiest" class="form-control w-150px" data-kt-select2="true">
@@ -94,6 +111,7 @@
             @endif
 
         </div>
+
 
         <div class="row">
             <div class="col-md-3">
@@ -119,10 +137,10 @@
                         @endif
                         <!-- @if ($totalMedicinePending > 0 || Auth::user()->role != '5')
     <th class="text-center">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="form-check form-check-sm form-check-custom form-check-solid me-3 {{ $dNone }}">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                <input class="form-check-input" type="checkbox" data-kt-check="true" id="selectAllCheckbox" data-kt-check-target="#kt_customers_table .form-check-input" value="" />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        </th>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <div class="form-check form-check-sm form-check-custom form-check-solid me-3 {{ $dNone }}">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <input class="form-check-input" type="checkbox" data-kt-check="true" id="selectAllCheckbox" data-kt-check-target="#kt_customers_table .form-check-input" value="" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </th>
 @elseif (Auth::user()->role == '5')
     <th class="text-center">{{ trans('messages.dashboard.fields.serial_no') }}</th>
     @endif -->
@@ -289,7 +307,8 @@
                                     @csrf
 
                                     <input type="hidden" name="medicine_request_id" value="{{ $medicine['mrId'] }}">
-                                    <input type="hidden" name="arogyamitra_id" value="{{ $medicine['arogyamitra_id'] }}">
+                                    <input type="hidden" name="arogyamitra_id"
+                                        value="{{ $medicine['arogyamitra_id'] }}">
 
                                     <input type="number" name="delivered_quantity" class="form-control form-control-sm"
                                         placeholder="Delivered Qty" required>

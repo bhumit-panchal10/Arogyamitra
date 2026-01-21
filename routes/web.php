@@ -119,7 +119,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     /* Stockiest Medicine Request */
     Route::get('change-status', [StockiestMedicineRequestController::class, 'updateStatus']);
-    Route::get('medicineRequest', [StockiestMedicineRequestController::class, 'index'])->name('medicineRequest.index');
+    Route::any('medicineRequest', [StockiestMedicineRequestController::class, 'index'])->name('medicineRequest.index');
     Route::post('medicineRequest', [StockiestMedicineRequestController::class, 'index'])->name('medicineRequest.status');
     Route::post('/medicineRequest/{id}/updateStatus', [StockiestMedicineRequestController::class, 'updateRequestStatus'])->name('medicineRequest.updateRequestStatus');
     Route::get('medicineReqReport', [StockiestMedicineRequestController::class, 'medicineReqReport'])->name('medicineReqReport');
