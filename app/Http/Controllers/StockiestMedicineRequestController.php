@@ -45,8 +45,11 @@ class StockiestMedicineRequestController extends Controller
         $gram = Gram::where('status', '1')->pluck('name', 'id');
         $user = User::select('users.role', 'users.*');
         $stockiestuser = User::where('role', '6')->get();
+        $fromdate = $request->fromdate;
+        $todate = $request->Todate;
 
         $dNone = '';
+
         if (Auth::user()->role == 4) {
 
             $select = ['medicine_request.id as mrId', 'm.id', 'medicine_request.status', 'medicine_request.created_at', 'medicine_request.arogyamitra_id', 'j.name as jilla_name', 'u.name as name', 'medicine_request.qty as request_qty', 'm.name as medicine_name', DB::raw('SUM(medicine_request.qty) as total_request')];
@@ -74,6 +77,7 @@ class StockiestMedicineRequestController extends Controller
                 ->count();
         } elseif (Auth::user()->role == 5) {
 
+
             $select = ['medicine_request.id as mrId', 'm.id', 'medicine_request.status', 'medicine_request.created_at', 'medicine_request.arogyamitra_id', 'j.name as jilla_name', 'u.name as name', 'medicine_request.qty as request_qty', 'm.name as medicine_name', DB::raw('SUM(medicine_request.qty) as total_request'), 'v.name as vibhag_name'];
             $query = MedicineRequest::select($select)
                 ->join('medicine as m', 'm.id', 'medicine_request.medicine_id')
@@ -97,6 +101,57 @@ class StockiestMedicineRequestController extends Controller
             $totalMedicinePending = MedicineRequest::join('users as u', 'u.id', 'medicine_request.app_user_id')
                 ->where(['medicine_request.status' => '1', 'u.id' => Auth::user()->prant_id])->where('medicine_request.status', '1')
                 ->count();
+        } elseif (Auth::user()->role == 1 && $request->status == '3') {
+
+            $totalMedicinePending = MedicineRequest::where('status', '1')->count();
+            $medicineRequest = DB::table('medicine_dispatch as md')
+                ->join('medicine_request as mr', 'mr.medicine_id', '=', 'md.medicine_id')
+                ->join('users as u', 'u.id', '=', 'mr.arogyamitra_id')
+                ->join('medicine as m', 'm.id', '=', 'mr.medicine_id')
+                ->join('jilla as j', 'j.id', '=', 'u.jilla_id')
+                ->select(
+                    'mr.id',
+                    'u.name As vibhag_name',
+                    'mr.id As mrId',
+                    'mr.status',
+                    'md.qty As deliverd_qty',
+                    'md.created_at As deliverd_date',
+                    'mr.created_at',
+                    'm.name As medicine_name',
+                    'm.name As name',
+                    'j.name As jilla_name',
+                    'mr.medicine_id',
+                    'mr.arogyamitra_id',
+
+                    DB::raw('SUM(md.qty) as delivered_qty'),
+                    DB::raw('MAX(md.created_at) as delivered_date')
+                )
+                ->where('u.role', 6)
+                ->when(!is_null($status), function ($q) use ($status) {
+                    $q->where('mr.status', $status);
+                }, function ($q) {
+                    $q->where('mr.status', 3);
+                })
+                ->when(
+                    $request->filled(['fromdate', 'Todate']),
+                    function ($q) use ($request) {
+                        $q->whereBetween('md.created_at', [
+                            $request->fromdate . ' 00:00:00',
+                            $request->Todate   . ' 23:59:59'
+                        ]);
+                    }
+                )
+
+                ->groupBy(
+                    'mr.medicine_id',
+                    'mr.arogyamitra_id',
+                    'u.name',
+                    'm.name',
+                    'j.name'
+                )
+                ->get()
+                ->map(fn($row) => (array) $row)
+                ->toArray();
         } else {
 
             // $select = [
@@ -137,7 +192,7 @@ class StockiestMedicineRequestController extends Controller
             $medicineRequest = DB::table('medicine_request as mr')
                 ->join('users as u', 'u.id', '=', 'mr.arogyamitra_id')
                 ->join('medicine as m', 'm.id', 'mr.medicine_id')
-                ->leftJoin('medicine_dispatch as md', 'md.medicine_id', '=', 'mr.medicine_id')
+                //->leftJoin('medicine_dispatch as md', 'md.medicine_id', '=', 'mr.medicine_id')
                 ->join('jilla as j', 'j.id', 'u.jilla_id')
                 ->select(
                     DB::raw('SUM(mr.qty) as total_request'),
@@ -145,8 +200,8 @@ class StockiestMedicineRequestController extends Controller
                     'u.name As vibhag_name',
                     'mr.id As mrId',
                     'mr.status',
-                    'md.qty As deliverd_qty',
-                    'md.created_at As deliverd_date',
+                    //'md.qty As deliverd_qty',
+                    //'md.created_at As deliverd_date',
                     'mr.created_at',
                     'm.name As medicine_name',
                     'm.name As name',
@@ -173,7 +228,7 @@ class StockiestMedicineRequestController extends Controller
                 ->toArray();
         }
 
-        return view('medicine_request.index', compact('stockiestuser', 'Prant', 'title', 'medicineRequest', 'totalMedicinePending', 'dNone'));
+        return view('medicine_request.index', compact('fromdate', 'todate', 'stockiestuser', 'Prant', 'title', 'medicineRequest', 'totalMedicinePending', 'dNone'));
     }
 
     public function updateRequestStatus(Request $request)
