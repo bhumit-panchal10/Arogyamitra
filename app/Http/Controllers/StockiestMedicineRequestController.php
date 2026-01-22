@@ -188,6 +188,7 @@ class StockiestMedicineRequestController extends Controller
             //     ->orderBy('medicine_request.updated_at', 'DESC')
             //     ->get()
             //     ->toArray();
+
             $totalMedicinePending = MedicineRequest::where('status', '1')->count();
             $medicineRequest = DB::table('medicine_request as mr')
                 ->join('users as u', 'u.id', '=', 'mr.arogyamitra_id')
@@ -197,6 +198,7 @@ class StockiestMedicineRequestController extends Controller
                 ->select(
                     DB::raw('SUM(mr.qty) as total_request'),
                     'mr.id',
+                    'mr.delivered_quantity As medicinereq_delivered_quantity',
                     'u.name As vibhag_name',
                     'mr.id As mrId',
                     'mr.status',

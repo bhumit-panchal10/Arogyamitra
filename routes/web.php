@@ -96,7 +96,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('report/order/medicines-request', [MedicineOrderController::class, 'index'])->name('order.medicines.index');
     Route::post('report/order/medicines-request', [MedicineOrderController::class, 'index'])->name('order.medicines');
     Route::put('/medicines/{id}/updateStatus', [MedicineController::class, 'updateStatus'])->name('medicines.updateStatus');
-    Route::post('/medicine-request/bulk-accept', [MedicineRequestController::class, 'bulkAccept'])->name('medicineRequest.bulkAccept');
+    Route::post('/medicine-request/delivered/flag/update', [MedicineRequestController::class, 'delivered_flag_update'])->name('medicineRequest.delivered_flag_update');
 
 
     Route::get('active-log', [ActivityController::class, 'index'])->name('activeLog.index');
