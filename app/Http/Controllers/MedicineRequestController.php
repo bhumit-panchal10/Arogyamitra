@@ -146,20 +146,17 @@ class MedicineRequestController extends Controller
         }
     }
 
-    public function bulkAccept(Request $request)
+    public function delivered_flag_update(Request $request)
     {
-        foreach ($request->requests as $req) {
 
-            MedicineRequest::where([
-                'medicine_id' => $req['medicine_id'],
-                'arogyamitra_id' => $req['arogyamitra_id'],
-                'status' => 2
-            ])->update(['status' => 3]);
-        }
-
-        return response()->json([
-            'message' => 'Selected requests accepted successfully'
+        MedicineRequest::where([
+            'id'     => $request->medicine_request_id,
+            'arogyamitra_id'  => $request->arogyamitra_id,
+        ])->update([
+            'status' => '3' // ENUM value must be string
         ]);
+        toastr()->success('Delivered successfully');
+        return back();
     }
 
     public function export($status)
@@ -173,62 +170,60 @@ class MedicineRequestController extends Controller
     public function deliver(Request $request)
     {
         $request->validate([
-            'medicine_request_id' => 'required',
-            'delivered_quantity'  => 'required|numeric|min:1',
+            'requests' => 'required|array|min:1',
+            'requests.*.medicine_request_id' => 'required|integer|exists:medicine_request,id',
+            'requests.*.delivered_quantity'  => 'required|numeric|min:1',
         ]);
 
         DB::transaction(function () use ($request) {
 
-            // 1️⃣ Get Medicine Request
-            $medicineRequest = MedicineRequest::findOrFail($request->medicine_request_id);
+            foreach ($request->requests as $row) {
 
-            $medicineId  = $medicineRequest->medicine_id;
-            $qtyDelivered = $request->delivered_quantity;
+                // 1️⃣ Get single medicine request
+                $medicineRequest = MedicineRequest::findOrFail($row['medicine_request_id']);
 
-            $arogyamitra_id = $request->arogyamitra_id;
-            // 2️⃣ Get last stock entry for this medicine
+                $medicineId     = $medicineRequest->medicine_id;
+                $qtyDelivered   = $row['delivered_quantity'];
+                $arogyamitra_id = $medicineRequest->arogyamitra_id;
 
-            MedicineDispatch::create([
-                'Stockiest_id' => $arogyamitra_id ?? '',
-                'medicine_id'    => $medicineId,
-                'qty'            => $qtyDelivered,
-                'Entery_By'  => Auth::user()->role,
-
-            ]);
-
-            $lastTrack = MedicineTrack::where('medicine_id', $medicineId)
-                ->orderBy('id', 'desc')
-                ->first();
-
-            $openingStock = $lastTrack ? $lastTrack->closing_stock : 0;
-            $closingStock = $openingStock + $qtyDelivered;
-
-            // if ($closingStock < 0) {
-            //     throw new \Exception('Insufficient stock');
-            // }
-
-
-            // 3️⃣ Insert medicine_track entry (REDUCE)
-            MedicineTrack::create([
-                'arogyamitra_id' => $arogyamitra_id ?? '',
-                'medicine_id'    => $medicineId,
-                'opening_stock'  => $openingStock,
-                'qty'            => $qtyDelivered,
-                'closing_stock'  => $closingStock,
-                'mode'           => 'R', // Reduce that means credit
-                'gram_id'        => $medicineRequest->gram_id,
-            ]);
-            // Update medicine_request
-            DB::table('medicine_request')
-                ->where('medicine_id', $medicineId)
-                ->where('arogyamitra_id', $arogyamitra_id)
-                ->update([
-                    'delivered_quantity' => $qtyDelivered,
-                    'status'             => '3', // must be string for ENUM
+                // 2️⃣ Insert dispatch
+                MedicineDispatch::create([
+                    'Stockiest_id' => $arogyamitra_id,
+                    'medicine_id'  => $medicineId,
+                    'qty'          => $qtyDelivered,
+                    'Entery_By'    => Auth::user()->role,
                 ]);
+
+                // 3️⃣ Get last stock
+                $lastTrack = MedicineTrack::where('medicine_id', $medicineId)
+                    ->orderByDesc('id')
+                    ->first();
+
+                $openingStock = $lastTrack ? $lastTrack->closing_stock : 0;
+                $closingStock = $openingStock + $qtyDelivered;
+
+                // 4️⃣ Track entry
+                MedicineTrack::create([
+                    'arogyamitra_id' => $arogyamitra_id,
+                    'medicine_id'    => $medicineId,
+                    'opening_stock'  => $openingStock,
+                    'qty'            => $qtyDelivered,
+                    'closing_stock'  => $closingStock,
+                    'mode'           => 'R',
+                    'gram_id'        => $medicineRequest->gram_id,
+                ]);
+
+                // 5️⃣ Update medicine request
+                $medicineRequest->update([
+                    'delivered_quantity' => $qtyDelivered,
+                    'status'             => '2',
+                ]);
+            }
         });
 
-        toastr()->success('Medicine delivered & stock updated successfully');
-        return back();
+        return response()->json([
+            'status'  => true,
+            'message' => 'Accept Request successfully'
+        ]);
     }
 }

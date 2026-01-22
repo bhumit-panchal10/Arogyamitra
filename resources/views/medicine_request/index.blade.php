@@ -27,10 +27,10 @@
 
         /* Keep active tab strong */
         /* .nav-tabs .nav-link.active {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                background-color: #0d6efd;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                color: #fff;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                font-weight: 600;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            background-color: #0d6efd;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            color: #fff;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            font-weight: 600;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        } */
     </style>
     <div class="card">
 
@@ -118,7 +118,7 @@
 
                 @if (request()->status == 1)
                     <button class="btn btn-xs btn-success" id="bulkAcceptBtn">
-                        Accept Selected
+                        Accept Request
                     </button>
                 @endif
             </div>
@@ -130,17 +130,17 @@
             <table id="kt_customers_table" class="table align-middle table-row-dashed fs-6 gy-5 w-10px pe-2">
                 <thead>
                     <tr class="text-start fw-bolder fs-7 text-uppercase gs-0">
-                        @if (request()->status == 1)
+                        {{-- @if (request()->status == 1)
                             <th class="text-center">
                                 <input type="checkbox" id="selectAll">
                             </th>
-                        @endif
+                        @endif --}}
                         <!-- @if ($totalMedicinePending > 0 || Auth::user()->role != '5')
     <th class="text-center">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <div class="form-check form-check-sm form-check-custom form-check-solid me-3 {{ $dNone }}">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <input class="form-check-input" type="checkbox" data-kt-check="true" id="selectAllCheckbox" data-kt-check-target="#kt_customers_table .form-check-input" value="" />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </th>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="form-check form-check-sm form-check-custom form-check-solid me-3 {{ $dNone }}">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <input class="form-check-input" type="checkbox" data-kt-check="true" id="selectAllCheckbox" data-kt-check-target="#kt_customers_table .form-check-input" value="" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </th>
 @elseif (Auth::user()->role == '5')
     <th class="text-center">{{ trans('messages.dashboard.fields.serial_no') }}</th>
     @endif -->
@@ -167,12 +167,12 @@
                     @forelse($medicineRequest as $medicine)
                         <tr>
 
-                            @if (request()->status == 1)
+                            {{-- @if (request()->status == 1)
                                 <td class="text-center">
                                     <input type="checkbox" class="rowCheckbox" data-medicine="{{ $medicine['id'] }}"
                                         data-user="{{ $medicine['arogyamitra_id'] }}">
                                 </td>
-                            @endif
+                            @endif --}}
                             @php
                                 $mids = \App\Models\MedicineRequest::select(DB::raw('GROUP_CONCAT(id) AS mrId'))
                                     ->where([
@@ -228,9 +228,13 @@
                                 <td class="text-center">
                                     {{ $medicine['deliverd_qty'] }}
                                 </td>
-                            @else
+                            @elseif(request()->status == 1)
                                 <td class="text-center">
                                     {{ $medicine['total_request'] }}
+                                </td>
+                            @else
+                                <td class="text-center">
+                                    {{ $medicine['medicinereq_delivered_quantity'] }}
                                 </td>
                             @endif
                             @if (request()->status == 3)
@@ -246,12 +250,16 @@
                                 <td class="text-center">
                                     @if ($medicine['status'] == 1)
                                         <div class="badge badge fw-bolder">
-                                            <a href="javascript:void(0);" type="submit"
+                                            {{-- <a href="javascript:void(0);" type="submit"
                                                 class="btn btn-xs btn-success acceptStock" data-toggle="tooltip"
                                                 data-bs-custom-class="tooltip-dark" title="Accept"
                                                 data-medicine="{{ $medicine['id'] }}"
                                                 data-arogyamitra_id="{{ $medicine['arogyamitra_id'] }}"><i
-                                                    class="fa fa-check"></i></a>
+                                                    class="fa fa-check"></i></a> --}}
+
+                                            <input type="number" class="form-control deliveredQty"
+                                                data-id="{{ $medicine['mrId'] }}" placeholder="Qty">
+
 
                                             {!! Form::open([
                                                 'style' => 'display: inline-block;',
@@ -296,12 +304,11 @@
                                     </td>
                                 @endif
                             @endif
+                            @if (request()->status == 2)
+                                <td class="text-center">
 
-                            <td class="text-center">
-
-                                @if ((int) $medicine['status'] === 2 && (int) Auth::user()->role === 1)
                                     {!! Form::open([
-                                        'route' => 'medicineRequest.deliver',
+                                        'route' => 'medicineRequest.delivered_flag_update',
                                         'method' => 'POST',
                                     ]) !!}
                                     @csrf
@@ -310,18 +317,13 @@
                                     <input type="hidden" name="arogyamitra_id"
                                         value="{{ $medicine['arogyamitra_id'] }}">
 
-                                    <input type="number" name="delivered_quantity" class="form-control form-control-sm"
-                                        placeholder="Delivered Qty" required>
-
                                     <button type="submit" class="btn btn-primary btn-sm mt-2">
-                                        Submit
+                                        Delivered
                                     </button>
 
                                     {!! Form::close() !!}
-                                @else
-                                @endif
-                            </td>
-
+                                </td>
+                            @endif
                         </tr>
                     @empty
                         <tr>
@@ -604,45 +606,123 @@
                 }
             }
 
-            /* ===============================
-               BULK ACCEPT ACTION
-            =============================== */
+
+            // $('#bulkAcceptBtn').on('click', function() {
+
+            //     let requests = [];
+
+            //     $('.rowCheckbox:checked').each(function() {
+            //         requests.push({
+            //             medicine_id: $(this).data('medicine'),
+            //             arogyamitra_id: $(this).data('user')
+            //         });
+            //     });
+
+            //     if (requests.length === 0) {
+            //         alert('Please select at least one request');
+            //         return;
+            //     }
+
+            //     if (!confirm('Are you sure you want to accept selected requests?')) {
+            //         return;
+            //     }
+
+            //     $.ajax({
+            //         url: "{{ route('medicineRequest.delivered_flag_update') }}",
+            //         type: "POST",
+            //         data: {
+            //             _token: "{{ csrf_token() }}",
+            //             requests: requests
+            //         },
+            //         success: function(response) {
+            //             alert(response.message);
+            //             location.reload();
+            //         },
+            //         error: function() {
+            //             alert('Something went wrong. Please try again.');
+            //         }
+            //     });
+            // });
+
             $('#bulkAcceptBtn').on('click', function() {
 
                 let requests = [];
 
-                $('.rowCheckbox:checked').each(function() {
-                    requests.push({
-                        medicine_id: $(this).data('medicine'),
-                        arogyamitra_id: $(this).data('user')
-                    });
-                });
+                $('.deliveredQty').each(function() {
 
-                if (requests.length === 0) {
-                    alert('Please select at least one request');
-                    return;
-                }
+                    let qty = $(this).val();
+                    let requestId = $(this).data('id');
 
-                if (!confirm('Are you sure you want to accept selected requests?')) {
-                    return;
-                }
-
-                $.ajax({
-                    url: "{{ route('medicineRequest.bulkAccept') }}",
-                    type: "POST",
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        requests: requests
-                    },
-                    success: function(response) {
-                        alert(response.message);
-                        location.reload();
-                    },
-                    error: function() {
-                        alert('Something went wrong. Please try again.');
+                    if (qty !== '' && qty > 0) {
+                        requests.push({
+                            medicine_request_id: requestId,
+                            delivered_quantity: qty
+                        });
                     }
                 });
+
+                /* ===============================
+                   NO QTY ENTERED
+                =============================== */
+                if (requests.length === 0) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Quantity Required',
+                        text: 'Please enter quantity in at least one row',
+                        confirmButtonText: 'OK'
+                    });
+                    return;
+                }
+
+                /* ===============================
+                   CONFIRMATION
+                =============================== */
+                Swal.fire({
+                    title: 'Confirm Delivery',
+                    text: 'Are you sure you want to deliver selected medicines?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, Deliver',
+                    cancelButtonText: 'Cancel',
+                    confirmButtonColor: '#28a745'
+                }).then((result) => {
+
+                    if (!result.isConfirmed) return;
+
+                    /* ===============================
+                       AJAX CALL
+                    =============================== */
+                    $.ajax({
+                        url: "{{ route('medicineRequest.deliver') }}",
+                        type: "POST",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            requests: requests
+                        },
+                        success: function(response) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success',
+                                text: response.message ??
+                                    'Medicine delivered successfully'
+                            }).then(() => {
+                                location.reload();
+                            });
+                        },
+                        error: function(xhr) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: xhr.responseJSON?.message ??
+                                    'Something went wrong'
+                            });
+                        }
+                    });
+
+                });
             });
+
+
 
         });
     </script>
