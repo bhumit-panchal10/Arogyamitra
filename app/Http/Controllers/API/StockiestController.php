@@ -30,6 +30,7 @@ class StockiestController extends Controller
     {
         if (auth()->guard('api')->user()) {
             $user = User::getUserByToken(auth()->guard('api')->user()->token()->id);
+
             if ($user) {
                 $this->user = $user;
             }
@@ -38,6 +39,7 @@ class StockiestController extends Controller
 
     public function getAppUser(Request $request)
     {
+
         if ($this->user && $this->user->status == "Active") {
             $stock = Validator::make($request->all(), [
                 'stockiest_id' => 'required|numeric|gt:0'
@@ -596,7 +598,7 @@ class StockiestController extends Controller
                     $newStock = $isMedicineStockAvailable['qty'] - $value['qty'];
 
                     $currentArr = [
-                        'qty' => $newStock ? : 0,
+                        'qty' => $newStock ?: 0,
                         'updated_at' => Carbon::now(),
                     ];
                     $response = $isMedicineStockAvailable->update($currentArr);
@@ -640,46 +642,46 @@ class StockiestController extends Controller
     {
         date_default_timezone_set('Asia/kolkata');
 
-            $fileAvailable = PdfTrack::select('file_name', 'created_at')
-                ->where('arogyamitra_id', $stockiestId)
-                ->whereDate('created_at', date('Y-m-d'))
-                ->first();
+        $fileAvailable = PdfTrack::select('file_name', 'created_at')
+            ->where('arogyamitra_id', $stockiestId)
+            ->whereDate('created_at', date('Y-m-d'))
+            ->first();
 
-                $date = date('Y-m-d');
-                $downloadLink = url('/assets/uploads/app-user-export') . '/' .  $date . '_' . $stockiestId . '.csv';
-                $filePath = public_path('/assets/uploads/app-user-export/' . $date . '_' . $stockiestId . ".csv");
+        $date = date('Y-m-d');
+        $downloadLink = url('/assets/uploads/app-user-export') . '/' .  $date . '_' . $stockiestId . '.csv';
+        $filePath = public_path('/assets/uploads/app-user-export/' . $date . '_' . $stockiestId . ".csv");
 
-            if (empty($fileAvailable)) {
-                try {
-                    $path =public_path('/assets/uploads/app-user-export');
-                    if (!File::isDirectory($path)) {
-                        File::makeDirectory($path, 0777, true, true);
-                    }
-
-                    $handle = fopen($filePath, 'w');
-                    $headers = ['Name', 'Mobile No.'];
-
-                    fputcsv($handle, $headers);
-                    foreach ($appUser as $val) {
-                        fputcsv($handle, $val);
-                    }
-                    fclose($handle);
-
-
-                    $insertArr = [
-                        'arogyamitra_id' => $stockiestId,
-                        'file_name' => $date . '_' . $stockiestId . ".csv",
-                        'created_at' => Carbon::now()
-                    ];
-
-                    PdfTrack::InsertGetId($insertArr);
-
-                    return $downloadLink;
-                } catch (\Throwable $th) {
-                    return false;
+        if (empty($fileAvailable)) {
+            try {
+                $path = public_path('/assets/uploads/app-user-export');
+                if (!File::isDirectory($path)) {
+                    File::makeDirectory($path, 0777, true, true);
                 }
-            } else {
+
+                $handle = fopen($filePath, 'w');
+                $headers = ['Name', 'Mobile No.'];
+
+                fputcsv($handle, $headers);
+                foreach ($appUser as $val) {
+                    fputcsv($handle, $val);
+                }
+                fclose($handle);
+
+
+                $insertArr = [
+                    'arogyamitra_id' => $stockiestId,
+                    'file_name' => $date . '_' . $stockiestId . ".csv",
+                    'created_at' => Carbon::now()
+                ];
+
+                PdfTrack::InsertGetId($insertArr);
+
                 return $downloadLink;
+            } catch (\Throwable $th) {
+                return false;
             }
+        } else {
+            return $downloadLink;
+        }
     }
 }

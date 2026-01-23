@@ -236,9 +236,9 @@ class StockiestMedicineRequestController extends Controller
     public function updateRequestStatus(Request $request)
     {
         //single
-        $medicine = MedicineRequest::where(['medicine_id' => $request->medicine_id, 'status' => '1', 'arogyamitra_id' => $request->arogyamitra_id])
-            ->update(['status' => $request->status]);
 
+        $medicine = MedicineRequest::where(['id' => $request->medicine_req_id, 'status' => '1', 'arogyamitra_id' => $request->arogyamitra_id])
+            ->update(['status' => $request->status]);
         if ($request->status == '2') {
             $message = 'Medicine request has been accepted!';
         } else {
@@ -345,7 +345,7 @@ class StockiestMedicineRequestController extends Controller
         $medicineRequest = MedicineRequest::select(
             'm.id as medicine_id',
             'm.name as medicine_name',
-            DB::raw('SUM(medicine_request.qty) as total_request')
+            DB::raw('SUM(medicine_request.delivered_quantity) as total_request')
         )
             ->join('medicine as m', 'm.id', '=', 'medicine_request.medicine_id')
             ->where('medicine_request.status', $status)
