@@ -23,6 +23,7 @@ class MedicineRequest extends Model
         'app_user_id',
         'app_user_name',
         'delivered_quantity',
+        'iRequestTo',
     ];
 
     public function medicine()

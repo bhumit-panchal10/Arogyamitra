@@ -146,21 +146,9 @@ class MedicineRequestController extends Controller
         }
     }
 
-    public function delivered_flag_update(Request $request)
-    {
-
-        MedicineRequest::where([
-            'id'     => $request->medicine_request_id,
-            'arogyamitra_id'  => $request->arogyamitra_id,
-        ])->update([
-            'status' => '3' // ENUM value must be string
-        ]);
-        toastr()->success('Delivered successfully');
-        return back();
-    }
-
     public function export($status)
     {
+
         return Excel::download(
             new MedicineRequestExport($status),
             'medicine_requests.xlsx'
@@ -179,39 +167,13 @@ class MedicineRequestController extends Controller
 
             foreach ($request->requests as $row) {
 
-                // 1️⃣ Get single medicine request
                 $medicineRequest = MedicineRequest::findOrFail($row['medicine_request_id']);
 
                 $medicineId     = $medicineRequest->medicine_id;
                 $qtyDelivered   = $row['delivered_quantity'];
                 $arogyamitra_id = $medicineRequest->arogyamitra_id;
 
-                // 2️⃣ Insert dispatch
-                MedicineDispatch::create([
-                    'Stockiest_id' => $arogyamitra_id,
-                    'medicine_id'  => $medicineId,
-                    'qty'          => $qtyDelivered,
-                    'Entery_By'    => Auth::user()->role,
-                ]);
 
-                // 3️⃣ Get last stock
-                $lastTrack = MedicineTrack::where('medicine_id', $medicineId)
-                    ->orderByDesc('id')
-                    ->first();
-
-                $openingStock = $lastTrack ? $lastTrack->closing_stock : 0;
-                $closingStock = $openingStock + $qtyDelivered;
-
-                // 4️⃣ Track entry
-                MedicineTrack::create([
-                    'arogyamitra_id' => $arogyamitra_id,
-                    'medicine_id'    => $medicineId,
-                    'opening_stock'  => $openingStock,
-                    'qty'            => $qtyDelivered,
-                    'closing_stock'  => $closingStock,
-                    'mode'           => 'R',
-                    'gram_id'        => $medicineRequest->gram_id,
-                ]);
 
                 // 5️⃣ Update medicine request
                 $medicineRequest->update([
@@ -225,5 +187,41 @@ class MedicineRequestController extends Controller
             'status'  => true,
             'message' => 'Accept Request successfully'
         ]);
+    }
+
+    public function delivered_flag_update(Request $request)
+    {
+
+        MedicineDispatch::create([
+            'Stockiest_id' => $request->arogyamitra_id,
+            'medicine_id'  => $request->medicine_id,
+            'qty'          => $request->quantity,
+            'Entery_By'    => Auth::user()->role,
+        ]);
+        $medicineRequest = MedicineRequest::findOrFail($request->medicine_request_id);
+        $lastTrack = MedicineTrack::where('medicine_id', $request->medicine_id)
+            ->orderByDesc('id')
+            ->first();
+
+        $openingStock = $lastTrack ? $lastTrack->closing_stock : 0;
+        $closingStock = $openingStock + $request->quantity;
+
+        MedicineTrack::create([
+            'arogyamitra_id' => $request->arogyamitra_id,
+            'medicine_id'    => $request->medicine_id,
+            'opening_stock'  => $openingStock,
+            'qty'            => $request->quantity,
+            'closing_stock'  => $closingStock,
+            'mode'           => 'R',
+            'gram_id'        => $medicineRequest->gram_id,
+        ]);
+        MedicineRequest::where([
+            'id'     => $request->medicine_request_id,
+            'arogyamitra_id'  => $request->arogyamitra_id,
+        ])->update([
+            'status' => '3' // ENUM value must be string
+        ]);
+        toastr()->success('Delivered successfully');
+        return back();
     }
 }

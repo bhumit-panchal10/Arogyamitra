@@ -154,40 +154,6 @@ class StockiestMedicineRequestController extends Controller
                 ->toArray();
         } else {
 
-            // $select = [
-            //     'medicine_request.id as mrId',
-            //     'm.id',
-            //     'medicine_request.status',
-            //     'medicine_request.created_at',
-            //     'medicine_request.arogyamitra_id',
-            //     'j.name as jilla_name',
-            //     'u.name as name',
-            //     'medicine_request.qty as request_qty',
-            //     'm.name as medicine_name',
-            //     DB::raw('SUM(medicine_request.qty) as total_request')
-            // ];
-            // $query = MedicineRequest::select($select)
-            //     ->join('medicine as m', 'm.id', 'medicine_request.medicine_id')
-            //     ->join('users as u', 'u.id', 'medicine_request.arogyamitra_id')
-            //     ->join('jilla as j', 'j.id', 'u.jilla_id');
-            // if (!is_null($status)) {
-            //     if ($status == 2 || $status == 0) {
-            //         $dNone = "d-none";
-            //     }
-            //     $query->where('medicine_request.status', $status);
-            // }
-            // $medicineRequest = $query
-            //     ->groupBy(
-            //         'medicine_request.medicine_id',
-            //         'medicine_request.arogyamitra_id',
-            //         'medicine_request.status',
-            //         'm.name',
-            //         'u.name',
-            //         'j.name'
-            //     )
-            //     ->orderBy('medicine_request.updated_at', 'DESC')
-            //     ->get()
-            //     ->toArray();
 
             $totalMedicinePending = MedicineRequest::where('status', '1')->count();
             $medicineRequest = DB::table('medicine_request as mr')
@@ -198,7 +164,7 @@ class StockiestMedicineRequestController extends Controller
                 ->select(
                     DB::raw('SUM(mr.qty) as total_request'),
                     'mr.id',
-                    'mr.delivered_quantity As medicinereq_delivered_quantity',
+                    DB::raw('SUM(mr.delivered_quantity) as medicinereq_delivered_quantity'),
                     'u.name As vibhag_name',
                     'mr.id As mrId',
                     'mr.status',

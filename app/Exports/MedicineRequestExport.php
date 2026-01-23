@@ -18,52 +18,30 @@ class MedicineRequestExport implements FromCollection, WithHeadings
 
     public function collection()
     {
-        return MedicineRequest::select([
-            'u.name as stockiest_name',
-            'j.name as jilla_name',
-            'm.name as medicine_name',
-
-            // ✅ FIX: aggregate stock safely
-            DB::raw('IFNULL(MAX(ms.qty), 0) as current_qty'),
-
-            DB::raw('SUM(medicine_request.qty) as total_request'),
-
-            DB::raw("
-            CASE medicine_request.status
-                WHEN '0' THEN 'Cancelled'
-                WHEN '1' THEN 'Pending'
-                WHEN '2' THEN 'Accepted'
-                WHEN '3' THEN 'Delivered'
-            END as status
-        "),
-
-            'medicine_request.created_at as request_date'
-        ])
-            ->join('medicine as m', 'm.id', '=', 'medicine_request.medicine_id')
-            ->join('users as u', 'u.id', '=', 'medicine_request.arogyamitra_id')
+        return MedicineRequest::from('medicine_request as mr')
+            ->select([
+                'u.name as vibhag_name',
+                'j.name as jilla_name',
+                'm.name as medicine_name',
+                DB::raw('SUM(mr.delivered_quantity) as medicinereq_delivered_quantity'),
+                DB::raw("DATE_FORMAT(mr.created_at, '%d-%m-%Y') as request_date"),
+                DB::raw("
+                    CASE mr.status
+                        WHEN 3 THEN 'Accepted'
+                    END as status
+                "),
+            ])
+            ->join('users as u', 'u.id', '=', 'mr.arogyamitra_id')
+            ->join('medicine as m', 'm.id', '=', 'mr.medicine_id')
             ->join('jilla as j', 'j.id', '=', 'u.jilla_id')
-
-            ->leftJoin('medicine_stock as ms', function ($join) {
-                $join->on('ms.medicine_id', '=', 'medicine_request.medicine_id')
-                    ->on('ms.arogyamitra_id', '=', 'medicine_request.arogyamitra_id');
-            })
-
             ->where('u.role', 6)
-            ->where('medicine_request.status', 2)
-
+            ->where('mr.status', $this->status)
             ->groupBy(
-                'medicine_request.medicine_id',
-                'medicine_request.status',
-                'u.id',
-                DB::raw('DATE(medicine_request.updated_at)')
+                'mr.medicine_id',
+                'mr.arogyamitra_id'
             )
-
-            ->orderBy('medicine_request.updated_at', 'DESC')
             ->get();
     }
-
-
-
 
     public function headings(): array
     {
@@ -71,10 +49,10 @@ class MedicineRequestExport implements FromCollection, WithHeadings
             'Stockiest Name',
             'Jilla',
             'Medicine Name',
-            'Current Qty',
-            'Requested Qty',
+            'Quantity',
+            'Requested Date',
             'Status',
-            'Request Date',
+
         ];
     }
 }

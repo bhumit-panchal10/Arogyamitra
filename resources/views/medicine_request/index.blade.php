@@ -27,10 +27,10 @@
 
         /* Keep active tab strong */
         /* .nav-tabs .nav-link.active {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            background-color: #0d6efd;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            color: #fff;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            font-weight: 600;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        } */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        background-color: #0d6efd;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        color: #fff;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        font-weight: 600;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    } */
     </style>
     <div class="card">
 
@@ -137,10 +137,10 @@
                         @endif --}}
                         <!-- @if ($totalMedicinePending > 0 || Auth::user()->role != '5')
     <th class="text-center">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="form-check form-check-sm form-check-custom form-check-solid me-3 {{ $dNone }}">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <input class="form-check-input" type="checkbox" data-kt-check="true" id="selectAllCheckbox" data-kt-check-target="#kt_customers_table .form-check-input" value="" />
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </th>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <div class="form-check form-check-sm form-check-custom form-check-solid me-3 {{ $dNone }}">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <input class="form-check-input" type="checkbox" data-kt-check="true" id="selectAllCheckbox" data-kt-check-target="#kt_customers_table .form-check-input" value="" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </th>
 @elseif (Auth::user()->role == '5')
     <th class="text-center">{{ trans('messages.dashboard.fields.serial_no') }}</th>
     @endif -->
@@ -314,6 +314,11 @@
                                     @csrf
 
                                     <input type="hidden" name="medicine_request_id" value="{{ $medicine['mrId'] }}">
+                                    <input type="hidden" name="medicine_id" value="{{ $medicine['medicine_id'] }}">
+
+                                    <input type="hidden" name="quantity"
+                                        value="{{ $medicine['medicinereq_delivered_quantity'] }}">
+
                                     <input type="hidden" name="arogyamitra_id"
                                         value="{{ $medicine['arogyamitra_id'] }}">
 
@@ -593,20 +598,6 @@
                 }
             });
 
-            /* ===============================
-               SHOW / HIDE BULK BUTTON
-            =============================== */
-            function toggleBulkButton() {
-                let checkedCount = $('.rowCheckbox:checked').length;
-
-                if (checkedCount > 0) {
-                    $('#bulkAcceptBtn').removeClass('d-none');
-                } else {
-                    $('#bulkAcceptBtn').addClass('d-none');
-                }
-            }
-
-
             // $('#bulkAcceptBtn').on('click', function() {
 
             //     let requests = [];
@@ -674,56 +665,34 @@
                     return;
                 }
 
-                /* ===============================
-                   CONFIRMATION
-                =============================== */
-                Swal.fire({
-                    title: 'Confirm Delivery',
-                    text: 'Are you sure you want to deliver selected medicines?',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonText: 'Yes, Deliver',
-                    cancelButtonText: 'Cancel',
-                    confirmButtonColor: '#28a745'
-                }).then((result) => {
-
-                    if (!result.isConfirmed) return;
-
-                    /* ===============================
-                       AJAX CALL
-                    =============================== */
-                    $.ajax({
-                        url: "{{ route('medicineRequest.deliver') }}",
-                        type: "POST",
-                        data: {
-                            _token: "{{ csrf_token() }}",
-                            requests: requests
-                        },
-                        success: function(response) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Success',
-                                text: response.message ??
-                                    'Medicine delivered successfully'
-                            }).then(() => {
-                                location.reload();
-                            });
-                        },
-                        error: function(xhr) {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error',
-                                text: xhr.responseJSON?.message ??
-                                    'Something went wrong'
-                            });
-                        }
-                    });
-
+                $.ajax({
+                    url: "{{ route('medicineRequest.deliver') }}",
+                    type: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        requests: requests
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: response.message ??
+                                'Accept Request successfully'
+                        }).then(() => {
+                            location.reload();
+                        });
+                    },
+                    error: function(xhr) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: xhr.responseJSON?.message ??
+                                'Something went wrong'
+                        });
+                    }
                 });
+
             });
-
-
-
         });
     </script>
 @endsection

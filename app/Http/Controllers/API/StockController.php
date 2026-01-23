@@ -339,6 +339,117 @@ class StockController extends Controller
         }
     }
 
+    // public function getStockList(Request $request)
+    // {
+    //     if ($this->user && $this->user->status == "Active") {
+    //         if ($this->user->role == 2) {
+    //             $stock = Validator::make($request->all(), [
+    //                 'arogyamitra_id' => 'required|numeric|gt:0'
+    //             ]);
+    //         } else if ($this->user->role == 6) {
+    //             $stock = Validator::make($request->all(), [
+    //                 'stockiest_id' => 'required|numeric|gt:0'
+    //             ]);
+    //         }
+
+    //         if ($stock->fails()) {
+    //             return response()->json([
+    //                 'status'    => '0',
+    //                 'result'    => 'failure',
+    //                 'medicine'  => $stock->errors()->all()
+    //             ], 422);
+    //         }
+
+    //         $medicine = [];
+    //         //Stockiest
+    //         if ($this->user->role == 6) {
+    //             //$getGramIds = $this->getGramStockiest($this->user);
+    //             /* $medicine = Medicine::select('ms.qty as current_stock', 'medicine.qty_type', 'medicine.name AS medicine_name', 'medicine.id as medicine_id', DB::raw("CONCAT(medicine.qty,' ',medicine.qty_type) AS packing"))
+    //                 ->leftJoin('medicine_stock as ms', 'ms.medicine_id', 'medicine.id')
+    //                 ->where('ms.arogyamitra_id', $request->get('stockiest_id'))
+    //                 ->orderBy('medicine.id', 'ASC')
+    //                 ->where('medicine.status', '1')
+    //                 ->get()
+    //                 ->toArray(); */
+
+    //             $medicine = Medicine::select('medicine.qty_type', 'medicine.name AS medicine_name', 'medicine.id as medicine_id', DB::raw("CONCAT(medicine.qty,' ',medicine.qty_type) AS packing"))
+    //                 ->where('medicine.status', '1')
+    //                 ->get()
+    //                 ->toArray();
+
+    //             foreach ($medicine as $key => $val) {
+    //                 $stock = MedicineStock::where(['arogyamitra_id' => $request->get('stockiest_id'), 'medicine_id' => $val['medicine_id']])->first();
+
+    //                 $arrData[$key]['medicine_id'] = $val['medicine_id'] ? $val['medicine_id'] : '';
+    //                 $arrData[$key]['medicine_name'] = $val['medicine_name'] ? $val['medicine_name'] : '';
+    //                 $arrData[$key]['packing'] = $val['packing'] ? $val['packing'] : '';
+    //                 $arrData[$key]['current_stock'] = $stock ? $stock->qty : '0';
+    //             }
+    //         } else if ($this->user->role == 2) {
+    //             //App user
+    //             $getGramId = self::getGramByArogyaMitraId($request->get('arogyamitra_id'));
+    //             $getGramIds = explode(',', $getGramId->gram_id);
+
+    //             $data['gram_id'] = $getGramIds;
+    //             $data['arogyamitra_id'] = $request->get('arogyamitra_id');
+
+    //             // To display current stock of medicine
+    //             $medicine = Medicine::select('ms.qty as current_stock', 'medicine.qty_type', 'medicine.name AS medicine_name', 'medicine.id as medicine_id', DB::raw("CONCAT(medicine.qty,' ',medicine.qty_type) AS packing"))
+    //                 ->leftJoin('medicine_stock as ms', function ($join) use ($data) {
+    //                     $join->on('medicine.id', '=', 'ms.medicine_id')
+    //                         ->whereIn('ms.gram_id', $data['gram_id'])
+    //                         ->where('arogyamitra_id', $data['arogyamitra_id']);
+    //                 })
+    //                 //->where(['medicine.status' => '1', 'arogyamitra_id' => $request->get('arogyamitra_id')])
+    //                 ->where(['medicine.status' => '1'])
+    //                 ->orderBy('medicine.id', 'ASC')
+    //                 ->get()
+    //                 ->toArray();
+
+    //                 foreach ($medicine as $key => $medicineList) {
+    //                     $arrData[$key]['medicine_id'] = $medicineList['medicine_id'] ? $medicineList['medicine_id'] : '';
+    //                     $arrData[$key]['medicine_name'] = $medicineList['medicine_name'] ? $medicineList['medicine_name'] : '';
+    //                     $arrData[$key]['packing'] = $medicineList['packing'] ? $medicineList['packing'] : '';
+    //                     $arrData[$key]['current_stock'] = $medicineList['current_stock'] ? $medicineList['current_stock'] : '0';
+    //                 }
+    //         }
+    //         // to do current stock in medicine available
+    //         if (!empty($medicine)) {
+    //             $beneficiaryArr = [
+    //                 'beneficiary' => 0,
+    //                 'last_update' => "",
+    //             ];
+    //             if ($this->user->role == 2) {
+    //                 $beneficiary = Beneficiary::whereIn('gram_id', $getGramIds)->orderBy('id', 'DESC')->first();
+    //                 if ($beneficiary) {
+    //                     $beneficiaryArr = [
+    //                         'beneficiary' => $beneficiary->number_of_beneficiary,
+    //                         'last_update' => date('d-m-Y', strtotime($beneficiary->created_at))
+    //                     ];
+    //                 }
+    //             }
+
+    //             return response()->json([
+    //                 'status'    => '1',
+    //                 'result'    => 'success',
+    //                 'beneficiary'  => $beneficiaryArr,
+    //                 'medicine'  => $arrData
+    //             ], 200);
+    //             // to do current stock in medicine Not available
+    //         } else {
+    //             return response()->json([
+    //                 'status'    => '0',
+    //                 'result'    => 'failure',
+    //                 'message'   => trans('messages.medicine_out_stock')
+    //             ], 200);
+    //         }
+    //     } else {
+    //         return response()->json([
+    //             'messages'  => trans('messages.unauthorized_user')
+    //         ], 401);
+    //     }
+    // }
+
     public function getStockList(Request $request)
     {
         if ($this->user && $this->user->status == "Active") {
@@ -363,27 +474,28 @@ class StockController extends Controller
             $medicine = [];
             //Stockiest
             if ($this->user->role == 6) {
-                //$getGramIds = $this->getGramStockiest($this->user);
-                /* $medicine = Medicine::select('ms.qty as current_stock', 'medicine.qty_type', 'medicine.name AS medicine_name', 'medicine.id as medicine_id', DB::raw("CONCAT(medicine.qty,' ',medicine.qty_type) AS packing"))
-                    ->leftJoin('medicine_stock as ms', 'ms.medicine_id', 'medicine.id')
-                    ->where('ms.arogyamitra_id', $request->get('stockiest_id'))
-                    ->orderBy('medicine.id', 'ASC')
-                    ->where('medicine.status', '1')
-                    ->get()
-                    ->toArray(); */
 
-                $medicine = Medicine::select('medicine.qty_type', 'medicine.name AS medicine_name', 'medicine.id as medicine_id', DB::raw("CONCAT(medicine.qty,' ',medicine.qty_type) AS packing"))
-                    ->where('medicine.status', '1')
-                    ->get()
-                    ->toArray();
+                $medicines = DB::table('medicine')
+                    ->where('status', 1)
+                    ->select(
+                        'medicine.*',
+                        DB::raw("(
+                        SELECT closing_stock
+                        FROM medicine_track
+                        WHERE medicine_track.medicine_id = medicine.id
+                        AND medicine_track.arogyamitra_id = {$request->stockiest_id}
+                        ORDER BY id DESC
+                        LIMIT 1
+                    ) as CurrentStock")
+                    )
+                    ->get();
 
                 foreach ($medicine as $key => $val) {
-                    $stock = MedicineStock::where(['arogyamitra_id' => $request->get('stockiest_id'), 'medicine_id' => $val['medicine_id']])->first();
 
-                    $arrData[$key]['medicine_id'] = $val['medicine_id'] ? $val['medicine_id'] : '';
+                    $arrData[$key]['medicine_id'] = $val['id'] ? $val['id'] : '';
                     $arrData[$key]['medicine_name'] = $val['medicine_name'] ? $val['medicine_name'] : '';
-                    $arrData[$key]['packing'] = $val['packing'] ? $val['packing'] : '';
-                    $arrData[$key]['current_stock'] = $stock ? $stock->qty : '0';
+                    $arrData[$key]['packing'] = $val['qty'] . ' ' . $val['qty_type'] ? $val['qty'] . ' ' . $val['qty_type'] : '';
+                    $arrData[$key]['current_stock'] = $val['CurrentStock'] ? $val['CurrentStock'] : '0';
                 }
             } else if ($this->user->role == 2) {
                 //App user
@@ -406,12 +518,12 @@ class StockController extends Controller
                     ->get()
                     ->toArray();
 
-                    foreach ($medicine as $key => $medicineList) {
-                        $arrData[$key]['medicine_id'] = $medicineList['medicine_id'] ? $medicineList['medicine_id'] : '';
-                        $arrData[$key]['medicine_name'] = $medicineList['medicine_name'] ? $medicineList['medicine_name'] : '';
-                        $arrData[$key]['packing'] = $medicineList['packing'] ? $medicineList['packing'] : '';
-                        $arrData[$key]['current_stock'] = $medicineList['current_stock'] ? $medicineList['current_stock'] : '0';
-                    }
+                foreach ($medicine as $key => $medicineList) {
+                    $arrData[$key]['medicine_id'] = $medicineList['medicine_id'] ? $medicineList['medicine_id'] : '';
+                    $arrData[$key]['medicine_name'] = $medicineList['medicine_name'] ? $medicineList['medicine_name'] : '';
+                    $arrData[$key]['packing'] = $medicineList['packing'] ? $medicineList['packing'] : '';
+                    $arrData[$key]['current_stock'] = $medicineList['current_stock'] ? $medicineList['current_stock'] : '0';
+                }
             }
             // to do current stock in medicine available
             if (!empty($medicine)) {
