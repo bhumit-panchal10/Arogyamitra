@@ -99,6 +99,63 @@ class StockiestController extends Controller
         }
     }
 
+    // public function getMedicineRequest(Request $request)
+    // {
+    //     if ($this->user && $this->user->status == "Active") {
+    //         $stock = Validator::make($request->all(), [
+    //             'app_user_id' => 'required|numeric|gt:0'
+    //         ]);
+
+    //         if ($stock->fails()) {
+    //             return response()->json([
+    //                 'status'    => '0',
+    //                 'result'    => 'failure',
+    //                 'medicine'  => $stock->errors()->all()
+    //             ], 422);
+    //         }
+    //         //$getGramIds = $this->getGramStockiest($request->get('app_user_id'));
+
+    //         $select = ['m.id as medicine_id', 'm.name as medicine_name', DB::raw('SUM(medicine_request.qty) as request_qty'), DB::raw("CONCAT(m.qty,' ',m.qty_type) AS packing")];
+    //         $medicineRequest = MedicineRequest::select($select)
+    //             ->join('medicine as m', 'm.id', 'medicine_request.medicine_id')
+    //             ->where(['medicine_request.status' => '1', 'app_user_id' => $request->get('app_user_id')])
+    //             ->groupBy('medicine_request.medicine_id')
+    //             ->orderBy('m.id', 'ASC')
+    //             ->get();
+
+    //         foreach ($medicineRequest as $key => $value) {
+    //             //$currentStock = MedicineRequest::where(['arogyamitra_id' => $request->get('app_user_id'), 'medicine_id' => $value['medicine_id']])->first();
+    //             $currentStock = MedicineStock::where(['arogyamitra_id' => $this->user->id, 'medicine_id' => $value['medicine_id']])->first(); //stockiest current stock
+
+    //             $arrData[$key]['medicine_id'] = $value['medicine_id'] ? (string)$value['medicine_id'] : '';
+    //             $arrData[$key]['medicine_name'] = $value['medicine_name'] ? $value['medicine_name'] : '';
+    //             $arrData[$key]['packing'] = $value['packing'] ? $value['packing'] : '';
+    //             $arrData[$key]['request_qty'] = $value['request_qty'] ? (string)$value['request_qty'] : '0';
+    //             $arrData[$key]['current_qty'] = $currentStock ? (string)$currentStock->qty : '0';
+    //         }
+
+    //         // to do current stock in medicine available
+    //         if (!empty($arrData)) {
+    //             return response()->json([
+    //                 'status'    => '1',
+    //                 'result'    => 'success',
+    //                 'medicine'  => $arrData
+    //             ], 200);
+    //             // to do current stock in medicine Not available
+    //         } else {
+    //             return response()->json([
+    //                 'status'    => '0',
+    //                 'result'    => 'failure',
+    //                 'message'   => trans('messages.medicine_out_stock')
+    //             ], 200);
+    //         }
+    //     } else {
+    //         return response()->json([
+    //             'messages'  => trans('messages.unauthorized_user')
+    //         ], 401);
+    //     }
+    // }
+
     public function getMedicineRequest(Request $request)
     {
         if ($this->user && $this->user->status == "Active") {
@@ -115,14 +172,15 @@ class StockiestController extends Controller
             }
             //$getGramIds = $this->getGramStockiest($request->get('app_user_id'));
 
-            $select = ['m.id as medicine_id', 'm.name as medicine_name', DB::raw('SUM(medicine_request.qty) as request_qty'), DB::raw("CONCAT(m.qty,' ',m.qty_type) AS packing")];
-            $medicineRequest = MedicineRequest::select($select)
-                ->join('medicine as m', 'm.id', 'medicine_request.medicine_id')
-                ->where(['medicine_request.status' => '1', 'app_user_id' => $request->get('app_user_id')])
-                ->groupBy('medicine_request.medicine_id')
-                ->orderBy('m.id', 'ASC')
+            $medicineRequest = DB::table('medicine_request as mr')
+                ->join('medicine as m', 'mr.medicine_id', '=', 'm.id')
+                ->where('mr.iRequestTo', $request->app_user_id)
+                ->where('mr.status', '1')
+                ->select(
+                    'mr.*',
+                    'm.*'
+                )
                 ->get();
-
             foreach ($medicineRequest as $key => $value) {
                 //$currentStock = MedicineRequest::where(['arogyamitra_id' => $request->get('app_user_id'), 'medicine_id' => $value['medicine_id']])->first();
                 $currentStock = MedicineStock::where(['arogyamitra_id' => $this->user->id, 'medicine_id' => $value['medicine_id']])->first(); //stockiest current stock
