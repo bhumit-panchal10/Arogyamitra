@@ -9,7 +9,8 @@ use App\Models\{
     MedicineStock,
     MedicineTrack,
     PdfTrack,
-    User
+    User,
+    MedicineDispatch
 };
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -158,14 +159,14 @@ class StockiestController extends Controller
     //     }
     // }
     
-   public function getMedicineRequest(Request $request)
-   {
+    public function getMedicineRequest(Request $request)
+    {
 
-    if (!$this->user || $this->user->status !== "Active") {
-        return response()->json([
-            'messages' => trans('messages.unauthorized_user')
-        ], 401);
-    }
+        if (!$this->user || $this->user->status !== "Active") {
+            return response()->json([
+                'messages' => trans('messages.unauthorized_user')
+            ], 401);
+        }
 
     // Validation
     $validator = Validator::make($request->all(), [
@@ -189,6 +190,7 @@ class StockiestController extends Controller
             'mr.id',
             'mr.medicine_id',
             'mr.qty',
+            'mr.app_user_id',
             'mr.status',
             'm.name',
             'm.qty_type'
@@ -203,7 +205,8 @@ class StockiestController extends Controller
             'medicine_id'   => $row->medicine_id,
             'qty'           => $row->qty. ' ' . $row->qty_type,
             'status'        => $row->status,
-            'medicine_name' => $row->name 
+            'medicine_name' => $row->name,
+            'app_user_id' => $row->app_user_id ?? '' 
         ];
     }
 
@@ -221,6 +224,101 @@ class StockiestController extends Controller
         'message' => trans('messages.medicine_out_stock')
     ], 200);
 }
+
+
+    public function getmedicinedelivered(Request $request)
+    {
+        if (!$this->user || $this->user->status !== "Active") {
+            return response()->json([
+                'messages' => trans('messages.unauthorized_user')
+            ], 401);
+        }
+
+        // 🔹 Validation
+        
+            $stock = Validator::make($request->all(), [
+                'iRequestTo'         => 'required|numeric|gt:0',
+                'medicine_id'          => 'required|numeric',
+                'qty'                  => 'required|numeric|min:1',
+                'medicine_request_id'  => 'required|numeric'
+            ]);
+        
+
+        if ($stock->fails()) {
+            return response()->json([
+                'status'   => '0',
+                'result'   => 'failure',
+                'medicine' => $stock->errors()->all()
+            ], 422);
+        }
+        //iRequestFrom Request from
+        //iRequestTo : person given the request
+        DB::transaction(function () use ($request) {
+
+            // 🔹 Dispatch Entry
+            MedicineDispatch::create([
+                'Stockiest_id' => $request->iRequestTo ?? $request->iRequestTo,
+                'medicine_id'  => $request->medicine_id,
+                'qty'          => $request->qty,
+                'Entery_By'    => Auth::user()->role,
+            ]);
+
+            $medicineRequest = MedicineRequest::findOrFail($request->medicine_request_id);
+            //$Arogyamitra = MedicineRequest::where('arogyamitra_id',medicineRequest->arogyamitra_id)->first();
+            
+
+            // 🔹 Last Stock
+           // 🔹 Last Stock
+$lastTrack = MedicineTrack::where([
+        'medicine_id'    => $request->medicine_id,
+        'arogyamitra_id' => $request->iRequestTo
+    ])
+    ->orderByDesc('id')
+    ->first();
+
+
+            $openingStock = $lastTrack ? $lastTrack->closing_stock : 0;
+            $closingStock = $openingStock - $request->qty;
+
+            // 🔹 Stockist / ArogyaMitra Credit
+            MedicineTrack::create([
+                'arogyamitra_id' => $request->iRequestTo ?? $request->stockiest_id,
+                'medicine_id'    => $request->medicine_id,
+                'opening_stock'  => $openingStock,
+                'qty'            => $request->qty,
+                'closing_stock'  => $closingStock,
+                'mode'           => 'C',
+                'gram_id'        => $medicineRequest->gram_id,
+            ]);
+            $lastTrack = MedicineTrack::where(['medicine_id'=> $request->medicine_id,'arogyamitra_id'=>$medicineRequest->arogyamitra_id])
+                ->orderByDesc('id')
+                ->first();
+                $openingStock = $lastTrack ? $lastTrack->closing_stock : 0;
+            $closingStock = $openingStock+$request->qty;
+            // 🔹 Receiver Entry
+            MedicineTrack::create([
+                'arogyamitra_id' => $medicineRequest->arogyamitra_id,
+                'medicine_id'    => $request->medicine_id,
+                'opening_stock'  => $openingStock,
+                'qty'            => $request->qty,
+                'closing_stock'  => $closingStock,
+                'mode'           => 'R',
+                'gram_id'        => $medicineRequest->gram_id,
+            ]);
+
+            // 🔹 Update Request Status
+            MedicineRequest::where('id', $request->medicine_request_id)
+                ->update([
+                    'status' => '3',
+                    'delivered_quantity' => $request->qty
+                ]);
+        });
+
+        return response()->json([
+            'result'  => 'success',
+            'message' => 'Medicine Delivered Successfully'
+        ], 200);
+    }
 
 
     public function updateStock(Request $request)
