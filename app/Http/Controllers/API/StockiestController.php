@@ -174,7 +174,7 @@ class StockiestController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
+            return response()->json([ 
                 'success' => false,
                 'errors'  => $validator->errors()
             ], 422);
@@ -209,6 +209,7 @@ class StockiestController extends Controller
         ]);
 
         return response()->json([
+            'status'  => '1',
             'success' => true,
             'message' => 'Medicine request rejected successfully'
         ], 200);
@@ -316,7 +317,6 @@ class StockiestController extends Controller
     public function receivestock(Request $request)
     {
 
-       
         if (!$this->user || $this->user->status !== "Active") {
             return response()->json([
                 'messages' => trans('messages.unauthorized_user')
@@ -334,11 +334,16 @@ class StockiestController extends Controller
                 'message'  => $validator->errors()->all()
             ], 422);
         }
+        if(Auth::user()->role == '6'){
+            $enter_by = '1';
+        }elseif(Auth::user()->role == '2'){
+            $enter_by = '6';
+        }
 
         // Fetch medicine requests
         $medicineRequest = DB::table('medicine_dispatch as md')
         ->join('medicine as m', 'md.medicine_id', '=', 'm.id')
-        ->join('users as u', 'md.stockiest_id', '=', 'u.id')
+        ->join('users as u', 'md.to_id', '=', 'u.id')
         ->selectRaw('
             md.medicine_id,
             m.name as medicine_name,
@@ -346,7 +351,7 @@ class StockiestController extends Controller
             u.name as stockiest_name,
             SUM(md.qty) as qty
         ')
-        ->where('md.stockiest_id', $request->login_user_id)
+        ->where('md.to_id', $request->login_user_id)
         ->groupBy(
             'md.medicine_id',
             'm.name',
@@ -413,14 +418,6 @@ class StockiestController extends Controller
 
         foreach ($request->items as $item) {
 
-            // 🔹 Dispatch Entry
-            MedicineDispatch::create([
-                'Stockiest_id' => $request->iRequestTo,
-                'medicine_id'  => $item['medicine_id'],
-                'qty'          => $item['qty'],
-                'Entery_By'    => Auth::user()->role,
-            ]);
-
             $medicineRequest = MedicineRequest::findOrFail($item['medicine_request_id']);
 
             // 🔹 Sender Last Stock
@@ -456,6 +453,15 @@ class StockiestController extends Controller
             $receiverOpening = $receiverLastTrack ? $receiverLastTrack->closing_stock : 0;
             $receiverClosing = $receiverOpening + $item['qty'];
 
+            // 🔹 Dispatch Entry
+            MedicineDispatch::create([
+                'from_id' => $request->iRequestTo,
+                'to_id'       => $medicineRequest->arogyamitra_id,
+                'medicine_id'  => $item['medicine_id'],
+                'qty'          => $item['qty'],
+                'Entery_By'    => Auth::user()->role,
+            ]);
+            
             // 🔹 Receiver Entry (R)
             MedicineTrack::create([
                 'arogyamitra_id' => $medicineRequest->arogyamitra_id,
@@ -605,12 +611,15 @@ class StockiestController extends Controller
         $medicineRequest = DB::table('medicine_request as mr')
             ->join('medicine as m', 'mr.medicine_id', '=', 'm.id')
             ->where('mr.iRequestTo', $request->login_user_id)
+            ->join('users as u', 'mr.iRequestTo', '=', 'u.id')
             ->where('mr.status', '3')
             ->select(
                 'mr.id',
                 'mr.medicine_id',
                 'mr.qty',
+                'u.name As username',
                 'mr.app_user_id',
+                'mr.app_user_name',
                 'mr.status',
                 'm.name',
                 'm.qty_type'
@@ -624,6 +633,7 @@ class StockiestController extends Controller
                 'medicine_request_id'   => $row->id,
                 'medicine_id'   => $row->medicine_id,
                 'qty'           => $row->qty . ' ' . $row->qty_type,
+                'app_user_name'        => $row->app_user_name,
                 'status'        => $row->status,
                 'medicine_name' => $row->name,
                 'app_user_id' => $row->app_user_id ?? ''

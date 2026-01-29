@@ -38,7 +38,6 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('receive-stock', [StockiestController::class, 'receivestock']);
     Route::post('used-note', [StockiestController::class, 'usednote']);
 
-
     Route::post('stockiest-stock-update', [StockiestController::class, 'updateStock']);
     Route::post('request-stock', [StockiestController::class, 'getRequestStock']);
     Route::post('stockiest-sync-data', [StockiestController::class, 'syncData']);

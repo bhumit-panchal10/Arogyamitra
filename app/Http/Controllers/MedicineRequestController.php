@@ -193,7 +193,8 @@ class MedicineRequestController extends Controller
     {
 
         MedicineDispatch::create([
-            'Stockiest_id' => $request->arogyamitra_id,
+            'from_id'     => '1',  
+            'to_id'       => $request->arogyamitra_id,
             'medicine_id'  => $request->medicine_id,
             'qty'          => $request->quantity,
             'Entery_By'    => Auth::user()->role,
