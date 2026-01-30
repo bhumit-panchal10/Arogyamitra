@@ -154,7 +154,6 @@ class StockiestMedicineRequestController extends Controller
                 ->toArray();
         } else {
 
-
             $totalMedicinePending = MedicineRequest::where('status', '1')->count();
             $medicineRequest = DB::table('medicine_request as mr')
                 ->join('users as u', 'u.id', '=', 'mr.arogyamitra_id')

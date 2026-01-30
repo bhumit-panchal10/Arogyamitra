@@ -24,7 +24,8 @@ use App\Http\Controllers\{
     MedicineStockController,
     StockiestMedicineRequestController,
     UserExportController,
-    StockReportController
+    StockReportController,
+    OrderPdfController
 };
 
 /*
@@ -98,7 +99,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/medicines/{id}/updateStatus', [MedicineController::class, 'updateStatus'])->name('medicines.updateStatus');
     Route::post('/medicine-request/delivered/flag/update', [MedicineRequestController::class, 'delivered_flag_update'])->name('medicineRequest.delivered_flag_update');
 
-
     Route::get('active-log', [ActivityController::class, 'index'])->name('activeLog.index');
 
     Route::any('report/beneficiaries', [BeneficiariesController::class, 'index'])->name('report.beneficiaries');
@@ -133,4 +133,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::any('report/stock-report-appuser', [StockReportController::class, 'appUsersReport'])->name('report.appUsers');
     Route::any('report/appUsers-report-show/{id}/{appUser}/show', [StockReportController::class, 'appUsersMedicineTrack'])->name('report.appUser-show');
     Route::get('user-gram-list', [StockReportController::class, 'getUserGramList']);
+
+    Route::get('/order-patrak-pdf/{id}', [OrderPdfController::class, 'generateOrderPatrak'])->name('generateOrderPatrak');
 });
