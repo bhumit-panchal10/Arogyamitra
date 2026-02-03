@@ -40,4 +40,15 @@ class MedicineRequest extends Model
     {
         return $this->hasOne('App\Models\User', 'gram_id');
     }
+
+    public function medicines()
+    {
+        return $this->belongsTo(Medicine::class, 'medicine_id');
+    }
+
+    public function stockiest()
+    {
+        return $this->belongsTo(User::class, 'arogyamitra_id');
+        // iRequestTo = stockiest user id
+    }
 }

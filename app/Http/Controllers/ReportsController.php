@@ -10,7 +10,9 @@ use App\Models\{
     Gram,
     Taluka,
     Gramjuth,
-    Prant
+    Prant,
+    MedicineRequest,
+    User
 };
 use Illuminate\Support\Facades\{
     DB,
@@ -22,6 +24,106 @@ class ReportsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function stockiestReport(Request $request)
+    {
+        $title = 'Stockiest Report';
+        // Stockiest dropdown
+        $stockiests = User::where('role', 6)
+            ->where('status', 1)
+            ->get();
+
+        $hasSearch = $request->filled('stockiest_id')
+            || $request->filled('from_date')
+            || $request->filled('to_date');
+
+        $dispatchData = collect();
+
+
+        // Medicine master (KEEP AS IT IS ✅)
+        $medicines = [
+            ['medicine_id' => 1, 'name' => 'મહાસુદર્શન ટીકડી'],
+            ['medicine_id' => 2, 'name' => 'સૂંઠ'],
+            ['medicine_id' => 3, 'name' => 'લીંડી પિંપર'],
+            ['medicine_id' => 4, 'name' => 'હરડે ટીકડી'],
+            ['medicine_id' => 5, 'name' => 'બહેડા'],
+            ['medicine_id' => 6, 'name' => 'આંમળા'],
+            ['medicine_id' => 7, 'name' => 'ગળો'],
+            ['medicine_id' => 8, 'name' => 'ગોખરું'],
+            ['medicine_id' => 9, 'name' => 'વાવડીંગ'],
+            ['medicine_id' => 10, 'name' => 'નાગકેસર'],
+            ['medicine_id' => 11, 'name' => 'મજીઠ'],
+            ['medicine_id' => 12, 'name' => 'કડાછાલ'],
+            ['medicine_id' => 13, 'name' => 'કુવાડિયા બીજ ચૂર્ણ'],
+            ['medicine_id' => 14, 'name' => 'ખેરછાલ'],
+            ['medicine_id' => 15, 'name' => 'હિંગ્વાષ્ટક'],
+            ['medicine_id' => 16, 'name' => 'કપૂરકાચલી'],
+            ['medicine_id' => 17, 'name' => 'અશ્વગંધા ટીકડી'],
+            ['medicine_id' => 19, 'name' => 'બિલ્વાદિ તેલ'],
+            ['medicine_id' => 20, 'name' => 'ઇરિમેદાદિ તેલ'],
+            ['medicine_id' => 21, 'name' => 'ષડબિંદુ તેલ'],
+        ];
+
+
+
+        if ($hasSearch) {
+            $dispatchData = DB::table('medicine_dispatch as md')
+                ->select(
+                    'md.medicine_id',
+                    'u.id as stockiest_id',
+                    'u.name as stockiest_name',
+                    'u.mobile_no',
+                    'p.name as prant_name',
+                    'v.name as vibhag_name',
+                    'j.name as jilla_name',
+                    DB::raw('SUM(md.qty) as total_dispatch')
+                )
+                ->join('users as u', 'u.id', '=', 'md.to_id')
+                ->leftJoin('prant as p', 'p.id', '=', 'u.prant_id')
+                ->leftJoin('vibhag as v', 'v.id', '=', 'u.vibhag_id')
+                ->leftJoin('jilla as j', 'j.id', '=', 'u.jilla_id')
+                ->where('u.role', 6)
+                // ✅ Stockiest filter
+                ->when(
+                    $request->stockiest_id,
+                    fn($q) =>
+                    $q->where('u.id', $request->stockiest_id)
+                )
+                // ✅ Date filter (created_at)
+                ->when(
+                    $request->from_date && $request->to_date,
+                    function ($q) use ($request) {
+                        $q->whereBetween('md.created_at', [
+                            $request->from_date . ' 00:00:00',
+                            $request->to_date . ' 23:59:59',
+                        ]);
+                    }
+                )
+                ->groupBy(
+                    'md.medicine_id',
+                    'u.id',
+                    'u.name',
+                    'u.mobile_no',
+                    'p.name',
+                    'v.name',
+                    'j.name'
+                )
+                ->get()
+                ->keyBy('medicine_id');
+        }
+
+        return view('report.StockiestReport', compact(
+            'title',
+            'medicines',
+            'dispatchData',
+            'stockiests'
+        ));
+    }
+
+    public function beneficiariesReport(Request $request)
+    {
+        return view('report.beneficiariesReport');
     }
 
     public function index(Request $request)
@@ -65,7 +167,7 @@ class ReportsController extends Controller
                 ->join('users', 'users.id', '=', 'medicine_stock.arogyamitra_id');
 
             if ($selPrant) {
-                $medicinesStock = $medicinesStock->where('users.prant_id', $selPrant)->whereIn('users.role', [2,3,4,5,6]);
+                $medicinesStock = $medicinesStock->where('users.prant_id', $selPrant)->whereIn('users.role', [2, 3, 4, 5, 6]);
             }
             if ($selVibhag) {
                 $currentStock = $medicinesStock->where('users.vibhag_id', $selVibhag);
@@ -74,7 +176,7 @@ class ReportsController extends Controller
                 $currentStock = $medicinesStock->where('users.jilla_id', $selJilla);
             }
             if ($selTaluka) {
-                $currentStock = $medicinesStock->leftJoin('gram as gs', 'gs.id', '=', 'users.gram_id')->leftJoin('gramjuth as gm', 'gm.id', '=', 'gs.gramjuth_id')->Join('taluka', 'taluka.id', '=', 'gm.taluka_id')->where('taluka.id', $selTaluka)->whereIn('users.role', [2,3,4,5]);
+                $currentStock = $medicinesStock->leftJoin('gram as gs', 'gs.id', '=', 'users.gram_id')->leftJoin('gramjuth as gm', 'gm.id', '=', 'gs.gramjuth_id')->Join('taluka', 'taluka.id', '=', 'gm.taluka_id')->where('taluka.id', $selTaluka)->whereIn('users.role', [2, 3, 4, 5]);
             }
             if ($selGramjuth) {
                 $currentStock = $medicinesStock->leftJoin('gram as g', 'g.id', '=', 'users.gram_id')->where('g.gramjuth_id', $selGramjuth);
