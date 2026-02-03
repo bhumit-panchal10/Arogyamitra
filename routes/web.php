@@ -94,13 +94,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('medicines', MedicineController::class);
     Route::get('report/medicines-stock', [ReportsController::class, 'index'])->name('report.medicines.index');
     Route::post('report/medicines-stock', [ReportsController::class, 'index'])->name('report.medicines');
+    Route::get('report/stockiestReport', [ReportsController::class, 'stockiestReport'])->name('report.stockiestReport');
+    Route::post('report/stockiestReport', [ReportsController::class, 'stockiestReport'])->name('report.stockiestReport');
+    Route::get('report/beneficiariesReport', [ReportsController::class, 'beneficiariesReport'])->name('report.beneficiariesReport');
+    Route::post('report/beneficiariesReport', [ReportsController::class, 'beneficiariesReport'])->name('report.beneficiariesReport');
+
+
     Route::get('report/order/medicines-request', [MedicineOrderController::class, 'index'])->name('order.medicines.index');
     Route::post('report/order/medicines-request', [MedicineOrderController::class, 'index'])->name('order.medicines');
     Route::put('/medicines/{id}/updateStatus', [MedicineController::class, 'updateStatus'])->name('medicines.updateStatus');
     Route::post('/medicine-request/delivered/flag/update', [MedicineRequestController::class, 'delivered_flag_update'])->name('medicineRequest.delivered_flag_update');
 
     Route::get('active-log', [ActivityController::class, 'index'])->name('activeLog.index');
-
     Route::any('report/beneficiaries', [BeneficiariesController::class, 'index'])->name('report.beneficiaries');
 
     Route::any('medicine-stock', [MedicineStockController::class, 'index'])->name('medicineStock.index');
@@ -109,7 +114,6 @@ Route::group(['middleware' => ['auth']], function () {
         ->name('medicineRequest.export');
     Route::post('medicineRequest/deliver', [MedicineRequestController::class, 'deliver'])
         ->name('medicineRequest.deliver');
-
 
     /* App User Medicine Request */
     /* Route::get('change-status', [MedicineRequestController::class, 'updateStatus']);

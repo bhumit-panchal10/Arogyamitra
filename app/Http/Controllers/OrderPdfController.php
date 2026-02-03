@@ -39,31 +39,29 @@ class OrderPdfController extends Controller
             ->groupBy('medicine_id')
             ->get();
         $medicineQtyMap = $medicines->pluck('qty', 'medicine_id')->toArray();
-
         $stokiestUser = User::where('id', $id)->first();
         $items = [
-            ['name' => 'મહાસુદર્શન ટીકડી', 'packing' => '200'],
-            ['name' => 'સૂંઠ', 'packing' => '100 gm'],
-            ['name' => 'લીંડી પિંપર', 'packing' => '100 gm'],
-            ['name' => 'હરડે ટીકડી', 'packing' => '200'],
-            ['name' => 'બહેડા', 'packing' => '100 gm'],
-            ['name' => 'આંમળા', 'packing' => '100 gm'],
-            ['name' => 'ગળો', 'packing' => '100 gm'],
-            ['name' => 'ગોખરું', 'packing' => '100 gm'],
-            ['name' => 'વાવડીંગ', 'packing' => '50 gm'],
-            ['name' => 'નાગકેસર', 'packing' => '100 gm'],
-            ['name' => 'મજીઠ', 'packing' => '100 gm'],
-            ['name' => 'કડાછાલ', 'packing' => '100 gm'],
-            ['name' => 'કુવાડિયા બીજ', 'packing' => '100 gm'],
-            ['name' => 'ખેરછાલ ચૂર્ણ', 'packing' => '100 gm'],
-            ['name' => 'હિંગ્વાષ્ટક', 'packing' => '100 gm'],
-            ['name' => 'કપૂરકાચલી', 'packing' => '100 gm'],
-            ['name' => 'અશ્વગંધા ટીકડી', 'packing' => '100 gm'],
-            ['name' => 'ઇરિમેદાદિ તેલ', 'packing' => '25 ml'],
-            ['name' => 'ષડબિંદુ તેલ', 'packing' => '25 ml'],
-            ['name' => 'બિલ્વાદિ તેલ', 'packing' => '25 ml'],
+            ['medicine_id' => 1,  'name' => 'મહાસુદર્શન ટીકડી', 'packing' => '200'],
+            ['medicine_id' => 2,  'name' => 'સૂંઠ', 'packing' => '100 gm'],
+            ['medicine_id' => 3,  'name' => 'લીંડી પિંપર', 'packing' => '100 gm'],
+            ['medicine_id' => 4,  'name' => 'હરડે ટીકડી', 'packing' => '200'],
+            ['medicine_id' => 5,  'name' => 'બહેડા', 'packing' => '100 gm'],
+            ['medicine_id' => 6,  'name' => 'આંમળા', 'packing' => '100 gm'],
+            ['medicine_id' => 7,  'name' => 'ગળો', 'packing' => '100 gm'],
+            ['medicine_id' => 8,  'name' => 'ગોખરું', 'packing' => '100 gm'],
+            ['medicine_id' => 9,  'name' => 'વાવડીંગ', 'packing' => '50 gm'],
+            ['medicine_id' => 10, 'name' => 'નાગકેસર', 'packing' => '100 gm'],
+            ['medicine_id' => 11, 'name' => 'મજીઠ', 'packing' => '100 gm'],
+            ['medicine_id' => 12, 'name' => 'કડાછાલ', 'packing' => '100 gm'],
+            ['medicine_id' => 13, 'name' => 'કુવાડિયા બીજ ચૂર્ણ', 'packing' => '100 gm'],
+            ['medicine_id' => 14, 'name' => 'ખેરછાલ', 'packing' => '100 gm'],
+            ['medicine_id' => 15, 'name' => 'હિંગ્વાષ્ટક', 'packing' => '100 gm'],
+            ['medicine_id' => 16, 'name' => 'કપૂરકાચલી', 'packing' => '100 gm'],
+            ['medicine_id' => 17, 'name' => 'અશ્વગંધા ટીકડી', 'packing' => '100 gm'],
+            ['medicine_id' => 20, 'name' => 'ઇરિમેદાદિ તેલ', 'packing' => '25 ml'],
+            ['medicine_id' => 21, 'name' => 'ષડબિંદુ તેલ', 'packing' => '25 ml'],
+            ['medicine_id' => 19, 'name' => 'બિલ્વાદિ તેલ', 'packing' => '25 ml'],
         ];
-
 
         // $pdf = Pdf::loadView('pdf.order_patrak', compact('items'))
         //     ->setPaper('A4', 'portrait');
@@ -75,7 +73,6 @@ class OrderPdfController extends Controller
         ])->render();
 
         $mpdf = PdfService::make();
-
         // Write and save PDF
         $mpdf->WriteHTML($pdf);
         // Download PDF

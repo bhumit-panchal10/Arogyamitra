@@ -96,6 +96,13 @@ return [
             'current_stock'            =>    'Current Stock',
             'current_stock_type'    =>    'CURRENT STOCK TYPE',
             'jilla_name'            =>    'jilla name',
+
+            'prant'            =>    'Prant',
+            'vibhag'            =>    'Vibhag',
+            'jilla'            =>    'Jilla',
+            'stockiest_user'            => 'Stockiest User',
+            'mobile'            => 'Mobile',
+
             'status'                =>    'STATUS',
             'action'                =>    'ACTIONS',
             'create'                =>    'Create',

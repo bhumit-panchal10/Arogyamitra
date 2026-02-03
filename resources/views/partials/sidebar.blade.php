@@ -147,6 +147,28 @@
                         </span>
                         <div class="menu-sub menu-sub-accordion">
                             <div class="menu-item">
+                                <a class="menu-link {{ request()->is('report.stockiestReport*') ? 'active' : '' }}"
+                                    href="{{ route('report.stockiestReport') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Stockiest Report</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="menu-sub menu-sub-accordion">
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('report.beneficiariesReport*') ? 'active' : '' }}"
+                                    href="{{ route('report.beneficiariesReport') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Beneficiaries Report</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="menu-sub menu-sub-accordion">
+                            <div class="menu-item">
                                 <a class="menu-link {{ request()->is('report/medicines-stock*') ? 'active' : '' }}"
                                     href="{{ route('report.medicines.index') }}">
                                     <span class="menu-bullet">

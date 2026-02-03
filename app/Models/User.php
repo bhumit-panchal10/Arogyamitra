@@ -82,6 +82,21 @@ class User extends Authenticatable
         return $this->hasOne(Gram::class, 'id');
     }
 
+    public function prant()
+    {
+        return $this->belongsTo(Prant::class, 'prant_id');
+    }
+
+    public function vibhag()
+    {
+        return $this->belongsTo(Vibhag::class, 'vibhag_id');
+    }
+
+    public function jilla()
+    {
+        return $this->belongsTo(Jilla::class, 'jilla_id');
+    }
+
     public static function getArogyaMitraIds($startDate, $endDate, $role, $prantId, $vibhagId, $jillaId)
     {
         $beneficiary = User::select(DB::raw("SUM(b.number_of_beneficiary) AS beneficiary"))
