@@ -46,9 +46,9 @@ class StockiestController extends Controller
         $validator = Validator::make($request->all(), [
             'arogyamitra_id' => 'required|numeric|gt:0',
             'gram_id' => 'required|numeric|gt:0',
+            'request_date' => 'required|date',
             'number_of_beneficiary' => 'required|numeric|gt:0',
         ]);
-        dd($validator);
 
         if ($validator->fails()) {
             return response()->json([
@@ -60,6 +60,7 @@ class StockiestController extends Controller
         Beneficiary::create([
             'arogyamitra_id' => $request->arogyamitra_id,
             'gram_id'       => $request->gram_id,
+            'request_date'       => $request->request_date,
             'number_of_beneficiary'  => $request->number_of_beneficiary,
         ]);
 

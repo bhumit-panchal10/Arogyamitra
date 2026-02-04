@@ -193,17 +193,22 @@ class MedicineRequestController extends Controller
     {
 
         MedicineDispatch::create([
-            'from_id'     => '1',  
+            'from_id'     => '1',
             'to_id'       => $request->arogyamitra_id,
             'medicine_id'  => $request->medicine_id,
             'qty'          => $request->quantity,
             'Entery_By'    => Auth::user()->role,
         ]);
         $medicineRequest = MedicineRequest::findOrFail($request->medicine_request_id);
-        $lastTrack = MedicineTrack::where('medicine_id', $request->medicine_id)
+        // $lastTrack = MedicineTrack::where('medicine_id', $request->medicine_id)
+        //     ->orderByDesc('id')
+        //     ->first();
+        $lastTrack = MedicineTrack::where([
+            'medicine_id'    => $request->medicine_id,
+            'arogyamitra_id' => $request->arogyamitra_id
+        ])
             ->orderByDesc('id')
             ->first();
-
         $openingStock = $lastTrack ? $lastTrack->closing_stock : 0;
         $closingStock = $openingStock + $request->quantity;
 
