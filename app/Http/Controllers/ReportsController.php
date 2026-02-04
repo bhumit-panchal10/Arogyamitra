@@ -18,6 +18,11 @@ use Illuminate\Support\Facades\{
     DB,
     Auth
 };
+use Carbon\Carbon;
+use App\Exports\StockiestReportExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\BeneficiariesReportExport;
+
 
 class ReportsController extends Controller
 {
@@ -25,6 +30,104 @@ class ReportsController extends Controller
     {
         $this->middleware('auth');
     }
+
+    public function exportStockiestExcel(Request $request)
+    {
+        // same logic as stockiestReport()
+        $dispatchData = DB::table('medicine_dispatch as md')
+            ->select(
+                'md.medicine_id',
+                DB::raw('SUM(md.qty) as total_dispatch'),
+                'p.name as prant',
+                'v.name as vibhag',
+                'j.name as jilla',
+                'u.name as stockiest',
+                'u.mobile_no as mobile',
+                'm.name as medicine_name'
+            )
+            ->join('users as u', 'u.id', '=', 'md.to_id')
+            ->join('medicine as m', 'm.id', '=', 'md.medicine_id')
+            ->leftJoin('prant as p', 'p.id', '=', 'u.prant_id')
+            ->leftJoin('vibhag as v', 'v.id', '=', 'u.vibhag_id')
+            ->leftJoin('jilla as j', 'j.id', '=', 'u.jilla_id')
+            ->where('u.role', 6)
+            ->when($request->stockiest_id, fn($q) => $q->where('u.id', $request->stockiest_id))
+            ->when(
+                $request->from_date && $request->to_date,
+                fn($q) =>
+                $q->whereBetween('md.created_at', [
+                    $request->from_date . ' 00:00:00',
+                    $request->to_date . ' 23:59:59'
+                ])
+            )
+            ->groupBy('md.medicine_id', 'p.name', 'v.name', 'j.name', 'u.name', 'u.mobile_no')
+            ->get();
+
+        return Excel::download(
+            new StockiestReportExport($dispatchData),
+            'stockiest_report.xlsx'
+        );
+    }
+
+    public function exportBeneficiariesExcel(Request $request)
+    {
+        $from = Carbon::parse($request->from_date)->startOfDay();
+        $to   = Carbon::parse($request->to_date)->endOfDay();
+
+        $report = DB::table('beneficiaries')
+            ->select([
+                DB::raw('SUM(beneficiaries.number_of_beneficiary) as total_beneficiary'),
+                'users.name as arogyamitraName',
+                'users.mobile_no',
+
+                DB::raw("(SELECT u.name FROM users u
+                WHERE u.role=6
+                AND FIND_IN_SET(users.gram_id,u.gram_id)
+                AND u.status='Active'
+                ORDER BY u.id DESC LIMIT 1) as StockiestUser"),
+
+                DB::raw("(SELECT u.mobile_no FROM users u
+                WHERE u.role=6
+                AND FIND_IN_SET(users.gram_id,u.gram_id)
+                AND u.status='Active'
+                ORDER BY u.id DESC LIMIT 1) as StockiestMobile"),
+
+                DB::raw("(SELECT u.name FROM users u
+                WHERE u.role=2
+                AND FIND_IN_SET(users.gram_id,u.gram_id)
+                AND u.status='Active'
+                ORDER BY u.id DESC LIMIT 1) as AppUser"),
+
+                DB::raw("(SELECT u.mobile_no FROM users u
+                WHERE u.role=2
+                AND FIND_IN_SET(users.gram_id,u.gram_id)
+                AND u.status='Active'
+                ORDER BY u.id DESC LIMIT 1) as AppUserMobile"),
+
+                'gram.name as Gram',
+                'gramjuth.name as Gramjuth',
+                'taluka.name as Taluka',
+                'jilla.name as Jilla',
+                'vibhag.name as Vibhag',
+                'prant.name as Prant',
+            ])
+            ->join('users', 'beneficiaries.arogyamitra_id', '=', 'users.id')
+            ->join('gram', 'gram.id', '=', 'beneficiaries.gram_id')
+            ->join('gramjuth', 'gramjuth.id', '=', 'gram.gramjuth_id')
+            ->join('taluka', 'taluka.id', '=', 'gramjuth.taluka_id')
+            ->join('jilla', 'jilla.id', '=', 'taluka.jilla_id')
+            ->join('vibhag', 'vibhag.id', '=', 'jilla.vibhag_id')
+            ->join('prant', 'prant.id', '=', 'vibhag.prant_id')
+            ->whereBetween('beneficiaries.created_at', [$from, $to])
+            ->groupBy('beneficiaries.arogyamitra_id', 'beneficiaries.gram_id')
+            ->get();
+
+        return Excel::download(
+            new BeneficiariesReportExport($report),
+            'beneficiaries_report.xlsx'
+        );
+    }
+
 
     public function stockiestReport(Request $request)
     {
@@ -123,8 +226,49 @@ class ReportsController extends Controller
 
     public function beneficiariesReport(Request $request)
     {
-        return view('report.beneficiariesReport');
+        $report = collect();
+        $searched = false;
+        $title = 'Beneficiaries Report';
+
+        if ($request->filled('from_date') && $request->filled('to_date')) {
+
+            $searched = true;
+
+            $fromDate = Carbon::parse($request->from_date)->startOfDay();
+            $toDate   = Carbon::parse($request->to_date)->endOfDay();
+
+            $report = DB::table('beneficiaries')
+                ->select([
+                    DB::raw('SUM(beneficiaries.number_of_beneficiary) as total_beneficiary'),
+                    'users.name as arogyamitraName',
+                    'users.mobile_no',
+                    DB::raw("(SELECT u.name FROM users u WHERE u.role=6 AND FIND_IN_SET(users.gram_id,u.gram_id) AND u.status='Active' ORDER BY u.id DESC LIMIT 1) as StockiestUser"),
+                    DB::raw("(SELECT u.mobile_no FROM users u WHERE u.role=6 AND FIND_IN_SET(users.gram_id,u.gram_id) AND u.status='Active' ORDER BY u.id DESC LIMIT 1) as StockiestMobile"),
+                    DB::raw("(SELECT u.name FROM users u WHERE u.role=2 AND FIND_IN_SET(users.gram_id,u.gram_id) AND u.status='Active' ORDER BY u.id DESC LIMIT 1) as AppUser"),
+                    DB::raw("(SELECT u.mobile_no FROM users u WHERE u.role=2 AND FIND_IN_SET(users.gram_id,u.gram_id) AND u.status='Active' ORDER BY u.id DESC LIMIT 1) as AppUserMobile"),
+                    'gram.name as Gram',
+                    'gramjuth.name as Gramjuth',
+                    'taluka.name as Taluka',
+                    'jilla.name as Jilla',
+                    'vibhag.name as Vibhag',
+                    'prant.name as Prant',
+                ])
+                ->join('users', 'beneficiaries.arogyamitra_id', '=', 'users.id')
+                ->join('gram', 'gram.id', '=', 'beneficiaries.gram_id')
+                ->join('gramjuth', 'gramjuth.id', '=', 'gram.gramjuth_id')
+                ->join('taluka', 'taluka.id', '=', 'gramjuth.taluka_id')
+                ->join('jilla', 'jilla.id', '=', 'taluka.jilla_id')
+                ->join('vibhag', 'vibhag.id', '=', 'jilla.vibhag_id')
+                ->join('prant', 'prant.id', '=', 'vibhag.prant_id')
+                ->whereBetween('beneficiaries.created_at', [$fromDate, $toDate])
+                ->groupBy('beneficiaries.arogyamitra_id', 'beneficiaries.gram_id')
+                ->get();
+        }
+
+        return view('report.beneficiariesReport', compact('report', 'searched', 'title'));
     }
+
+
 
     public function index(Request $request)
     {

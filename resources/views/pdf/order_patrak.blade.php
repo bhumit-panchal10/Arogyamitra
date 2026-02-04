@@ -85,12 +85,13 @@
             </tr>
         </thead>
         <tbody>
+            @php $i = 1; @endphp
             @foreach ($items as $item)
                 @php
                     $qty = $medicineQtyMap[$item['medicine_id']] ?? '';
                 @endphp
                 <tr>
-                    <td style="color:red">{{ $item['medicine_id'] }}</td>
+                    <td style="color:red">{{ $i++ }}</td>
                     <td style="color:#0096FF">{{ $item['name'] }}</td>
                     <td>{{ $item['packing'] }}</td>
                     <td>{{ $qty }}</td>

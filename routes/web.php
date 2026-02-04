@@ -99,6 +99,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('report/beneficiariesReport', [ReportsController::class, 'beneficiariesReport'])->name('report.beneficiariesReport');
     Route::post('report/beneficiariesReport', [ReportsController::class, 'beneficiariesReport'])->name('report.beneficiariesReport');
 
+    Route::get('report/stockiest/export', [ReportsController::class, 'exportStockiestExcel'])
+        ->name('report.stockiest.export');
+
+    Route::get('report/beneficiaries/export', [ReportsController::class, 'exportBeneficiariesExcel'])
+        ->name('report.beneficiaries.export');
+
 
     Route::get('report/order/medicines-request', [MedicineOrderController::class, 'index'])->name('order.medicines.index');
     Route::post('report/order/medicines-request', [MedicineOrderController::class, 'index'])->name('order.medicines');

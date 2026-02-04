@@ -17,22 +17,9 @@
     <div class="card">
 
         <div class="card-body pt-0 table-responsive">
-            <div class="medicine_list d-none">Stockiest Report</div>
-            <form method="GET" action="{{ route('report.stockiestReport') }}" class="mb-5">
+            <div class="medicine_list d-none">Beneficiaries Report</div>
+            <form method="GET" action="{{ route('report.beneficiariesReport') }}" class="mb-5">
                 <div class="row align-items-end g-3">
-
-                    <div class="col-md-3">
-                        <label class="form-label fw-bold">Stockiest</label>
-                        <select name="stockiest_id" class="form-control">
-                            <option value="">All Stockiest</option>
-                            @foreach ($stockiests as $stockiest)
-                                <option value="{{ $stockiest->id }}"
-                                    {{ request('stockiest_id') == $stockiest->id ? 'selected' : '' }}>
-                                    {{ $stockiest->name }} ({{ $stockiest->mobile_no }})
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
 
                     <div class="col-md-3">
                         <label class="form-label fw-bold">From Date</label>
@@ -48,7 +35,7 @@
                         <button type="submit" class="btn btn-primary">
                             Search
                         </button>
-                        <a href="{{ route('report.stockiestReport') }}" class="btn btn-secondary">
+                        <a href="{{ route('report.beneficiariesReport') }}" class="btn btn-secondary">
                             Reset
                         </a>
                     </div>
@@ -56,49 +43,70 @@
                 </div>
 
             </form>
+            @if ($searched && $report->isNotEmpty())
+                <a href="{{ route('report.beneficiaries.export', request()->query()) }}" class="btn btn-success">
+                    Export Excel
+                </a>
+            @endif
+
 
             <table id="medicineTable" class="table align-middle table-row-dashed fs-6 gy-5">
                 <thead>
                     <tr class="text-start fw-bolder fs-7 text-uppercase gs-0">
-                        <th class="text-center">{{ trans('messages.medicine.fields.serial_no') }}</th>
-                        <th class="text-center">{{ trans('messages.medicine.fields.medicine') }}</th>
-                        <th class="text-center">{{ trans('messages.medicine.fields.quantity') }}</th>
-                        <th class="text-center">{{ trans('messages.medicine.fields.prant') }}</th>
-                        <th class="text-center">{{ trans('messages.medicine.fields.vibhag') }}</th>
-                        <th class="text-center">{{ trans('messages.medicine.fields.jilla') }}</th>
-                        <th class="text-center">{{ trans('messages.medicine.fields.stockiest_user') }}</th>
-                        <th class="text-center">{{ trans('messages.medicine.fields.mobile') }}</th>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Prant</th>
+                        <th class="text-center">Vibhag</th>
+                        <th class="text-center">Jilla</th>
+                        <th class="text-center">Taluka</th>
+                        <th class="text-center">Gramjuth</th>
+                        <th class="text-center">Gram</th>
+                        <th class="text-center">Beneficiary</th>
+                        <th class="text-center">Arogyamitra</th>
+                        <th class="text-center">Arogyamitra Mobile</th>
+                        <th class="text-center">App User</th>
+                        <th class="text-center">App User Mobile</th>
+                        <th class="text-center">Stockiest</th>
+                        <th class="text-center">Stockiest Mobile</th>
                     </tr>
                 </thead>
-                <tbody class="text-gray-600 fw-bold">
-                    @if ($dispatchData->isEmpty())
+
+                <tbody>
+                    @if (!$searched)
                         <tr>
-                            <td colspan="8" class="text-center text-muted">
-                                Please search to view stockiest report
+                            <td colspan="14" class="text-center text-muted">
+                                Please select From Date & To Date and click Search
+                            </td>
+                        </tr>
+                    @elseif ($report->isEmpty())
+                        <tr>
+                            <td colspan="14" class="text-center text-danger">
+                                No data found for selected date range
                             </td>
                         </tr>
                     @else
-                        @foreach ($medicines as $index => $medicine)
-                            @php
-                                $row = $dispatchData->firstWhere('medicine_id', $medicine['medicine_id']);
-                            @endphp
+                        @foreach ($report as $index => $row)
                             <tr>
                                 <td class="text-center">{{ $index + 1 }}</td>
-                                <td class="text-center">{{ $medicine['name'] }}</td>
-                                <td class="text-center">{{ $row->total_dispatch ?? '-' }}</td>
-                                <td class="text-center">{{ $row->prant_name ?? '-' }}</td>
-                                <td class="text-center">{{ $row->vibhag_name ?? '-' }}</td>
-                                <td class="text-center">{{ $row->jilla_name ?? '-' }}</td>
-                                <td class="text-center">{{ $row->stockiest_name ?? '-' }}</td>
-                                <td class="text-center">{{ $row->mobile_no ?? '-' }}</td>
+                                <td class="text-center">{{ $row->Prant }}</td>
+                                <td class="text-center">{{ $row->Vibhag }}</td>
+                                <td class="text-center">{{ $row->Jilla }}</td>
+                                <td class="text-center">{{ $row->Taluka }}</td>
+                                <td class="text-center">{{ $row->Gramjuth }}</td>
+                                <td class="text-center">{{ $row->Gram }}</td>
+                                <td class="text-center">{{ $row->total_beneficiary }}</td>
+                                <td class="text-center">{{ $row->arogyamitraName }}</td>
+                                <td class="text-center">{{ $row->mobile_no }}</td>
+                                <td class="text-center">{{ $row->AppUser }}</td>
+                                <td class="text-center">{{ $row->AppUserMobile }}</td>
+                                <td class="text-center">{{ $row->StockiestUser }}</td>
+                                <td class="text-center">{{ $row->StockiestMobile }}</td>
                             </tr>
                         @endforeach
                     @endif
                 </tbody>
 
-
-
             </table>
+
         </div>
     </div>
 @endsection

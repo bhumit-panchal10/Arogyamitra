@@ -57,6 +57,12 @@
 
             </form>
 
+            @if ($dispatchData->isNotEmpty())
+                <a href="{{ route('report.stockiest.export', request()->query()) }}" class="btn btn-success">
+                    Export Excel
+                </a>
+            @endif
+
             <table id="medicineTable" class="table align-middle table-row-dashed fs-6 gy-5">
                 <thead>
                     <tr class="text-start fw-bolder fs-7 text-uppercase gs-0">
@@ -67,7 +73,7 @@
                         <th class="text-center">{{ trans('messages.medicine.fields.vibhag') }}</th>
                         <th class="text-center">{{ trans('messages.medicine.fields.jilla') }}</th>
                         <th class="text-center">{{ trans('messages.medicine.fields.stockiest_user') }}</th>
-                        <th class="text-center">{{ trans('messages.medicine.fields.mobile') }}</th>
+                        <th class="text-center">{{ trans('messages.medicine.fields.stockiest_mobile') }}</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-600 fw-bold">
