@@ -543,6 +543,7 @@ class StockController extends Controller
     //     }
     // }
 
+
     public function getStockList(Request $request)
     {
         if ($this->user && $this->user->status == "Active") {
@@ -565,17 +566,20 @@ class StockController extends Controller
             }
 
             $medicine = [];
+            $deliveredQty = [];
             //Stockiest
             if ($this->user->role == 6) {
 
-                $deliveredQty = DB::table('medicine_request')
+                $deliveredQty = DB::table('medicine_request as mr')
                     ->select(
-                        'medicine_id',
-                        DB::raw('SUM(qty) as total_delivered_qty')
+                        'mr.medicine_id',
+                        'm.delivered_qty',
+                        DB::raw('SUM(mr.qty) as total_delivered_qty')
                     )
-                    ->where('iRequestTo', $request->stockiest_id)
-                    ->where('status', '1')
-                    ->groupBy('medicine_id')
+                    ->join('medicine as m', 'mr.medicine_id', '=', 'm.id')
+                    ->where('mr.iRequestTo', $request->stockiest_id)
+                    ->where('mr.status', '1')
+                    ->groupBy('mr.medicine_id')
                     ->get();
 
                 $medicine = DB::table('medicine')
@@ -596,14 +600,14 @@ class StockController extends Controller
                         return (array) $item;
                     })
                     ->toArray();
-                //dd($medicine);
+                // dd($medicine);
 
                 foreach ($medicine as $key => $val) {
 
                     $arrData[$key]['medicine_id'] = $val['id'] ? $val['id'] : '';
                     $arrData[$key]['medicine_name'] = $val['name'] ? $val['name'] : '';
                     $arrData[$key]['packing'] = $val['qty'] . ' ' . $val['qty_type'] ? $val['qty'] . ' ' . $val['qty_type'] : '';
-                    $arrData[$key]['current_stock'] = $val['CurrentStock'] ? $val['CurrentStock'] : '0';
+                    $arrData[$key]['current_stock'] = (!is_null($val['CurrentStock'])) ? $val['CurrentStock'] . ' ' . ($val['delivered_qty'] ?? '') : '0';
                 }
             } else if ($this->user->role == 2) {
                 //App user
@@ -635,7 +639,8 @@ class StockController extends Controller
                     $arrData[$key]['medicine_id'] = $val['id'] ? $val['id'] : '';
                     $arrData[$key]['medicine_name'] = $val['name'] ? $val['name'] : '';
                     $arrData[$key]['packing'] = $val['qty'] . ' ' . $val['qty_type'] ? $val['qty'] . ' ' . $val['qty_type'] : '';
-                    $arrData[$key]['current_stock'] = $val['CurrentStock'] ? $val['CurrentStock'] : '0';
+                    // $arrData[$key]['current_stock'] = $val['CurrentStock'] . ' '. $val['delivered_qty'] ? $val['CurrentStock'] .' '. $val['delivered_qty'] : '0';
+                    $arrData[$key]['current_stock'] = (!is_null($val['CurrentStock'])) ? $val['CurrentStock'] . ' ' . ($val['delivered_qty'] ?? '') : '0';
                 }
             }
             // to do current stock in medicine available
@@ -666,6 +671,7 @@ class StockController extends Controller
                 }
 
                 return response()->json($response, 200);
+
                 // return response()->json([
                 //     'status'    => '1',
                 //     'result'    => 'success',

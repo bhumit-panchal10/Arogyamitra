@@ -43,6 +43,7 @@ class StockiestController extends Controller
     public function beneficiariesadd(Request $request)
     {
 
+        // 🔹 Validation
         $validator = Validator::make($request->all(), [
             'arogyamitra_id' => 'required|numeric|gt:0',
             'gram_id' => 'required|numeric|gt:0',
@@ -133,6 +134,63 @@ class StockiestController extends Controller
         }
     }
 
+    // public function getMedicineRequest(Request $request)
+    // {
+    //     if ($this->user && $this->user->status == "Active") {
+    //         $stock = Validator::make($request->all(), [
+    //             'app_user_id' => 'required|numeric|gt:0'
+    //         ]);
+
+    //         if ($stock->fails()) {
+    //             return response()->json([
+    //                 'status'    => '0',
+    //                 'result'    => 'failure',
+    //                 'medicine'  => $stock->errors()->all()
+    //             ], 422);
+    //         }
+    //         //$getGramIds = $this->getGramStockiest($request->get('app_user_id'));
+
+    //         $select = ['m.id as medicine_id', 'm.name as medicine_name', DB::raw('SUM(medicine_request.qty) as request_qty'), DB::raw("CONCAT(m.qty,' ',m.qty_type) AS packing")];
+    //         $medicineRequest = MedicineRequest::select($select)
+    //             ->join('medicine as m', 'm.id', 'medicine_request.medicine_id')
+    //             ->where(['medicine_request.status' => '1', 'app_user_id' => $request->get('app_user_id')])
+    //             ->groupBy('medicine_request.medicine_id')
+    //             ->orderBy('m.id', 'ASC')
+    //             ->get();
+
+    //         foreach ($medicineRequest as $key => $value) {
+    //             //$currentStock = MedicineRequest::where(['arogyamitra_id' => $request->get('app_user_id'), 'medicine_id' => $value['medicine_id']])->first();
+    //             $currentStock = MedicineStock::where(['arogyamitra_id' => $this->user->id, 'medicine_id' => $value['medicine_id']])->first(); //stockiest current stock
+
+    //             $arrData[$key]['medicine_id'] = $value['medicine_id'] ? (string)$value['medicine_id'] : '';
+    //             $arrData[$key]['medicine_name'] = $value['medicine_name'] ? $value['medicine_name'] : '';
+    //             $arrData[$key]['packing'] = $value['packing'] ? $value['packing'] : '';
+    //             $arrData[$key]['request_qty'] = $value['request_qty'] ? (string)$value['request_qty'] : '0';
+    //             $arrData[$key]['current_qty'] = $currentStock ? (string)$currentStock->qty : '0';
+    //         }
+
+    //         // to do current stock in medicine available
+    //         if (!empty($arrData)) {
+    //             return response()->json([
+    //                 'status'    => '1',
+    //                 'result'    => 'success',
+    //                 'medicine'  => $arrData
+    //             ], 200);
+    //             // to do current stock in medicine Not available
+    //         } else {
+    //             return response()->json([
+    //                 'status'    => '0',
+    //                 'result'    => 'failure',
+    //                 'message'   => trans('messages.medicine_out_stock')
+    //             ], 200);
+    //         }
+    //     } else {
+    //         return response()->json([
+    //             'messages'  => trans('messages.unauthorized_user')
+    //         ], 401);
+    //     }
+    // }
+
     public function rejectMedicineRequest(Request $request)
     {
         if (!$this->user || $this->user->status !== "Active") {
@@ -200,7 +258,8 @@ class StockiestController extends Controller
 
         // Validation
         $validator = Validator::make($request->all(), [
-            'app_user_id' => 'required|numeric|gt:0'
+            'app_user_id' => 'required|numeric|gt:0',
+            'gram_id' => 'nullable'
         ]);
 
         if ($validator->fails()) {
@@ -227,22 +286,26 @@ class StockiestController extends Controller
         //     )
         //     ->get();
 
-        $medicineRequest = DB::table('medicine_request as mr')
-            ->join('medicine as m', 'mr.medicine_id', '=', 'm.id')
-            ->join('users as u', 'mr.arogyamitra_id', '=', 'u.id')
-            ->where('mr.iRequestTo', $request->app_user_id)
-            ->where('mr.status', '1')
-            ->select(
-                'mr.id',
-                'u.name as arogyamitra_name', // ✅ correct name
-                'mr.medicine_id',
-                'mr.qty',
-                'mr.app_user_id',
-                'mr.status',
-                'm.name',
-                'm.qty_type'
-            )
-            ->selectRaw('
+        if ($this->user->role == '2') {
+            $medicineRequest = DB::table('medicine_request as mr')
+                ->join('medicine as m', 'mr.medicine_id', '=', 'm.id')
+                ->join('users as u', 'mr.arogyamitra_id', '=', 'u.id')
+                ->where('mr.iRequestTo', $request->app_user_id)
+                ->where('mr.gram_id', $request->gram_id)
+
+                ->where('mr.status', '1')
+                ->select(
+                    'mr.id',
+                    'u.name as arogyamitra_name', // ✅ correct name
+                    'mr.medicine_id',
+                    DB::raw('SUM(mr.qty) as qty'),
+                    'mr.app_user_id',
+                    'mr.status',
+                    'm.name',
+                    'm.qty_type',
+                    'm.delivered_qty'
+                )
+                ->selectRaw('
         (
             SELECT mt.closing_stock
             FROM medicine_track mt
@@ -252,10 +315,43 @@ class StockiestController extends Controller
             LIMIT 1
         ) as CurrentStock
         ', [$request->app_user_id])
-            ->orderBy('mr.app_user_id')
-            ->orderBy('mr.id')
-            ->get();
-
+                ->orderBy('mr.app_user_id')
+                ->orderBy('mr.id')
+                ->groupBy('mr.medicine_id')
+                ->get();
+        } else {
+            $medicineRequest = DB::table('medicine_request as mr')
+                ->join('medicine as m', 'mr.medicine_id', '=', 'm.id')
+                ->join('users as u', 'mr.arogyamitra_id', '=', 'u.id')
+                ->where('mr.iRequestTo', $request->app_user_id)
+                ->where('mr.status', '1')
+                ->select(
+                    'mr.id',
+                    'u.name as arogyamitra_name', // ✅ correct name
+                    'mr.medicine_id',
+                    DB::raw('SUM(mr.qty) as qty'),
+                    'mr.app_user_id',
+                    'mr.status',
+                    'm.name',
+                    'm.qty_type',
+                    'm.delivered_qty'
+                )
+                ->selectRaw('
+            (
+                SELECT mt.closing_stock
+                FROM medicine_track mt
+                WHERE mt.medicine_id = m.id
+                  AND mt.arogyamitra_id = ?
+                ORDER BY mt.id DESC
+                LIMIT 1
+            ) as CurrentStock
+            ', [$request->app_user_id])
+                ->orderBy('mr.app_user_id')
+                ->orderBy('mr.id')
+                ->groupBy('mr.medicine_id')
+                ->groupBy('mr.arogyamitra_id')
+                ->get();
+        }
         $arrData = [];
 
         foreach ($medicineRequest as $row) {
@@ -267,7 +363,7 @@ class StockiestController extends Controller
                 'medicine_name' => $row->name,
                 'app_user_id' => $row->app_user_id ?? '',
                 'user_name' => $row->arogyamitra_name ?? '',
-                'CurrentStock' => $row->CurrentStock ?? ''
+                'CurrentStock'        => ($row->CurrentStock ?? 0) . ' ' . ($row->delivered_qty ?? '')
 
             ];
         }
@@ -286,6 +382,7 @@ class StockiestController extends Controller
             'message' => trans('messages.medicine_out_stock')
         ], 200);
     }
+
 
     public function receivestock(Request $request)
     {
@@ -321,6 +418,7 @@ class StockiestController extends Controller
             md.medicine_id,
             m.name as medicine_name,
             m.qty_type,
+            m.delivered_qty,
             u.name as stockiest_name,
             SUM(md.qty) as qty
         ')
@@ -333,14 +431,13 @@ class StockiestController extends Controller
             )
             ->get();
 
-
         $arrData = [];
 
         foreach ($medicineRequest as $row) {
             $arrData[] = [
                 'medicine_id'     => $row->medicine_id,
                 'medicine_name'   => $row->medicine_name,
-                'qty'             => $row->qty . ' ' . $row->qty_type,
+                'qty'             => $row->qty . ' ' . $row->delivered_qty,
                 'stockiest_name'  => $row->stockiest_name,
             ];
         }
@@ -360,6 +457,7 @@ class StockiestController extends Controller
             'message' => trans('messages.medicine_out_stock')
         ], 200);
     }
+
 
     public function getmedicinedelivered(Request $request)
     {
@@ -460,6 +558,8 @@ class StockiestController extends Controller
             'message' => 'Medicines Delivered Successfully'
         ], 200);
     }
+
+
 
     // public function getmedicinedelivered(Request $request)
     // {
@@ -581,18 +681,19 @@ class StockiestController extends Controller
         $medicineRequest = DB::table('medicine_request as mr')
             ->join('medicine as m', 'mr.medicine_id', '=', 'm.id')
             ->where('mr.iRequestTo', $request->login_user_id)
-            ->join('users as u', 'mr.iRequestTo', '=', 'u.id')
+            ->join('users as u', 'mr.arogyamitra_id', '=', 'u.id')
             ->where('mr.status', '3')
             ->select(
                 'mr.id',
                 'mr.medicine_id',
                 'mr.qty',
-                'u.name As username',
+                'u.name As from_user_name',
                 'mr.app_user_id',
                 'mr.app_user_name',
                 'mr.status',
                 'm.name',
-                'm.qty_type'
+                'm.qty_type',
+                'm.delivered_qty'
             )
             ->get();
 
@@ -602,8 +703,8 @@ class StockiestController extends Controller
             $arrData[] = [
                 'medicine_request_id'   => $row->id,
                 'medicine_id'   => $row->medicine_id,
-                'qty'           => $row->qty . ' ' . $row->qty_type,
-                'app_user_name'        => $row->app_user_name,
+                'qty'           => $row->qty . ' ' . $row->delivered_qty,
+                'app_user_name' => $row->from_user_name,
                 'status'        => $row->status,
                 'medicine_name' => $row->name,
                 'app_user_id' => $row->app_user_id ?? ''
@@ -624,6 +725,8 @@ class StockiestController extends Controller
             'message' => trans('messages.medicine_out_stock')
         ], 200);
     }
+
+
     public function updateStock(Request $request)
     {
         if ($this->user && $this->user->status == "Active") {
