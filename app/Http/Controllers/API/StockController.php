@@ -40,208 +40,209 @@ class StockController extends Controller
             }
         }
     }
-
+    
     public function updateStockDetailsByType(Request $request)
     {
-        /* -------------------------------------------------
+    /* -------------------------------------------------
      | AUTH CHECK
      -------------------------------------------------*/
-        if (!$this->user || $this->user->status !== "Active") {
-            return response()->json([
-                'status'  => '0',
-                'result'  => 'failure',
-                'message' => trans('messages.unauthorized_user')
-            ], 401);
-        }
+    if (!$this->user || $this->user->status !== "Active") {
+        return response()->json([
+            'status'  => '0',
+            'result'  => 'failure',
+            'message' => trans('messages.unauthorized_user')
+        ], 401);
+    }
 
-        date_default_timezone_set('Asia/Kolkata');
+    date_default_timezone_set('Asia/Kolkata');
 
-        /* -------------------------------------------------
+    /* -------------------------------------------------
      | VALIDATION
      -------------------------------------------------*/
-        $rules = [
-            'type' => 'required|in:current,request,received,consume',
-        ];
+    $rules = [
+        'type' => 'required|in:current,request,received,consume',
+    ];
 
-        if ($this->user->role == 2) {
-            $rules['arogyamitra_id'] = 'required|numeric|gt:0';
-        } elseif ($this->user->role == 6) {
-            $rules['stockiest_id'] = 'required|numeric|gt:0';
-        }
+    if ($this->user->role == 2) {
+        $rules['arogyamitra_id'] = 'required|numeric|gt:0';
+    } elseif ($this->user->role == 6) {
+        $rules['stockiest_id'] = 'required|numeric|gt:0';
+    }
 
-        if ($request->type !== 'consume') {
-            $rules['stock'] = 'required|array|min:1';
-            $rules['stock.*.medicine_id'] = 'required|numeric|gt:0';
-            $rules['stock.*.qty'] = 'required|numeric|gt:0';
-        }
+    if ($request->type !== 'consume') {
+        $rules['stock'] = 'required|array|min:1';
+        $rules['stock.*.medicine_id'] = 'required|numeric|gt:0';
+        $rules['stock.*.qty'] = 'required|numeric|gt:0';
+    }
 
-        if ($request->type === 'request') {
-            $rules['gram_id'] = 'nullable';
-        }
+    if ($request->type === 'request') {
+        $rules['gram_id'] = 'nullable';
+    }
 
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return response()->json([
-                'status'  => '0',
-                'result'  => 'failure',
-                'message' => $validator->errors()->all()
-            ], 422);
-        }
+    $validator = Validator::make($request->all(), $rules);
+    if ($validator->fails()) {
+        return response()->json([
+            'status'  => '0',
+            'result'  => 'failure',
+            'message' => $validator->errors()->all()
+        ], 422);
+    }
 
-        /* -------------------------------------------------
+    /* -------------------------------------------------
      | COMMON VARIABLES
      -------------------------------------------------*/
-        $stock     = $request->stock ?? [];
-        $requestData = $request->all();
+    $stock     = $request->stock ?? [];
+    $requestData = $request->all();
 
-        $id = ($this->user->role == 2)
-            ? $request->arogyamitra_id
-            : $request->stockiest_id;
+    $id = ($this->user->role == 2)
+        ? $request->arogyamitra_id
+        : $request->stockiest_id;
 
-        /* -------------------------------------------------
+    /* -------------------------------------------------
      | QTY LIMIT CHECK
      -------------------------------------------------*/
-        foreach ($stock as $s) {
-            if ($s['qty'] >= 100000) {
-                return response()->json([
-                    'status'  => '0',
-                    'result'  => 'failure',
-                    'message' => trans('messages.qty_max_length')
-                ], 422);
-            }
-        }
-
-        /* -------------------------------------------------
-     | FIND STOCKIEST BY MULTIPLE GRAM IDS
-     -------------------------------------------------*/
-        $arogyamitraGramIds = explode(',', Auth::user()->gram_id);
-
-        $stockiest = DB::table('users')
-            ->where('role', 6)
-            ->where('status', 'Active')
-            ->where(function ($q) use ($arogyamitraGramIds) {
-                foreach ($arogyamitraGramIds as $gid) {
-                    $q->orWhereRaw('FIND_IN_SET(?, gram_id)', [$gid]);
-                }
-            })
-            ->first();
-
-        if (!$stockiest) {
+    foreach ($stock as $s) {
+        if ($s['qty'] >= 100000) {
             return response()->json([
                 'status'  => '0',
                 'result'  => 'failure',
-                'message' => 'Stockiest not found for this Gram'
-            ], 404);
+                'message' => trans('messages.qty_max_length')
+            ], 422);
         }
+    }
 
-        $stockiest_id = $stockiest->id;
+    /* -------------------------------------------------
+     | FIND STOCKIEST BY MULTIPLE GRAM IDS
+     -------------------------------------------------*/
+    $arogyamitraGramIds = explode(',', Auth::user()->gram_id);
 
-        /* -------------------------------------------------
+    $stockiest = DB::table('users')
+        ->where('role', 6)
+        ->where('status', 'Active')
+        ->where(function ($q) use ($arogyamitraGramIds) {
+            foreach ($arogyamitraGramIds as $gid) {
+                $q->orWhereRaw('FIND_IN_SET(?, gram_id)', [$gid]);
+            }
+        })
+        ->first();
+
+    if (!$stockiest) {
+        return response()->json([
+            'status'  => '0',
+            'result'  => 'failure',
+            'message' => 'Stockiest not found for this Gram'
+        ], 404);
+    }
+
+    $stockiest_id = $stockiest->id;
+
+    /* -------------------------------------------------
      | TYPE : REQUEST
      -------------------------------------------------*/
-        if ($request->type === 'request') {
+    if ($request->type === 'request') {
 
-            $gramId = (int) $request->gram_id;
-            $medicineRequest = false;
+        $gramId = (int) $request->gram_id;
+        $medicineRequest = false;
 
-            DB::transaction(function () use (
-                $stock,
-                $id,
-                $stockiest_id,
-                $gramId,
-                &$medicineRequest
-            ) {
+        DB::transaction(function () use (
+            $stock,
+            $id,
+            $stockiest_id,
+            $gramId,
+            &$medicineRequest
+        ) {
 
-                // Gram user (role = 3)
-                $gramUser = DB::table('users')
-                    ->where('role', 3)
-                    ->where('gram_id', $gramId)
-                    ->first();
+            // Gram user (role = 3)
+            $gramUser = DB::table('users')
+                ->where('role', 3)
+                ->where('gram_id', $gramId)
+                ->first();
+          
+            foreach ($stock as $item) {
 
-                foreach ($stock as $item) {
-
-                    /* --------------------------------
+                /* --------------------------------
                  | ROLE : AROGYAMITRA (2)
                  --------------------------------*/
-                    if (Auth::user()->role == 2) {
+                if (Auth::user()->role == 2) {
 
-                        // Arogyamitra → Stockiest
-                        $medicineRequest = RequestStock::insertGetId([
-                            'arogyamitra_id' => $id,
+                    // Arogyamitra → Stockiest
+                    $medicineRequest = RequestStock::insertGetId([
+                        'arogyamitra_id' => $id,
+                        'medicine_id'    => $item['medicine_id'],
+                        'qty'            => $item['qty'],
+                        'gram_id'        => $gramId,
+                        'status'         => '1',
+                        'app_user_id'    => Auth::id(),
+                        'app_user_name'  => Auth::user()->name,
+                        'iRequestTo'     => $stockiest_id,
+                        'created_at'     => now(),
+                        'updated_at'     => now()
+                    ]);
+
+                    // Gram → Arogyamitra
+                    if ($gramUser) {
+                        RequestStock::insert([
+                            'arogyamitra_id' => $gramUser->id,
                             'medicine_id'    => $item['medicine_id'],
                             'qty'            => $item['qty'],
                             'gram_id'        => $gramId,
                             'status'         => '1',
                             'app_user_id'    => Auth::id(),
                             'app_user_name'  => Auth::user()->name,
-                            'iRequestTo'     => $stockiest_id,
-                            'created_at'     => now(),
-                            'updated_at'     => now()
-                        ]);
-
-                        // Gram → Arogyamitra
-                        if ($gramUser) {
-                            RequestStock::insert([
-                                'arogyamitra_id' => $gramUser->id,
-                                'medicine_id'    => $item['medicine_id'],
-                                'qty'            => $item['qty'],
-                                'gram_id'        => $gramId,
-                                'status'         => '1',
-                                'app_user_id'    => Auth::id(),
-                                'app_user_name'  => Auth::user()->name,
-                                'iRequestTo'     => $id,
-                                'created_at'     => now(),
-                                'updated_at'     => now()
-                            ]);
-                        }
-                    }
-
-                    /* --------------------------------
-                 | ROLE : STOCKIEST (6)
-                 --------------------------------*/ else {
-
-                        $medicineRequest = RequestStock::insertGetId([
-                            'arogyamitra_id' => $id,
-                            'medicine_id'    => $item['medicine_id'],
-                            'qty'            => $item['qty'],
-                            'gram_id'        => null,
-                            'status'         => '1',
-                            'app_user_id'    => null,
-                            'app_user_name'  => null,
-                            'iRequestTo'     => 1,
+                            'iRequestTo'     => $id,
                             'created_at'     => now(),
                             'updated_at'     => now()
                         ]);
                     }
                 }
-            });
 
-            if ($medicineRequest) {
-                self::latLong($requestData);
+                /* --------------------------------
+                 | ROLE : STOCKIEST (6)
+                 --------------------------------*/
+                else {
 
-                return response()->json([
-                    'status'  => '1',
-                    'result'  => 'success',
-                    'message' => trans('messages.request_stock')
-                ], 200);
+                    $medicineRequest = RequestStock::insertGetId([
+                        'arogyamitra_id' => $id,
+                        'medicine_id'    => $item['medicine_id'],
+                        'qty'            => $item['qty'],
+                        'gram_id'        => null,
+                        'status'         => '1',
+                        'app_user_id'    => null,
+                        'app_user_name'  => null,
+                        'iRequestTo'     => 1,
+                        'created_at'     => now(),
+                        'updated_at'     => now()
+                    ]);
+                }
             }
+        });
+
+        if ($medicineRequest) {
+            self::latLong($requestData);
 
             return response()->json([
-                'status'  => '0',
-                'result'  => 'failure',
-                'message' => trans('messages.fails')
-            ], 400);
+                'status'  => '1',
+                'result'  => 'success',
+                'message' => trans('messages.request_stock')
+            ], 200);
         }
 
-        /* -------------------------------------------------
-     | INVALID TYPE
-     -------------------------------------------------*/
         return response()->json([
             'status'  => '0',
             'result'  => 'failure',
-            'message' => trans('messages.invalid_request')
+            'message' => trans('messages.fails')
         ], 400);
     }
+
+    /* -------------------------------------------------
+     | INVALID TYPE
+     -------------------------------------------------*/
+    return response()->json([
+        'status'  => '0',
+        'result'  => 'failure',
+        'message' => trans('messages.invalid_request')
+    ], 400);
+}
 
 
 
@@ -571,17 +572,17 @@ class StockController extends Controller
             if ($this->user->role == 6) {
 
                 $deliveredQty = DB::table('medicine_request as mr')
-                    ->select(
-                        'mr.medicine_id',
-                        'm.delivered_qty',
-                        DB::raw('SUM(mr.qty) as total_delivered_qty')
-                    )
-                    ->join('medicine as m', 'mr.medicine_id', '=', 'm.id')
-                    ->where('mr.iRequestTo', $request->stockiest_id)
-                    ->where('mr.status', '1')
-                    ->groupBy('mr.medicine_id')
-                    ->get();
-
+                ->select(
+                    'mr.medicine_id',
+                    'm.delivered_qty',
+                    DB::raw('SUM(mr.qty) as total_delivered_qty')
+                )
+                ->join('medicine as m', 'mr.medicine_id', '=', 'm.id')
+                ->where('mr.iRequestTo', $request->stockiest_id)
+                ->where('mr.status', '1')
+                ->groupBy('mr.medicine_id')
+                ->get();
+               
                 $medicine = DB::table('medicine')
                     ->where('status', '1')
                     ->select(
@@ -597,18 +598,22 @@ class StockController extends Controller
                     )
                     ->get()
                     ->map(function ($item) {
-                        return (array) $item;
-                    })
+                      return (array) $item;
+                     })
                     ->toArray();
-                // dd($medicine);
-
+                    // dd($medicine);
+                
                 foreach ($medicine as $key => $val) {
+                    $currentStock = $val['CurrentStock'] ?? 0;
+                    $delivered_Qty = $val['delivered_qty'] ?? 0;
 
                     $arrData[$key]['medicine_id'] = $val['id'] ? $val['id'] : '';
                     $arrData[$key]['medicine_name'] = $val['name'] ? $val['name'] : '';
                     $arrData[$key]['packing'] = $val['qty'] . ' ' . $val['qty_type'] ? $val['qty'] . ' ' . $val['qty_type'] : '';
-                    $arrData[$key]['current_stock'] = (!is_null($val['CurrentStock'])) ? $val['CurrentStock'] . ' ' . ($val['delivered_qty'] ?? '') : '0';
-                }
+                    // $arrData[$key]['current_stock'] = (!is_null($val['CurrentStock']))? $val['CurrentStock'] . ' ' . ($val['delivered_qty'] ?? ''): '0';                
+                    $arrData[$key]['current_stock'] =($currentStock > 0)? $currentStock . ' ' . $delivered_Qty: '0 ' . $delivered_Qty;}
+
+                
             } else if ($this->user->role == 2) {
                 //App user
                 $getGramId = self::getGramByArogyaMitraId($request->get('arogyamitra_id'));
@@ -629,19 +634,22 @@ class StockController extends Controller
                     )
                     ->get()
                     ->map(function ($item) {
-                        return (array) $item;
-                    })
+                      return (array) $item;
+                     })
                     ->toArray();
-                //dd($medicine);
-
+                    //dd($medicine);
+                
                 foreach ($medicine as $key => $val) {
+                    $currentStock = $val['CurrentStock'] ?? 0;
+                    $delivered_Qty = $val['delivered_qty'] ?? 0;
+
 
                     $arrData[$key]['medicine_id'] = $val['id'] ? $val['id'] : '';
                     $arrData[$key]['medicine_name'] = $val['name'] ? $val['name'] : '';
                     $arrData[$key]['packing'] = $val['qty'] . ' ' . $val['qty_type'] ? $val['qty'] . ' ' . $val['qty_type'] : '';
                     // $arrData[$key]['current_stock'] = $val['CurrentStock'] . ' '. $val['delivered_qty'] ? $val['CurrentStock'] .' '. $val['delivered_qty'] : '0';
-                    $arrData[$key]['current_stock'] = (!is_null($val['CurrentStock'])) ? $val['CurrentStock'] . ' ' . ($val['delivered_qty'] ?? '') : '0';
-                }
+                    // $arrData[$key]['current_stock'] = (!is_null($val['CurrentStock']))? $val['CurrentStock'] . ' ' . ($val['delivered_qty'] ?? ''): '0'.''.$val['delivered_qty'];                
+                    $arrData[$key]['current_stock'] =($currentStock > 0)? $currentStock . ' ' . $delivered_Qty: '0 ' . $delivered_Qty;}
             }
             // to do current stock in medicine available
             if (!empty($medicine)) {
@@ -658,19 +666,19 @@ class StockController extends Controller
                         ];
                     }
                 }
-
+                
                 $response = [
                     'status' => '1',
                     'result' => 'success',
                     'beneficiary'  => $beneficiaryArr,
                     'medicine' => $arrData
                 ];
-
+                
                 if ($this->user->role == 6) {
                     $response['delivered_qty'] = $deliveredQty;
                 }
 
-                return response()->json($response, 200);
+               return response()->json($response, 200);
 
                 // return response()->json([
                 //     'status'    => '1',
