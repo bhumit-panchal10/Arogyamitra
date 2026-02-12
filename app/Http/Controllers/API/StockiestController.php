@@ -31,18 +31,19 @@ class StockiestController extends Controller
     function __construct()
     {
         if (auth()->guard('api')->user()) {
-
+        
             $user = User::getUserByToken(auth()->guard('api')->user()->token()->id);
-
+           
             if ($user) {
                 $this->user = $user;
             }
+            
         }
     }
-
+    
     public function beneficiariesadd(Request $request)
     {
-
+       
         // 🔹 Validation
         $validator = Validator::make($request->all(), [
             'arogyamitra_id' => 'required|numeric|gt:0',
@@ -74,7 +75,7 @@ class StockiestController extends Controller
 
     public function getAppUser(Request $request)
     {
-
+       
         if ($this->user && $this->user->status == "Active") {
             $stock = Validator::make($request->all(), [
                 'stockiest_id' => 'required|numeric|gt:0'
@@ -89,7 +90,7 @@ class StockiestController extends Controller
             }
 
             $getUser = $this->getAppUserList($this->user);
-
+          
             // to do current stock in medicine available
             if (!empty($getUser)) {
                 if ($request->get('export') == 'csv') {
@@ -190,7 +191,7 @@ class StockiestController extends Controller
     //         ], 401);
     //     }
     // }
-
+    
     public function rejectMedicineRequest(Request $request)
     {
         if (!$this->user || $this->user->status !== "Active") {
@@ -206,7 +207,7 @@ class StockiestController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json([
+            return response()->json([ 
                 'success' => false,
                 'errors'  => $validator->errors()
             ], 422);
@@ -246,8 +247,8 @@ class StockiestController extends Controller
             'message' => 'Medicine request rejected successfully'
         ], 200);
     }
-
-    public function getMedicineRequest(Request $request)
+    
+     public function getMedicineRequest(Request $request)
     {
 
         if (!$this->user || $this->user->status !== "Active") {
@@ -285,27 +286,28 @@ class StockiestController extends Controller
         //         'm.qty_type'
         //     )
         //     ->get();
+        
+        if($this->user->role == '2')
+        {
+             $medicineRequest = DB::table('medicine_request as mr')
+            ->join('medicine as m', 'mr.medicine_id', '=', 'm.id')
+            ->join('users as u', 'mr.arogyamitra_id', '=', 'u.id')
+            ->where('mr.iRequestTo', $request->app_user_id)
+            ->where('mr.gram_id', $request->gram_id)
 
-        if ($this->user->role == '2') {
-            $medicineRequest = DB::table('medicine_request as mr')
-                ->join('medicine as m', 'mr.medicine_id', '=', 'm.id')
-                ->join('users as u', 'mr.arogyamitra_id', '=', 'u.id')
-                ->where('mr.iRequestTo', $request->app_user_id)
-                ->where('mr.gram_id', $request->gram_id)
-
-                ->where('mr.status', '1')
-                ->select(
-                    'mr.id',
-                    'u.name as arogyamitra_name', // ✅ correct name
-                    'mr.medicine_id',
-                    DB::raw('SUM(mr.qty) as qty'),
-                    'mr.app_user_id',
-                    'mr.status',
-                    'm.name',
-                    'm.qty_type',
-                    'm.delivered_qty'
-                )
-                ->selectRaw('
+            ->where('mr.status', '1')
+            ->select(
+                'mr.id',
+                'u.name as arogyamitra_name', // ✅ correct name
+                'mr.medicine_id',
+                 DB::raw('SUM(mr.qty) as qty'),
+                'mr.app_user_id',
+                'mr.status',
+                'm.name',
+                'm.qty_type',
+                'm.delivered_qty'
+            )
+            ->selectRaw('
         (
             SELECT mt.closing_stock
             FROM medicine_track mt
@@ -314,29 +316,31 @@ class StockiestController extends Controller
             ORDER BY mt.id DESC
             LIMIT 1
         ) as CurrentStock
-        ', [$request->app_user_id])
-                ->orderBy('mr.app_user_id')
-                ->orderBy('mr.id')
-                ->groupBy('mr.medicine_id')
-                ->get();
-        } else {
-            $medicineRequest = DB::table('medicine_request as mr')
-                ->join('medicine as m', 'mr.medicine_id', '=', 'm.id')
-                ->join('users as u', 'mr.arogyamitra_id', '=', 'u.id')
-                ->where('mr.iRequestTo', $request->app_user_id)
-                ->where('mr.status', '1')
-                ->select(
-                    'mr.id',
-                    'u.name as arogyamitra_name', // ✅ correct name
-                    'mr.medicine_id',
-                    DB::raw('SUM(mr.qty) as qty'),
-                    'mr.app_user_id',
-                    'mr.status',
-                    'm.name',
-                    'm.qty_type',
-                    'm.delivered_qty'
-                )
-                ->selectRaw('
+        ', [$request->app_user_id]) 
+         ->orderBy('mr.app_user_id')
+         ->orderBy('mr.id')
+         ->groupBy('mr.medicine_id')
+         ->get();
+            
+        }
+        else{
+             $medicineRequest = DB::table('medicine_request as mr')
+            ->join('medicine as m', 'mr.medicine_id', '=', 'm.id')
+            ->join('users as u', 'mr.arogyamitra_id', '=', 'u.id')
+            ->where('mr.iRequestTo', $request->app_user_id)
+            ->where('mr.status', '1')
+            ->select(
+                'mr.id',
+                'u.name as arogyamitra_name', // ✅ correct name
+                'mr.medicine_id',
+               DB::raw('SUM(mr.qty) as qty'),
+                'mr.app_user_id',
+                'mr.status',
+                'm.name',
+                'm.qty_type',
+                'm.delivered_qty'
+            )
+            ->selectRaw('
             (
                 SELECT mt.closing_stock
                 FROM medicine_track mt
@@ -345,26 +349,26 @@ class StockiestController extends Controller
                 ORDER BY mt.id DESC
                 LIMIT 1
             ) as CurrentStock
-            ', [$request->app_user_id])
-                ->orderBy('mr.app_user_id')
-                ->orderBy('mr.id')
-                ->groupBy('mr.medicine_id')
-                ->groupBy('mr.arogyamitra_id')
-                ->get();
+            ', [$request->app_user_id]) 
+             ->orderBy('mr.app_user_id')
+             ->orderBy('mr.id')
+             ->groupBy('mr.medicine_id')
+             ->groupBy('mr.arogyamitra_id')
+             ->get();
         }
         $arrData = [];
-
+   
         foreach ($medicineRequest as $row) {
             $arrData[] = [
                 'medicine_request_id'   => $row->id,
                 'medicine_id'   => $row->medicine_id,
-                'qty'           => $row->qty . ' ' . $row->qty_type,
+                'qty'           => $row->qty . ' ' . $row->delivered_qty,
                 'status'        => $row->status,
                 'medicine_name' => $row->name,
                 'app_user_id' => $row->app_user_id ?? '',
                 'user_name' => $row->arogyamitra_name ?? '',
                 'CurrentStock'        => ($row->CurrentStock ?? 0) . ' ' . ($row->delivered_qty ?? '')
-
+               
             ];
         }
 
@@ -404,17 +408,24 @@ class StockiestController extends Controller
                 'message'  => $validator->errors()->all()
             ], 422);
         }
-        if (Auth::user()->role == '6') {
+        if(Auth::user()->role == '6'){
             $enter_by = '1';
-        } elseif (Auth::user()->role == '2') {
+        }elseif(Auth::user()->role == '2'){
             $enter_by = '6';
         }
 
         // Fetch medicine requests
         $medicineRequest = DB::table('medicine_dispatch as md')
-            ->join('medicine as m', 'md.medicine_id', '=', 'm.id')
-            ->join('users as u', 'md.to_id', '=', 'u.id')
-            ->selectRaw('
+        ->join('medicine as m', 'md.medicine_id', '=', 'm.id')
+        ->join('users as u', 'md.to_id', '=', 'u.id')
+        ->where('md.to_id', $request->login_user_id)
+        ->when($request->from_date, function ($q) use ($request) {
+           $q->whereDate('md.created_at', '>=', $request->from_date);
+        })
+       ->when($request->to_date, function ($q) use ($request) {
+         $q->whereDate('md.created_at', '<=', $request->to_date);
+       })
+        ->selectRaw('
             md.medicine_id,
             m.name as medicine_name,
             m.qty_type,
@@ -422,14 +433,13 @@ class StockiestController extends Controller
             u.name as stockiest_name,
             SUM(md.qty) as qty
         ')
-            ->where('md.to_id', $request->login_user_id)
-            ->groupBy(
-                'md.medicine_id',
-                'm.name',
-                'm.qty_type',
-                'u.name'
-            )
-            ->get();
+        ->groupBy(
+            'md.medicine_id',
+            'm.name',
+            'm.qty_type',
+            'u.name'
+        )
+        ->get();
 
         $arrData = [];
 
@@ -457,107 +467,107 @@ class StockiestController extends Controller
             'message' => trans('messages.medicine_out_stock')
         ], 200);
     }
-
-
+    
+    
     public function getmedicinedelivered(Request $request)
     {
-        if (!$this->user || $this->user->status !== "Active") {
-            return response()->json([
-                'messages' => trans('messages.unauthorized_user')
-            ], 401);
-        }
+    if (!$this->user || $this->user->status !== "Active") {
+        return response()->json([
+            'messages' => trans('messages.unauthorized_user')
+        ], 401);
+    }
 
-        // 🔹 Validation
-        $validator = Validator::make($request->all(), [
-            'iRequestTo' => 'required|numeric|gt:0',
-            'items' => 'required|array|min:1',
-            'items.*.medicine_id' => 'required|numeric|gt:0',
-            'items.*.qty' => 'required|numeric|min:1',
-            'items.*.medicine_request_id' => 'required|numeric|gt:0',
-        ]);
+    // 🔹 Validation
+    $validator = Validator::make($request->all(), [
+        'iRequestTo' => 'required|numeric|gt:0',
+        'items' => 'required|array|min:1',
+        'items.*.medicine_id' => 'required|numeric|gt:0',
+        'items.*.qty' => 'required|numeric|min:1',
+        'items.*.medicine_request_id' => 'required|numeric|gt:0',
+    ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => '0',
-                'result' => 'failure',
-                'errors' => $validator->errors()
-            ], 422);
-        }
+    if ($validator->fails()) {
+        return response()->json([
+            'status' => '0',
+            'result' => 'failure',
+            'errors' => $validator->errors()
+        ], 422);
+    }
 
-        DB::transaction(function () use ($request) {
+    DB::transaction(function () use ($request) {
 
-            foreach ($request->items as $item) {
+        foreach ($request->items as $item) {
 
-                $medicineRequest = MedicineRequest::findOrFail($item['medicine_request_id']);
+            $medicineRequest = MedicineRequest::findOrFail($item['medicine_request_id']);
 
-                // 🔹 Sender Last Stock
-                $lastTrack = MedicineTrack::where([
+            // 🔹 Sender Last Stock
+            $lastTrack = MedicineTrack::where([
                     'medicine_id'    => $item['medicine_id'],
                     'arogyamitra_id' => $request->iRequestTo
                 ])
-                    ->orderByDesc('id')
-                    ->first();
+                ->orderByDesc('id')
+                ->first();
 
-                $openingStock = $lastTrack ? $lastTrack->closing_stock : 0;
-                $closingStock = $openingStock - $item['qty'];
+            $openingStock = $lastTrack ? $lastTrack->closing_stock : 0;
+            $closingStock = $openingStock - $item['qty'];
 
-                // 🔹 Sender Credit (C)
-                MedicineTrack::create([
-                    'arogyamitra_id' => $request->iRequestTo,
-                    'medicine_id'    => $item['medicine_id'],
-                    'opening_stock'  => $openingStock,
-                    'qty'            => $item['qty'],
-                    'closing_stock'  => $closingStock,
-                    'mode'           => 'C',
-                    'gram_id'        => $medicineRequest->gram_id,
-                ]);
+            // 🔹 Sender Credit (C)
+            MedicineTrack::create([
+                'arogyamitra_id' => $request->iRequestTo,
+                'medicine_id'    => $item['medicine_id'],
+                'opening_stock'  => $openingStock,
+                'qty'            => $item['qty'],
+                'closing_stock'  => $closingStock,
+                'mode'           => 'C',
+                'gram_id'        => $medicineRequest->gram_id,
+            ]);
 
-                // 🔹 Receiver Last Stock
-                $receiverLastTrack = MedicineTrack::where([
+            // 🔹 Receiver Last Stock
+            $receiverLastTrack = MedicineTrack::where([
                     'medicine_id'    => $item['medicine_id'],
                     'arogyamitra_id' => $medicineRequest->arogyamitra_id
                 ])
-                    ->orderByDesc('id')
-                    ->first();
+                ->orderByDesc('id')
+                ->first();
 
-                $receiverOpening = $receiverLastTrack ? $receiverLastTrack->closing_stock : 0;
-                $receiverClosing = $receiverOpening + $item['qty'];
+            $receiverOpening = $receiverLastTrack ? $receiverLastTrack->closing_stock : 0;
+            $receiverClosing = $receiverOpening + $item['qty'];
 
-                // 🔹 Dispatch Entry
-                MedicineDispatch::create([
-                    'from_id' => $request->iRequestTo,
-                    'to_id'       => $medicineRequest->arogyamitra_id,
-                    'medicine_id'  => $item['medicine_id'],
-                    'qty'          => $item['qty'],
-                    'Entery_By'    => Auth::user()->role,
+            // 🔹 Dispatch Entry
+            MedicineDispatch::create([
+                'from_id' => $request->iRequestTo,
+                'to_id'       => $medicineRequest->arogyamitra_id,
+                'medicine_id'  => $item['medicine_id'],
+                'qty'          => $item['qty'],
+                'Entery_By'    => Auth::user()->role,
+            ]);
+            
+            // 🔹 Receiver Entry (R)
+            MedicineTrack::create([
+                'arogyamitra_id' => $medicineRequest->arogyamitra_id,
+                'medicine_id'    => $item['medicine_id'],
+                'opening_stock'  => $receiverOpening,
+                'qty'            => $item['qty'],
+                'closing_stock'  => $receiverClosing,
+                'mode'           => 'R',
+                'gram_id'        => $medicineRequest->gram_id,
+            ]);
+
+            // 🔹 Update Request Status
+            MedicineRequest::where('id', $item['medicine_request_id'])
+                ->update([
+                    'status' => '3',
+                    'delivered_quantity' => $item['qty']
                 ]);
+        }
+    });
 
-                // 🔹 Receiver Entry (R)
-                MedicineTrack::create([
-                    'arogyamitra_id' => $medicineRequest->arogyamitra_id,
-                    'medicine_id'    => $item['medicine_id'],
-                    'opening_stock'  => $receiverOpening,
-                    'qty'            => $item['qty'],
-                    'closing_stock'  => $receiverClosing,
-                    'mode'           => 'R',
-                    'gram_id'        => $medicineRequest->gram_id,
-                ]);
-
-                // 🔹 Update Request Status
-                MedicineRequest::where('id', $item['medicine_request_id'])
-                    ->update([
-                        'status' => '3',
-                        'delivered_quantity' => $item['qty']
-                    ]);
-            }
-        });
-
-        return response()->json([
-            'status'    => '1',
-            'result' => 'success',
-            'message' => 'Medicines Delivered Successfully'
-        ], 200);
-    }
+    return response()->json([
+        'status'    => '1',
+        'result' => 'success',
+        'message' => 'Medicines Delivered Successfully'
+    ], 200);
+}
 
 
 
@@ -570,14 +580,14 @@ class StockiestController extends Controller
     //     }
 
     //     // ðŸ”¹ Validation
-
+        
     //         $stock = Validator::make($request->all(), [
     //             'iRequestTo'         => 'required|numeric|gt:0',
     //             'medicine_id'          => 'required|numeric',
     //             'qty'                  => 'required|numeric|min:1',
     //             'medicine_request_id'  => 'required|numeric'
     //         ]);
-
+        
 
     //     if ($stock->fails()) {
     //         return response()->json([
@@ -600,7 +610,7 @@ class StockiestController extends Controller
 
     //         $medicineRequest = MedicineRequest::findOrFail($request->medicine_request_id);
     //         //$Arogyamitra = MedicineRequest::where('arogyamitra_id',medicineRequest->arogyamitra_id)->first();
-
+            
 
     //         // ðŸ”¹ Last Stock
     //       // ðŸ”¹ Last Stock
@@ -654,7 +664,7 @@ class StockiestController extends Controller
     //         'message' => 'Medicine Delivered Successfully'
     //     ], 200);
     // }
-
+    
     public function usednote(Request $request)
     {
 
@@ -683,18 +693,30 @@ class StockiestController extends Controller
             ->where('mr.iRequestTo', $request->login_user_id)
             ->join('users as u', 'mr.arogyamitra_id', '=', 'u.id')
             ->where('mr.status', '3')
+            ->when($request->from_date, function ($q) use ($request) {
+                $q->whereDate('mr.created_at', '>=', $request->from_date);
+             })
+           ->when($request->to_date, function ($q) use ($request) {
+              $q->whereDate('mr.created_at', '<=', $request->to_date);
+            })
             ->select(
                 'mr.id',
+                DB::raw('SUM(mr.delivered_quantity) as qty'),
                 'mr.medicine_id',
-                'mr.qty',
+                //'mr.qty',
                 'u.name As from_user_name',
                 'mr.app_user_id',
                 'mr.app_user_name',
                 'mr.status',
                 'm.name',
                 'm.qty_type',
-                'm.delivered_qty'
+                'm.delivered_qty',
+                
             )
+            ->groupBy(
+            'mr.medicine_id'
+             )
+            
             ->get();
 
         $arrData = [];
@@ -1169,7 +1191,7 @@ class StockiestController extends Controller
                     $newStock = $isMedicineStockAvailable['qty'] - $value['qty'];
 
                     $currentArr = [
-                        'qty' => $newStock ?: 0,
+                        'qty' => $newStock ? : 0,
                         'updated_at' => Carbon::now(),
                     ];
                     $response = $isMedicineStockAvailable->update($currentArr);
@@ -1213,46 +1235,46 @@ class StockiestController extends Controller
     {
         date_default_timezone_set('Asia/kolkata');
 
-        $fileAvailable = PdfTrack::select('file_name', 'created_at')
-            ->where('arogyamitra_id', $stockiestId)
-            ->whereDate('created_at', date('Y-m-d'))
-            ->first();
+            $fileAvailable = PdfTrack::select('file_name', 'created_at')
+                ->where('arogyamitra_id', $stockiestId)
+                ->whereDate('created_at', date('Y-m-d'))
+                ->first();
 
-        $date = date('Y-m-d');
-        $downloadLink = url('/assets/uploads/app-user-export') . '/' .  $date . '_' . $stockiestId . '.csv';
-        $filePath = public_path('/assets/uploads/app-user-export/' . $date . '_' . $stockiestId . ".csv");
+                $date = date('Y-m-d');
+                $downloadLink = url('/assets/uploads/app-user-export') . '/' .  $date . '_' . $stockiestId . '.csv';
+                $filePath = public_path('/assets/uploads/app-user-export/' . $date . '_' . $stockiestId . ".csv");
 
-        if (empty($fileAvailable)) {
-            try {
-                $path = public_path('/assets/uploads/app-user-export');
-                if (!File::isDirectory($path)) {
-                    File::makeDirectory($path, 0777, true, true);
+            if (empty($fileAvailable)) {
+                try {
+                    $path =public_path('/assets/uploads/app-user-export');
+                    if (!File::isDirectory($path)) {
+                        File::makeDirectory($path, 0777, true, true);
+                    }
+
+                    $handle = fopen($filePath, 'w');
+                    $headers = ['Name', 'Mobile No.'];
+
+                    fputcsv($handle, $headers);
+                    foreach ($appUser as $val) {
+                        fputcsv($handle, $val);
+                    }
+                    fclose($handle);
+
+
+                    $insertArr = [
+                        'arogyamitra_id' => $stockiestId,
+                        'file_name' => $date . '_' . $stockiestId . ".csv",
+                        'created_at' => Carbon::now()
+                    ];
+
+                    PdfTrack::InsertGetId($insertArr);
+
+                    return $downloadLink;
+                } catch (\Throwable $th) {
+                    return false;
                 }
-
-                $handle = fopen($filePath, 'w');
-                $headers = ['Name', 'Mobile No.'];
-
-                fputcsv($handle, $headers);
-                foreach ($appUser as $val) {
-                    fputcsv($handle, $val);
-                }
-                fclose($handle);
-
-
-                $insertArr = [
-                    'arogyamitra_id' => $stockiestId,
-                    'file_name' => $date . '_' . $stockiestId . ".csv",
-                    'created_at' => Carbon::now()
-                ];
-
-                PdfTrack::InsertGetId($insertArr);
-
+            } else {
                 return $downloadLink;
-            } catch (\Throwable $th) {
-                return false;
             }
-        } else {
-            return $downloadLink;
-        }
     }
 }

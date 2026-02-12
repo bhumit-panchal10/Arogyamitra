@@ -54,6 +54,7 @@
                 <thead>
                     <tr class="text-start fw-bolder fs-7 text-uppercase gs-0">
                         <th class="text-center">#</th>
+                        <th class="text-center">Date</th>
                         <th class="text-center">Prant</th>
                         <th class="text-center">Vibhag</th>
                         <th class="text-center">Jilla</th>
@@ -87,6 +88,7 @@
                         @foreach ($report as $index => $row)
                             <tr>
                                 <td class="text-center">{{ $index + 1 }}</td>
+                                <td class="text-center">{{ date('d-m-Y',strtotime($row->request_date)) }}</td>
                                 <td class="text-center">{{ $row->Prant }}</td>
                                 <td class="text-center">{{ $row->Vibhag }}</td>
                                 <td class="text-center">{{ $row->Jilla }}</td>
